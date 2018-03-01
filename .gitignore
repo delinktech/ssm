@@ -1,5 +1,6 @@
 /bootstrap/compiled.php
 /node_modules
+/public
 .env.*.php
 .env.php
 .env
