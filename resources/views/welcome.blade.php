@@ -6,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>School System</title>
+    
+    <!-- CSRF Stuff -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <h1>First setup :)</h1>
+
+    <div id="app">
+      <app-component></app-component>
+    </div>
+
+    <script src="{{ asset('js/app.js') }}"></script>
   </body>
 </html>
