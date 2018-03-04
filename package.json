@@ -21,6 +21,6 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "vue-material": "^1.0.0-beta-7"
+    "vue-material": "^1.0.0-beta-8"
   }
 }
