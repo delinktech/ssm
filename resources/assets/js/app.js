@@ -1,34 +1,20 @@
 require('./bootstrap');
-/*import Vue from 'vue';
-import VueMaterial from 'vue-material';
+import Vue from 'vue'
+import router from './router';
+import AppComponent from './components/app-component/AppComponent';
 
-Vue.use(VueMaterial);*/
+// import vueMaterial
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css' // themeing app
 
-Vue.component(
-  'school-component',
-  require('./components/school.component/SchoolComponent.vue')
-);
+// tell vue to use material
+Vue.use(VueMaterial)
 
-Vue.component(
-  'result-component',
-  require('./components/results.component/ResultsComponent.vue')
-);
-
-Vue.component(
-  'teacher-component',
-  require('./components/teachers.component/TeachersComponent.vue')
-);
-
-Vue.component(
-  'student-component',
-  require('./components/students.component/StudentsComponent.vue')
-);
-
-Vue.component(
-  'app-component',
-  require('./components/AppComponent.vue')
-);
-
+// initialize the vue app
 const app = new Vue({
-  el: '#app'
+  el: '#app',
+  router,
+  components: { AppComponent },
+  template: '<AppComponent/>'
 });
