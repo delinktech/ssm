@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import axios from 'axios';
-import VueMaterial from 'vue-material';
 
 window._ = require('lodash');
 
@@ -22,9 +21,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-
 window.Vue = Vue;
-Vue.use(VueMaterial);
 
 window.axios = axios;
 window.axios.defaults.headers.common = {
