@@ -17,9 +17,8 @@
   </head>
   <body>
 
-    <div id="app">
-      <app-component></app-component>
-    </div>
+    <!-- vue components will lender inside here -->
+    <div id="app">Loading...</div>
 
     <script src="{{ asset('js/app.js') }}"></script>
   </body>
