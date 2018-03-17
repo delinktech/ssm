@@ -51,7 +51,11 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+      // get single student details
+      $student = Student::findOrFail($id);
+
+      // return sngle student as a resource
+      return new StudentResource($student);
     }
 
     /**
