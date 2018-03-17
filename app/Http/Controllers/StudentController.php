@@ -16,8 +16,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-      $students = Student::Paginate(15);
-
+      $students = Student::orderBy('created_at', 'desc')->paginate(10);
+ 
       // return a collection of students
       return StudentResource::collection($students);
     }
