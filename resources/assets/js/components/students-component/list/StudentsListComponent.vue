@@ -11,7 +11,7 @@
           <md-table-head>Class</md-table-head>
           <md-table-head>Age</md-table-head>
       </md-table-row>
-      <md-table-row v-for="student in students" :key="index">
+      <md-table-row v-for="student in students" :key="student.student_id">
         <md-table-cell>11</md-table-cell>
         <md-table-cell>{{student.student_reg}}</md-table-cell>
         <md-table-cell>{{student.student_first_name}}</md-table-cell>
