@@ -21,6 +21,10 @@
       </md-table-row>
     </md-table>
 
+    <md-snackbar :md-position="position" :md-duration="4000" :md-active.sync="showSnackbar" md-persistent>
+      <span>ERROR: Getting list of students</span>
+      <md-button class="md-primary" @click="fetchStudents()">Retry</md-button>
+    </md-snackbar>
   </div>
 </template>
 
@@ -42,7 +46,9 @@
         },
         _id: '',
         pagination: {},
-        edit: false
+        edit: false,
+        showSnackbar: false,
+        position: 'center',
       }
     },
 
@@ -55,13 +61,14 @@
         fetch('api/students')
         .then(res => res.json())
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
 
           // assign the data to students array
           this.students = res.data;
         })
         .catch(err => {
           console.log('Error: Getting students', err);
+          this.showSnackbar = true;
         })
       }
     }
