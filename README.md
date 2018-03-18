@@ -1,4 +1,4 @@
-# ssm: A school system to manage students results
+# ssm: A school system
 
 ## Architecture
 - Laravel Framework 5.5.35 in the backend [Laravel](https://laravel.com)
