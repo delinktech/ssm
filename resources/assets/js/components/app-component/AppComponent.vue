@@ -47,16 +47,16 @@
         </md-app-drawer>
 
         <md-app-content>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea.
-
+          <!-- router -->
+          <router-view/>
         </md-app-content>
+
       </md-app>
     </div>
 
   </div>
 </template>
 
-    <router-view/>
 <script>
   export default {
     name: 'AppComponent',
