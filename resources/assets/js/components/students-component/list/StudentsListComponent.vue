@@ -10,17 +10,22 @@
           <md-table-head>Gender</md-table-head>
           <md-table-head>Class</md-table-head>
           <md-table-head>Age</md-table-head>
+          <md-table-head>Actions</md-table-head>
       </md-table-row>
-      <md-table-row v-for="student in students" :key="student.student_id">
-        <md-table-cell>11</md-table-cell>
+      <md-table-row v-for="student in students" :key="student.id">
         <md-table-cell>{{student.student_reg}}</md-table-cell>
         <md-table-cell>{{student.student_first_name}}</md-table-cell>
         <md-table-cell>{{student.student_gender}}</md-table-cell>
         <md-table-cell>{{student.class_id}}</md-table-cell>
         <md-table-cell>{{student.student_dob}}</md-table-cell>
+        <md-table-cell>
+          <md-button @click="editStudent(student.id)" class="md-icon-button">
+            <md-icon>edit</md-icon>
+          </md-button>
           <md-button @click="deleteStudent(student.id)" class="md-icon-button">
             <md-icon>delete</md-icon>
           </md-button>
+        </md-table-cell>
       </md-table-row>
     </md-table>
 
@@ -60,6 +65,7 @@
     },
 
     methods: {
+      /*method to fetch all the students*/
       fetchStudents() {
         fetch('api/students')
         .then(res => res.json())
