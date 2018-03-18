@@ -29,7 +29,7 @@ let router = new Router({
     {
       path: '/students',
       name: 'students-component',
-      component: StudentsListComponent,
+      component: StudentsComponent,
       children: [
         {
           path: 'list',
