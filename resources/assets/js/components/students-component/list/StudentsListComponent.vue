@@ -18,6 +18,9 @@
         <md-table-cell>{{student.student_gender}}</md-table-cell>
         <md-table-cell>{{student.class_id}}</md-table-cell>
         <md-table-cell>{{student.student_dob}}</md-table-cell>
+          <md-button @click="deleteStudent(student.id)" class="md-icon-button">
+            <md-icon>delete</md-icon>
+          </md-button>
       </md-table-row>
     </md-table>
 
@@ -70,6 +73,28 @@
           console.log('Error: Getting students', err);
           this.showSnackbar = true;
         })
+      },
+
+      /*method to delete a single student*/
+      deleteStudent(_id) {
+        // confirm if user wants to delete
+        if (confirm('Are you sure you want to delete this student?')) {
+          fetch(`api/student/${_id}`, {
+            method: 'delete'
+          })
+          .then(res => res.json())
+          .then(res => {
+            // student delete
+            // TODO: add snackbar
+
+            // refresh the student list
+            this.fetchStudents()
+          })
+          .catch(err => {
+            // TODO: add snackbar
+            console.log('ERROR: while deleting student', err);
+          })
+        }
       }
     }
   }
