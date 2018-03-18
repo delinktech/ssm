@@ -19,6 +19,16 @@
       </md-list>
     </md-list-item>
 
+    <md-list-item md-expand>
+      <md-icon>list</md-icon>
+      <span class="md-list-item-text">Teachers</span>
+
+      <md-list slot="md-expand">
+        <md-list-item class="md-inset"><router-link to="/teachers/list">List Teachers</router-link></md-list-item>
+        <md-list-item class="md-inset"><router-link to="/teachers/add">Add Teacher</router-link></md-list-item>
+      </md-list>
+    </md-list-item>
+
     <md-list-item>
       <md-icon>send</md-icon>
       <span class="md-list-item-text">Sent Mail</span>
@@ -30,8 +40,8 @@
     </md-list-item>
 
     <md-list-item>
-      <md-icon>error</md-icon>
-      <span class="md-list-item-text">Spam</span>
+      <md-icon>&#xE899;</md-icon>
+      <span class="md-list-item-text">Logout</span>
     </md-list-item>
   </md-list>
 </div>
