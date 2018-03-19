@@ -9,6 +9,11 @@ import StudentAddComponent from '../components/students-component/add/StudentAdd
 import StudentsListComponent from '../components/students-component/list/StudentsListComponent'
 import StudentEditComponent from '../components/students-component/edit/StudentEditComponent'
 
+import TeachersComponent from '../components/teachers-component/TeachersComponent'
+import TeachersAddComponent from '../components/teachers-component/add/TeachersAddComponent'
+import TeachersListComponent from '../components/teachers-component/list/TeachersListComponent'
+import TeachersEditComponent from '../components/teachers-component/edit/TeachersEditComponent'
+
 Vue.use(Router)
 
 let router = new Router({
@@ -36,12 +41,31 @@ let router = new Router({
           component: StudentsListComponent
         },
         {
-          path: 'edit',
+          path: 'edit/:id',
           component: StudentEditComponent
         },
         {
           path: 'add',
           component: StudentAddComponent
+        }
+      ]
+    },
+    {
+      path: '/teachers',
+      name: 'teachers-component',
+      component: TeachersComponent,
+      children: [
+        {
+          path: 'list',
+          component: TeachersListComponent
+        },
+        {
+          path: 'edit/:id',
+          component: TeachersEditComponent
+        },
+        {
+          path: 'add',
+          component: TeachersAddComponent
         }
       ]
     }
