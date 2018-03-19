@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import AppComponent from '../components/app-component/AppComponent'
+import DashboardComponent from '../components/dashboard-component/DashboardComponent'
 
 import StudentsComponent from '../components/students-component/StudentsComponent'
 import StudentAddComponent from '../components/students-component/add/StudentAddComponent'
@@ -22,8 +23,8 @@ let router = new Router({
     },
     {
       path: '/dashboard',
-      name: 'dashboard-component'
-      // component: AppComponent
+      name: 'dashboard-component',
+      component: DashboardComponent
     },
     {
       path: '/students',
