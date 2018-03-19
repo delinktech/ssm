@@ -1,5 +1,6 @@
 <template>
-  <div id="view-students">
+  <div id="students">
+    <!-- components render here -->
     <router-view></router-view>
   </div>
 </template>
@@ -17,9 +18,7 @@
     },
 
     methods: {
-      fetchStudents() {
-
-      }
+  
     }
   }
 </script>
