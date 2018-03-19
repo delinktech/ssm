@@ -32,6 +32,23 @@
         })
       },
 
+      // delete a single teacher
+      deleteTeacher(_id) {
+        if (confirm('Are you sure want to delete the teacher?')) {
+          fetch(`api/teacher/${_id}`, { method: 'delete' })
+          .then(res => res.json())
+          .then(res => {
+            // TODO: add snackbar for success here
+
+            // fetch the teachers list again
+            this.fetchTeachers()
+          })
+          .catch(err => {
+            console.log('ERROR: deleting teacher ->', err);
+            // TODO: add snackbar here
+          })
+        }
+      }
     }
   }
 </script>
