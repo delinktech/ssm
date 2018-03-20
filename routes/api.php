@@ -31,3 +31,18 @@ Route::put('student', 'StudentController@store');
 
 // delete student
 Route::delete('student/{id}', 'StudentController@destroy');
+
+// list teachers
+Route::get('teachers', 'TeacherController@index');
+
+// show single teacher
+Route::get('teacher/{id}', 'TeacherController@show');
+
+// add a student
+Route::post('teacher', 'TeacherController@store');
+
+// update/edit a teacher
+Route::put('teacher', 'TeacherController@store');
+
+// delete teacher
+Route::delete('teacher/{id}', 'TeacherController@destroy');
