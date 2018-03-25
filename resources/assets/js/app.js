@@ -1,29 +1,28 @@
-require('./bootstrap');
 import Vue from 'vue'
-import router from './router';
-import AppComponent from './components/app-component/AppComponent';
 
-// Import Helpers for filters
-import { domain, count, prettyDate, pluralize } from './filters'
+import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 
-// import vueMaterial
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css' // themeing app
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/en'
 
-// Import Install and register helper items
-Vue.filter('count', count)
-Vue.filter('domain', domain)
-Vue.filter('prettyDate', prettyDate)
-Vue.filter('pluralize', pluralize)
+import './styles/index.scss' // global css
 
-// tell vue to use material
-Vue.use(VueMaterial)
+import App from './App'
+import router from './router'
+import store from './store'
 
-// initialize the vue app
-const app = new Vue({
+import './icons' // icon
+import './permission' // permission control
+
+Vue.use(ElementUI, { locale })
+
+Vue.config.productionTip = false
+
+new Vue({
   el: '#app',
   router,
-  components: { AppComponent },
-  template: '<AppComponent/>'
-});
+  store,
+  template: '<App/>',
+  components: { App }
+})

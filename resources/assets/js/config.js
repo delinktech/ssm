@@ -1,0 +1,1 @@
+export const apiBaseUrl = 'http://dev.ssm.io/'
