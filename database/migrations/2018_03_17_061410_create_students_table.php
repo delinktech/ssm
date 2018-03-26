@@ -26,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('student_second_name');
             $table->string('student_last_surname');
             $table->date('student_dob');
+            $table->date('reg_date');
             $table->string('student_gender');
             $table->longText('passport_photo')->nullable();
             $table->string('student_school');

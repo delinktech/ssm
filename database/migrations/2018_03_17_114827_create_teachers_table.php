@@ -24,6 +24,8 @@ class CreateTeachersTable extends Migration
             $table->text('teacher_password')->nullable();
             $table->integer('teacher_status')->nullable();
             $table->integer('teacher_school_id');
+            $table->integer('teacher_class_id');
+            $table->string('subjects_id');
             $table->integer('teacher_user_id');
             $table->text('teacher_code')->nullable();
             $table->timestamps();
