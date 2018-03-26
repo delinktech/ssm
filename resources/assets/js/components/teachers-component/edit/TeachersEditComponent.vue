@@ -1,15 +1,16 @@
 <template>
-  <div id="students">
-    <!-- components render here -->
-    <router-view></router-view>
-  </div>
+	<div id="teachers-list">
+		<!-- TODO: display list of teachers here -->
+    <h3>EDIT A TEACHERS ;)</h3>
+	</div>
 </template>
 
 <script>
   export default {
-    name: 'StudentsComponent',
-    data() {
+    name: 'TeachersEditComponent',
+    data: () => {
       return {
+
       }
     },
 
@@ -18,7 +19,7 @@
     },
 
     methods: {
-  
+
     }
   }
 </script>
