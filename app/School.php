@@ -8,5 +8,17 @@ class School extends Model
 {
     protected $table='schools';
 
-    protected $fillable=['school_name' , 'school_logo' , 'school_address', 'school_mobile', 'school_email', 'school_county', 'school_town', 'school_level', 'user_id'];
+    protected $primaryKey='id';
+
+    protected $fillable=['school_name' ,'reg_no', 'school_logo' , 'school_address', 'school_mobile', 'school_email', 'school_county', 'school_town', 'school_level', 'user_id'];
+
+     public function studentSchool()
+    {
+        return $this->hasMany(studentSchool::class, 'student_id', 'id');
+      }
+
+       public function schoolTeacher(){
+        return $this->hasMany(schoolTeacher::class,'teacher_id','id');
+    }
+
 }
