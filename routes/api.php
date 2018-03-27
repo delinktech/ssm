@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user/login', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/user', ['uses' => 'UserController@signup']);
+
 // list students
 Route::get('students', 'StudentController@index');
 
