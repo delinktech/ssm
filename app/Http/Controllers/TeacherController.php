@@ -17,7 +17,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::orderBy('created_at', 'desc')->paginate(10);
+        $teachers = Teacher::orderBy('created_at', 'desc')->paginate(15);
  
       // return a collection of teachers
       return TeacherResource::collection($teachers);
