@@ -13,7 +13,7 @@ class FileUpload extends Model
 
      	$name="";
      	$photo=$request->photo;
-     	If($request->hasFilea($fileName))
+     	If($request->hasFile($fileName))
      	{
      		$extension=$photo->getClientOriginalExtension();
      		$name=rand(11111,99999).".".date('Y-m-d').".".time().".".$extension;
