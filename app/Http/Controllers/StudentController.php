@@ -1,7 +1,8 @@
-  <?php
+<?php
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Student;
@@ -14,24 +15,25 @@ use Storage;
 
 use App\Http\Resources\Student as StudentResource;
 
-class StudentController extends BaseController
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id = -1)
+    public function index()
     {
-      $data["edit"] = $id;
-        if (Auth::user()->user_type == 0) {
-            $data['students'] = Student::where('school_id', $this->school_id->id)->orderBy('id', 'desc')->get();
-        } else if (Auth::user()->user_type == 2) {
-            $data['students'] = $this->getTeacherStudents();
-        }
- 
+      // $data["edit"] = $id;
+      //   if (Auth::user()->teacher_username == 0) {
+      //       $data['students'] = Student::where('school_id', $this->school_id->id)->orderBy('id', 'desc')->get();
+      //   } else if (Auth::user()->user_id == 2) {
+      //       $data['students'] = $this->getTeacherStudents();
+      //   }
+      $students = Student::Paginate(15);
       // return a collection of students
-      return view('students', 'StudentController@index', $data);
+      // return view('students', 'StudentController@index');
+      return StudentResource::collection($students);
     }
 
     /**
@@ -163,7 +165,7 @@ class StudentController extends BaseController
       $student->student_gender = $request->input('student_gender');
       $student->reg_date = $request->input('reg_date');
       $student->student_gender = $request->input('student_gender');
-      $student->passport_photo = $request->('passport_photo');
+      $student->passport_photo = $request->input('passport_photo');
       $student->student_school = $request->input('student_school');
      
 
