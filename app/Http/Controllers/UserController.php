@@ -16,6 +16,7 @@ class UserController extends Controller
     // validating the forms data
     $this->validate($request, [
         'name' => 'required',
+        'username' => 'required',
         'email' => 'required|email|unique:users',
         'password' => 'required'
       ]);
@@ -23,6 +24,7 @@ class UserController extends Controller
     $user = new User([
       'email' => $request->input('email'),
       'name' => $request->input('name'),
+      'username' => $request->input('username'),
       'password' => bcrypt($request->input('password'))
     ]);
 
@@ -39,12 +41,11 @@ class UserController extends Controller
     public function signin(Request $request) {
       // validating the forms data
       $this->validate($request, [
-          'name' => 'required',
-          'email' => 'required|email',
+          'username' => 'required',
           'password' => 'required'
         ]);
 
-      $credentials = $request->only('email', 'password');
+      $credentials = $request->only('username', 'password');
 
       try {
         if (!$token = JWTAuth::attempt($credentials)) {
