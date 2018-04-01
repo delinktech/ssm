@@ -19,21 +19,24 @@ Route::middleware('auth:api')->get('/user/login', function (Request $request) {
 
 Route::post('/user', ['uses' => 'UserController@signup']);
 Route::post('/user/login', ['uses' => 'UserController@signin']);
+Route::get('/user/info', function() {
+   return JWTAuth::parseToken()->authenticate();
+});
 
 // list students
-Route::get('students', 'StudentController@index');
+Route::get('students', ['uses' => 'StudentController@index', 'middleware' => 'auth.jwt']);
 
 // show single student
-Route::get('student/{id}', 'StudentController@show');
+Route::get('student/{id}', ['uses' => 'StudentController@show', 'middleware' => 'auth.jwt']);
 
 // add a student
-Route::post('student', 'StudentController@store');
+Route::post('student', ['uses' => 'StudentController@store', 'middleware' => 'auth.jwt']);
 
 // update/edit a student
-Route::put('student', 'StudentController@store');
+Route::put('student', ['uses' => 'StudentController@store', 'middleware' => 'auth.jwt']);
 
 // delete student
-Route::delete('student/{id}', 'StudentController@destroy');
+Route::delete('student/{id}', ['uses' => 'StudentController@destroy', 'middleware' => 'auth.jwt']);
 
 // list teachers
 Route::get('teachers', 'TeacherController@index');
