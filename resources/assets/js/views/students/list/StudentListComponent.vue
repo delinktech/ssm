@@ -37,41 +37,46 @@
 </template>
 
 <script>
-import { getStudents } from '../../api/students-list'
+  import { getStudents } from '../../../api/students'
 
-export default {
-  data() {
-    return {
-      list: null,
-      listLoading: true
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
+  export default {
+    name: 'StudentListComponent',
+    data() {
+      return {
+        list: null,
+        listLoading: true
       }
-      return statusMap[status]
-    }
-  },
-  created() {
-    this.fetchData()
-  },
-  methods: {
-    fetchData() {
-      this.listLoading = true
-      getStudents().then(response => {
-        console.log('students:', response.data)
-        this.list = response.data.data
-        this.listLoading = false
-      })
-        .catch(err => {
-          // TODO: add a snackbar
-          console.log(err)
+    },
+    filters: {
+      statusFilter(status) {
+        const statusMap = {
+          published: 'success',
+          draft: 'gray',
+          deleted: 'danger'
+        }
+        return statusMap[status]
+      }
+    },
+    created() {
+      this.fetchData()
+    },
+    methods: {
+      fetchData() {
+        this.listLoading = true
+        getStudents().then(response => {
+          console.log('students:', response.data)
+          this.list = response.data.data
+          this.listLoading = false
         })
+          .catch(err => {
+            // TODO: add a snackbar
+            console.log(err)
+          })
+      }
     }
   }
-}
 </script>
+
+<style scoped>
+  
+</style>
