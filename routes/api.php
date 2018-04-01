@@ -22,6 +22,9 @@ Route::post('/user/login', ['uses' => 'UserController@signin']);
 Route::get('/user/info', function() {
    return JWTAuth::parseToken()->authenticate();
 });
+Route::post('/user/logout', function() {
+   return JWTAuth::parseToken()->invalidate();
+});
 
 // list students
 Route::get('students', ['uses' => 'StudentController@index', 'middleware' => 'auth.jwt']);
