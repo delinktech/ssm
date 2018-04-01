@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->string('student_last_surname');
             $table->date('student_dob');
             $table->string('student_gender');
+            $table->string('student_parent');
             $table->longText('passport_photo')->nullable();
             $table->string('student_school');
             $table->timestamps();

@@ -11,6 +11,7 @@ $factory->define(App\Student::class, function (Faker $faker) {
         'student_last_surname' => $faker->name,
         'student_dob' => $faker->date('Y-m-d'),
         'student_gender' => $faker->randomElement(['male', 'female']),
-        'student_parent' => $faker->numberBetween(1-2)
+        'student_parent' => $faker->numberBetween(1-2),
+        'student_school' => $faker->numberBetween(1-2)
     ];
 });
