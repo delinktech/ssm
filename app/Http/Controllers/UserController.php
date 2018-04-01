@@ -15,25 +15,42 @@ class UserController extends Controller
   public function signup(Request $request) {
     // validating the forms data
     $this->validate($request, [
-        'name' => 'required',
+        'firstname' => 'required',
+        'lastname' => 'required',
+        'phone' => 'required',
         'username' => 'required',
-        'roles' => 'required',
         'email' => 'required|email|unique:users',
-        'password' => 'required'
+        'password' => 'required',
+        'school' => 'required',
+        'roles' => 'required',
+        'level' => 'required'
       ]);
 
     $user = new User([
-      'email' => $request->input('email'),
-      'name' => $request->input('name'),
+      'user_firstname' => $request->input('firstname'),
+      'user_lastname' => $request->input('lastname'),
+      'user_phone' => $request->input('phone'),
+
       'username' => $request->input('username'),
-      'password' => bcrypt($request->input('password'))
+      'email' => $request->input('email'),
+      'password' => bcrypt($request->input('password')),
+
+      'school' => $request->input('school'),
+      'approved' => false,
+      'roles' => $request->input('roles'),
+      'level' => $request->input('level'),
+      'avatar' => $request->input('avatar'),
+
+      // TODO: add created by field
+      'creatdBy' => JWTAuth::parseToken()->toUser()->username,
+      'updatedBy' => ''
     ]);
-
-    $user->save();
-
-    return response()->json([
-      'message' => 'Sussesfuly added User'
-    ], 201);
+    
+    if ($user->save()) {
+      return response()->json([
+        'message' => 'Sussesfuly added User'
+      ], 201);
+    }
   }
 
   /*
