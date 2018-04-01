@@ -17,41 +17,22 @@ Route::middleware('auth:api')->get('/user/login', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/user', ['uses' => 'UserController@signup']);
-Route::post('/user/login', ['uses' => 'UserController@signin']);
-Route::get('/user/info', function() {
-   return JWTAuth::parseToken()->authenticate();
-});
-Route::post('/user/logout', function() {
-   return JWTAuth::parseToken()->invalidate();
-});
+/* user auth routes */
+Route::post('/user', ['uses' => 'UserController@signup']);	// user signup
+Route::post('/user/login', ['uses' => 'UserController@signin']);	// user login
+Route::get('/user/info', function() { return JWTAuth::parseToken()->authenticate(); });	// get authenticated user info
+Route::post('/user/logout', function() { return JWTAuth::parseToken()->invalidate(); });	// user logout
 
-// list students
-Route::get('students', ['uses' => 'StudentController@index', 'middleware' => 'auth.jwt']);
+/* Students routes */
+Route::get('students', ['uses' => 'StudentController@index', 'middleware' => 'auth.jwt']);	// get all the students
+Route::get('student/{id}', ['uses' => 'StudentController@show', 'middleware' => 'auth.jwt']);	// get a single student
+Route::post('student', ['uses' => 'StudentController@store', 'middleware' => 'auth.jwt']);	// add a single student
+Route::put('student', ['uses' => 'StudentController@store', 'middleware' => 'auth.jwt']);	// update a single student
+Route::delete('student/{id}', ['uses' => 'StudentController@destroy', 'middleware' => 'auth.jwt']);	// delete a single student
 
-// show single student
-Route::get('student/{id}', ['uses' => 'StudentController@show', 'middleware' => 'auth.jwt']);
-
-// add a student
-Route::post('student', ['uses' => 'StudentController@store', 'middleware' => 'auth.jwt']);
-
-// update/edit a student
-Route::put('student', ['uses' => 'StudentController@store', 'middleware' => 'auth.jwt']);
-
-// delete student
-Route::delete('student/{id}', ['uses' => 'StudentController@destroy', 'middleware' => 'auth.jwt']);
-
-// list teachers
-Route::get('teachers', 'TeacherController@index');
-
-// show single teacher
-Route::get('teacher/{id}', 'TeacherController@show');
-
-// add a student
-Route::post('teacher', 'TeacherController@store');
-
-// update/edit a teacher
-Route::put('teacher', 'TeacherController@store');
-
-// delete teacher
-Route::delete('teacher/{id}', 'TeacherController@destroy');
+/* Teachers routes */
+Route::get('teachers', ['uses' => 'TeacherController@index', 'middleware' => 'auth.jwt']); // get all teachers
+Route::get('teacher/{id}', ['uses' => 'TeacherController@show', 'middleware' => 'auth.jwt']); // get a single teacher
+Route::post('teacher', ['uses' => 'TeacherController@store', 'middleware' => 'auth.jwt']); // add a teacher
+Route::put('teacher', ['uses' => 'TeacherController@store', 'middleware' => 'auth.jwt']); // update a teacher
+Route::delete('teacher/{id}', ['uses' => 'TeacherController@destroy', 'middleware' => 'auth.jwt']); // delete a teacher
