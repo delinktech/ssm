@@ -17,6 +17,7 @@ class UserController extends Controller
     $this->validate($request, [
         'name' => 'required',
         'username' => 'required',
+        'roles' => 'required',
         'email' => 'required|email|unique:users',
         'password' => 'required'
       ]);
@@ -38,30 +39,30 @@ class UserController extends Controller
   /*
     function to sigin users to the app
   */ 
-    public function signin(Request $request) {
-      // validating the forms data
-      $this->validate($request, [
-          'username' => 'required',
-          'password' => 'required'
-        ]);
+  public function signin(Request $request) {
+    // validating the forms data
+    $this->validate($request, [
+        'username' => 'required',
+        'password' => 'required'
+      ]);
 
-      $credentials = $request->only('username', 'password');
+    $credentials = $request->only('username', 'password');
 
-      try {
-        if (!$token = JWTAuth::attempt($credentials)) {
-          return response()->json([
-            'error' => 'Invalid Credentials!'
-            ], 401);
-        }
-      } catch (JWTException $e) {
+    try {
+      if (!$token = JWTAuth::attempt($credentials)) {
         return response()->json([
-          'error' => 'Could not create Token!'
-          ], 500);
+          'error' => 'Invalid Credentials!'
+          ], 401);
       }
-
-      // succss creating token return the token
+    } catch (JWTException $e) {
       return response()->json([
-        'token' => $token
-        ], 200); 
+        'error' => 'Could not create Token!'
+        ], 500);
     }
+
+    // succss creating token return the token
+    return response()->json([
+      'token' => $token
+      ], 201); 
+  }
 }
