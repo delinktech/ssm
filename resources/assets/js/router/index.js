@@ -72,19 +72,19 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/students/list',
     name: 'Students',
-    meta: { title: 'Students', icon: 'list' },
+    meta: { title: 'Students', icon: 'table' },
     children: [
       {
         path: 'list',
         name: 'StudentsList',
         component: view('students/list/StudentListComponent'),
-        meta: { title: 'Students List', icon: 'table' }
+        meta: { title: 'Students List' }
       },
       {
         path: 'add',
         name: 'StudentAdd',
         component: view('students/add/StudentAddComponent'),
-        meta: { title: 'Students Add', icon: 'form' }
+        meta: { title: 'Students Add' }
       }
     ]
   },
@@ -93,19 +93,40 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/teachers/list',
     name: 'Teachers',
-    meta: { title: 'Teachers', icon: 'pen' },
+    meta: { title: 'Teachers', icon: 'table' },
     children: [
       {
         path: 'list',
         name: 'TeachersList',
         component: view('teachers/list/TeacherListComponent'),
-        meta: { title: 'Teachers List', icon: 'table' }
+        meta: { title: 'Teachers List' }
       },
       {
         path: 'add',
         name: 'TeachersAdd',
         component: view('teachers/add/TeacherAddComponent'),
-        meta: { title: 'Teachers Add', icon: 'form' }
+        meta: { title: 'Teachers Add' }
+      }
+    ]
+  },
+  {
+    path: '/results',
+    component: Layout,
+    redirect: '/results/export',
+    name: 'results',
+    meta: { title: 'Results', icon: 'excel' },
+    children: [
+      {
+        path: 'export',
+        name: 'export',
+        component: view('results/export/ResultsExportComponent'),
+        meta: { title: 'Export Result' }
+      },
+      {
+        path: 'upload',
+        name: 'upload',
+        component: view('results/upload/ResultsUploadComponent'),
+        meta: { title: 'Upload Results' }
       }
     ]
   },
