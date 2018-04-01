@@ -1,27 +1,18 @@
 import request from '../utils/request'
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource)
 
 export function login(username, password) {
-  return request({
-    url: '/api/user/login',
-    method: 'post',
-    data: {
-      username,
-      password
-    }
-  })
+  const userCredentials = { 'username': username, 'password': password }
+  return Vue.http.post('/api/user/login', userCredentials)
 }
 
 export function getInfo(token) {
-  return request({
-    url: 'api/user/info',
-    method: 'get',
-    params: { token }
-  })
+  return Vue.http.get('/api/user/info', { params: {'token': token }} )
 }
 
-export function logout() {
-  return request({
-    url: 'api/user/logout',
-    method: 'post'
-  })
+export function logout(token) {
+  return Vue.http.post('/api/user/logout', { params: {'token': token }} )
 }
