@@ -24,11 +24,12 @@ class CreateUsersTable extends Migration
       $table->string('email')->unique();
       $table->string('password');
 
-      $table->string('school');
-      $table->string('approved');
+      $table->integer('school');
+      $table->boolean('approved');
       $table->string('roles');
       $table->string('level');
-      
+      $table->string('avatar');
+
       $table->rememberToken();
 
       $table->string('creatdBy');
