@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import axios from 'axios'
 
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
-
-axios.defaults.baseURL = 'http://dev.ssm.io/api'
 
 Vue.use(Router)
 
@@ -70,49 +67,48 @@ export const constantRouterMap = [
   //   ]
   // },
 
-  // {
-  //   path: '/students',
-  //   component: Layout,
-  //   redirect: '/students/list',
-  //   name: 'Students',
-  //   meta: { title: 'Students', icon: 'list' },
-  //   children: [
-  //     {
-  //       path: 'list',
-  //       name: 'StudentsList',
-  //       component: view('.views/students/students-list'),
-  //       meta: { title: 'Students List', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'add',
-  //       name: 'StudentAdd',
-  //       component: view('.views/students/students-add'),
-  //       meta: { title: 'Students Add', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/teachers',
-  //   component: Layout,
-  //   redirect: '/teachers/list',
-  //   name: 'Teachers',
-  //   meta: { title: 'Teachers', icon: 'pen' },
-  //   children: [
-  //     {
-  //       path: 'list',
-  //       name: 'TeachersList',
-  //       component: view('.views/teachers/teachers-list'),
-  //       meta: { title: 'Teachers List', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'add',
-  //       name: 'TeachersAdd',
-  //       component: view('.views/teachers/teachers-add'),
-  //       meta: { title: 'Teachers Add', icon: 'form' }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/students',
+    component: Layout,
+    redirect: '/students/list',
+    name: 'Students',
+    meta: { title: 'Students', icon: 'list' },
+    children: [
+      {
+        path: 'list',
+        name: 'StudentsList',
+        component: view('students/list/StudentListComponent'),
+        meta: { title: 'Students List', icon: 'table' }
+      },
+      {
+        path: 'add',
+        name: 'StudentAdd',
+        component: view('students/add/StudentAddComponent'),
+        meta: { title: 'Students Add', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/teachers',
+    component: Layout,
+    redirect: '/teachers/list',
+    name: 'Teachers',
+    meta: { title: 'Teachers', icon: 'pen' },
+    children: [
+      {
+        path: 'list',
+        name: 'TeachersList',
+        component: view('teachers/list/TeacherListComponent'),
+        meta: { title: 'Teachers List', icon: 'table' }
+      },
+      {
+        path: 'add',
+        name: 'TeachersAdd',
+        component: view('teachers/add/TeacherAddComponent'),
+        meta: { title: 'Teachers Add', icon: 'form' }
+      }
+    ]
+  },
 
   // {
   //   path: '/form',
