@@ -64,7 +64,6 @@
       fetchData() {
         this.listLoading = true
         getStudents().then(response => {
-          console.log('students:', response.data)
           this.list = response.data.data
           this.listLoading = false
         })
