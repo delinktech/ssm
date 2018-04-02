@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user/login', function (Request $request) {
 /* user auth routes */
 Route::post('/user', ['uses' => 'UserController@signup']);	// user signup
 Route::post('/user/login', ['uses' => 'UserController@signin']);	// user login
+Route::get('/user/list', ['uses' => 'UserController@index']);	// user login
 Route::get('/user/info', function() { return JWTAuth::parseToken()->authenticate(); });	// get authenticated user info
 Route::post('/user/logout', function() { return JWTAuth::parseToken()->invalidate(); });	// user logout
 
