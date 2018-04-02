@@ -9,3 +9,9 @@ export default {
   name: 'app'
 }
 </script>
+
+<style scoped>
+  #app {
+    margin-bottom: 20px;
+  }
+</style>
