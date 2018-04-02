@@ -1,96 +1,91 @@
 <template>
   <div class="content-container">
     <h3>Add Users</h3>
-    <!-- <el-steps :active="active" finish-status="success">
-      <el-step title="Basic Information">1</el-step>
-      <el-step title="Users Information">2</el-step>
-      <el-step title="Confirmation">3</el-step>
-    </el-steps> -->
 
     <!-- form starts -->
-    <el-form ref="form" :model="form" :rules="rules" class="dm-margin-top">
-      <!-- basic info -->
-      <div v-if="active===1">
-        <el-col :span="11">
-          <el-form-item label="First Name">
-            <el-input v-model="form.fname"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="2">&nbsp;</el-col>
-        <el-col :span="11">
-          <el-form-item label="Last Name">
-            <el-input v-model="form.lname"></el-input>
-          </el-form-item>
-        </el-col>
+    <el-form ref="form" :model="form" :rules="rules">
+      <el-col :span="11">
+        <el-form-item label="First Name">
+          <el-input v-model="form.fname"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="11">
+        <el-form-item label="Last Name">
+          <el-input v-model="form.lname"></el-input>
+        </el-form-item>
+      </el-col>
 
-        <el-col :span="11">
-          <el-form-item label="User Name">
-            <el-input v-model="form.username"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="2">&nbsp;</el-col>
-        <el-col :span="11">
-          <el-form-item label="E-mail">
-            <el-input v-model="form.email"></el-input>
-          </el-form-item>
-        </el-col>
+      <el-col :span="11">
+        <el-form-item label="User Name">
+          <el-input v-model="form.username"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="11">
+        <el-form-item label="E-mail">
+          <el-input v-model="form.email"></el-input>
+        </el-form-item>
+      </el-col>
 
-        <el-col :span="24">
-          <el-form-item label="Phone Number">
-            <el-input v-model="form.phone"></el-input>
-          </el-form-item>
-        </el-col>
-        
-        <el-col :span="7">
-          <el-form-item label="School">
-            <el-select v-model="form.school" placeholder="Please select school">
-              <el-option label="School one" value="1"></el-option>
-              <el-option label="School two" value="2"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="1">&nbsp;</el-col>
-        <el-col :span="7">
-          <el-form-item label="User Level">
-            <el-select v-model="form.level" placeholder="Please user level">
-              <el-option label="Head Master" value="head"></el-option>
-              <el-option label="Teacher" value="teacher"></el-option>
-              <el-option label="Sec" value="sec"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="2">&nbsp;</el-col>
-        <el-col :span="7">
-          <el-form-item label="Teacher?">
-            <el-switch v-model="form.hasTeacherObject"></el-switch>
-          </el-form-item>
-        </el-col>
+      <el-col :span="24">
+        <el-form-item label="Phone Number">
+          <el-input v-model="form.phone"></el-input>
+        </el-form-item>
+      </el-col>
+      
+      <el-col :span="7">
+        <el-form-item label="School">
+          <el-select v-model="form.school" placeholder="Please select school">
+            <el-option label="School one" value="1"></el-option>
+            <el-option label="School two" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="7">
+        <el-form-item label="User Level">
+          <el-select v-model="form.level" placeholder="Please user level">
+            <el-option label="Head Master" value="head"></el-option>
+            <el-option label="Teacher" value="teacher"></el-option>
+            <el-option label="Sec" value="sec"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="7">
+        <el-form-item label="Teacher?">
+          <el-switch v-model="form.hasTeacherObject"></el-switch>
+        </el-form-item>
+      </el-col>
 
-        <el-col :span="24">
-          <el-form-item label="User Roles">
-            <el-checkbox-group v-model="form.roles">
-              <el-checkbox label="Admin" name="type"></el-checkbox>
-              <el-checkbox label="Head Master" name="type"></el-checkbox>
-              <el-checkbox label="Dean" name="type"></el-checkbox>
-              <el-checkbox label="Teacher" name="type"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </el-col>
+      <el-col :span="24">
+        <el-form-item label="User Roles">
+          <el-checkbox-group v-model="form.roles">
+            <el-checkbox label="Admin" name="type"></el-checkbox>
+            <el-checkbox label="Head Master" name="type"></el-checkbox>
+            <el-checkbox label="Dean" name="type"></el-checkbox>
+            <el-checkbox label="Teacher" name="type"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-col>
 
-        <el-col :span="11">
-          <el-form-item label="Password" prop="pass">
-            <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="2">&nbsp;</el-col>
-        <el-col :span="11">
-          <el-form-item label="Confirm" prop="checkPass">
-            <el-input type="password" v-model="form.checkPass" auto-complete="off"></el-input>
-          </el-form-item>
-        </el-col>
-      </div>
+      <el-col :span="11">
+        <el-form-item label="Password" prop="pass">
+          <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="11">
+        <el-form-item label="Confirm" prop="checkPass">
+          <el-input type="password" v-model="form.checkPass" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-col>
 
-      <el-button style="margin-top: 12px;" @click="onSubmit(form)">Save</el-button>
+      <el-col :span="24">
+        <el-button type="success" style="margin-top: 12px;" @click="onSubmit(form)">Save</el-button>
+      </el-col>
+
     </el-form>
     <!-- form ends -->
   </div>
@@ -160,12 +155,6 @@
 
 <style scoped>
   .content-container {
-    margin: 15px;
-  }
-  .dm-margin {
     margin: 20px;
-  }
-  .dm-margin-top {
-    margin-top: 20px;
   }
 </style>
