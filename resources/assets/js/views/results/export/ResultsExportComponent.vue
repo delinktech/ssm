@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import { Export2Excel } from '../../../vendor/Export2Excel'
-import { fetchStudents } from '../../../api/students'
+// import { Export2Excel } from '../../../vendor/Export2Excel'
+import { getStudents } from '../../../api/students'
 import { parseTime } from '../../../utils'
 
 export default {
@@ -55,21 +55,21 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      fetchStudents().then(response => {
+      getStudents().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })
     },
     handleDownload() {
       this.downloadLoading = true
-      Export2Excel.then(excel => {
-        const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
-        const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
-        const list = this.list
-        const data = this.formatJson(filterVal, list)
-        excel.export_json_to_excel(tHeader, data, this.filename)
-        this.downloadLoading = false
-      })
+      // Export2Excel.then(excel => {
+      //   const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
+      //   const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+      //   const list = this.list
+      //   const data = this.formatJson(filterVal, list)
+      //   excel.export_json_to_excel(tHeader, data, this.filename)
+      //   this.downloadLoading = false
+      // })
     },
     formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => {
