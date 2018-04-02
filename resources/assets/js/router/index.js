@@ -130,6 +130,27 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/users',
+    component: Layout,
+    redirect: '/users/list',
+    name: 'users',
+    meta: { title: 'Users', icon: 'form' },
+    children: [
+      {
+        path: 'list',
+        name: 'list',
+        component: view('users/list/UsersListComponent'),
+        meta: { title: 'Users List' }
+      },
+      {
+        path: 'add',
+        name: 'add',
+        component: view('users/add/UsersAddComponent'),
+        meta: { title: 'Add Users' }
+      }
+    ]
+  },
 
   // {
   //   path: '/form',
