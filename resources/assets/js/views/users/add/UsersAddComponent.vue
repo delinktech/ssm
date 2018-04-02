@@ -6,37 +6,37 @@
     <el-form ref="form" :model="form" :rules="rules">
       <el-col :span="11">
         <el-form-item label="First Name">
-          <el-input v-model="form.fname"></el-input>
+          <el-input v-model="form.fname" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Last Name">
-          <el-input v-model="form.lname"></el-input>
+          <el-input v-model="form.lname" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="11">
         <el-form-item label="User Name">
-          <el-input v-model="form.username"></el-input>
+          <el-input v-model="form.username" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="E-mail">
-          <el-input v-model="form.email"></el-input>
+          <el-input v-model="form.email" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="24">
         <el-form-item label="Phone Number">
-          <el-input v-model="form.phone"></el-input>
+          <el-input v-model="form.phone" size="medium"></el-input>
         </el-form-item>
       </el-col>
       
       <el-col :span="7">
         <el-form-item label="School">
-          <el-select v-model="form.school" placeholder="Please select school">
+          <el-select v-model="form.school" placeholder="Please select school" size="medium">
             <el-option label="School one" value="1"></el-option>
             <el-option label="School two" value="2"></el-option>
           </el-select>
@@ -45,7 +45,7 @@
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
         <el-form-item label="User Level">
-          <el-select v-model="form.level" placeholder="Please user level">
+          <el-select v-model="form.level" placeholder="Please user level" size="medium">
             <el-option label="Head Master" value="head"></el-option>
             <el-option label="Teacher" value="teacher"></el-option>
             <el-option label="Sec" value="sec"></el-option>
@@ -72,13 +72,13 @@
 
       <el-col :span="11">
         <el-form-item label="Password" prop="pass">
-          <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
+          <el-input type="password" v-model="form.pass" size="medium" auto-complete="off"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="form.checkPass" auto-complete="off"></el-input>
+          <el-input type="password" v-model="form.checkPass" size="medium" auto-complete="off"></el-input>
         </el-form-item>
       </el-col>
 
