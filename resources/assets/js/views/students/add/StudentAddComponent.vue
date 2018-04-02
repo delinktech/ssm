@@ -39,8 +39,20 @@
     name: 'StudentAddComponent',
     data() {
       return {
-        list: null,
-        listLoading: true
+        listLoading: true,
+        studentForm: {
+          regNum: '',
+
+          firstName: '',
+          secondName: '',
+          lastName: '',
+          gender: '',
+          dob: '',
+
+          school: '',
+          class: '',
+          parent: ''
+        }
       }
     },
     filters: {
@@ -54,11 +66,19 @@
       }
     },
     created() {
-      this.fetchData()
+      // TODO: fatch data required before saving students
+      // this.fetchSchools()
+      // this.fetchClass()
+      // this.fetchParents()
     },
     methods: {
       fetchData() {
         this.listLoading = true
+      },
+      onSubmit() {
+        if (this.studentForm.valid) {
+          // post data to api
+        }
       }
     }
   }
