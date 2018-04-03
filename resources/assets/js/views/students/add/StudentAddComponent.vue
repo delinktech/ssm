@@ -138,6 +138,7 @@
     name: 'StudentAddComponent',
     data() {
       return {
+        active: 1,
         schoolInfo: null,
         schClasses: null,
         parentForm: {
@@ -192,9 +193,13 @@
       onSubmit() {
         if (this.parentForm.valid) {
           // post data to api
-
+          console.log('parent=>', this.parentForm)
+          console.log('student=>', this.studentForm)
           // TODO: on success parent save get parent and save student
         }
+      },
+      next() {
+        if (this.active++ > 1) this.active = 1;
       }
     }
   }
