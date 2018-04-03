@@ -6,13 +6,13 @@
     <el-form ref="form" :model="form" :rules="rules">
       <el-col :span="11">
         <el-form-item label="First Name">
-          <el-input v-model="form.fname" size="medium"></el-input>
+          <el-input v-model="form.firstname" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Last Name">
-          <el-input v-model="form.lname" size="medium"></el-input>
+          <el-input v-model="form.lastname" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
@@ -72,13 +72,13 @@
 
       <el-col :span="11">
         <el-form-item label="Password" prop="pass">
-          <el-input type="password" v-model="form.pass" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="form.password" size="medium" auto-complete="off"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="form.checkPass" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="checkPass" size="medium" auto-complete="off"></el-input>
         </el-form-item>
       </el-col>
 
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+  import { saveUser } from '../../../api/users'
 
   export default {
     name: 'UsersAddComponent',
@@ -118,20 +119,21 @@
       return {
         active: 1,
         form: {
-          fname: '',
-          lname: '',
+          firstname: '',
+          lastname: '',
           username: '',
           email: '',
           phone: '',
           roles: [],
           school: '',
           password: '',
-          checkPass: '',
           level: '',
+          avatar: '',
           hasTeacherObject: ''
         },
+        checkPass: '',
         rules: {
-          pass: [
+          password: [
             { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
@@ -145,9 +147,14 @@
       next() {
         if (this.active++ > 2) this.active = 1;
       },
-      onSubmit(data) {
+      onSubmit() {
         // save user
-        console.log(data)
+        saveUser(this.form).then(res => {
+          // successful save
+        })
+          .catch(err => {
+            console.log(err)
+          })
       }
     }
   }
