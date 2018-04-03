@@ -5,8 +5,8 @@ import { getToken } from '../utils/auth'
 Vue.use(VueResource)
 
 /* function to add/signup users to the app */
-export const saveUser = () => {
-  return Vue.http.post('/api/user', { params: { 'token': getToken() }} )
+export const saveUser = (formData) => {
+  return Vue.http.post('/api/user', { content: formData, params: { 'token': getToken() } })
 }
 
 /* function to fetch all the users from the api */
