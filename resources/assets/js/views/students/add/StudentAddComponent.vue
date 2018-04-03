@@ -137,10 +137,14 @@
         schoolInfo: null,
         schClasses: null,
         parentForm: {
-          firstName: '',
-          secondName: '',
+          firstname: '',
+          secondname: '',
           phone: '',
-          email: ''
+          email: '',
+          nationalId: '',
+          county: '',
+          sub_county: '',
+          ward: ''
         },
         studentForm: {
           regNum: 'MTNT/2018/2579',
