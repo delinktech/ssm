@@ -17,14 +17,14 @@ cd ssm
 ## Build Setup
 ```
   # Install dependencies
-  npm install
+  $ npm install
 
   # Update laravel packages
-  composer update
+  $ composer update
 
-  # Run vue watch 
-  npm run watch
+  # Start vue files watch 
+  $ npm run watch
 
-  # run php server
-  php artisan run server
+  # Start php server
+  $ php artisan run server
 ```
