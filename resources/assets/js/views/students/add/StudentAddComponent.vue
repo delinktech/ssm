@@ -69,10 +69,61 @@
 
       <el-col :span="24">
         <el-button type="success" style="margin-top: 12px;" @click="onSubmit(form)">Save Student</el-button>
+    <el-form ref="parentForm" :model="parentForm" v-if="active === 2"> <!-- /parents form begins -->
+      <el-col :span="11">
+        <el-form-item label="First Name">
+          <el-input v-model="parentForm.firstname" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="11">
+        <el-form-item label="Last Name">
+          <el-input v-model="parentForm.seconname" size="medium"></el-input>
+        </el-form-item>
       </el-col>
 
-    </el-form> <!-- /form ends -->
+      <el-col :span="7">
+        <el-form-item label="Phone">
+          <el-input v-model="parentForm.phone" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="8">
+        <el-form-item label="E-Mail">
+          <el-input v-model="parentForm.email" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="7">
+        <el-form-item label="Natioanl ID">
+          <el-input v-model="parentForm.nationalId" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
 
+      <el-col :span="7">
+        <el-form-item label="County">
+          <el-input v-model="parentForm.county" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="8">
+        <el-form-item label="Sub-County">
+          <el-input v-model="parentForm.sub_county" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="7">
+        <el-form-item label="Ward">
+          <el-input v-model="parentForm.ward" size="medium"></el-input>
+        </el-form-item>
+      </el-col>
+
+      <el-col :span="24">
+        <el-button type="success" style="margin-top: 12px;" @click="onSubmit">All Done Save</el-button>
+      </el-col>
+    </el-form> <!-- /parents form ends -->
+
+    <el-button style="margin-top: 12px;" @click="next">Next step</el-button>
   </div>
 </template>
 
