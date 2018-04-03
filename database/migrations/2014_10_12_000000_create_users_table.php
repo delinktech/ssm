@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
       $table->string('roles');
       $table->string('level');
       $table->string('avatar');
+      $table->boolean('hasTeacherObject');
 
       $table->rememberToken();
 

@@ -46,9 +46,10 @@ class UserController extends Controller
 
       'school' => $request->input('school'),
       'approved' => false,
-      'roles' => $request->input('roles'),
+      'roles' => implode(',', $request->input('roles')),
       'level' => $request->input('level'),
       'avatar' => $request->input('avatar'),
+      'hasTeacherObject' => $request->input('hasTeacherObject'),
 
       // TODO: add created by field
       'creatdBy' => JWTAuth::parseToken()->toUser()->username,
