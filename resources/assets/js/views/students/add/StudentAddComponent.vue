@@ -12,8 +12,12 @@
       >>> smile all the way :)
     -->
 
-    <!-- form starts -->
-    <el-form ref="form" :model="studentForm">
+    <el-steps :active="active" finish-status="success"> <!--- steps begins -->
+      <el-step title="Student Info"></el-step>
+      <el-step title="Parent Info"></el-step>
+    </el-steps>
+
+    <el-form ref="studentForm" :model="studentForm" v-if="active === 1"> <!-- student form starts -->
       <el-col :span="11">
         <el-form-item label="School">
           <el-input v-model="studentForm.school" size="medium"></el-input>
@@ -67,8 +71,8 @@
         </el-form-item>
       </el-col>
 
-      <el-col :span="24">
-        <el-button type="success" style="margin-top: 12px;" @click="onSubmit(form)">Save Student</el-button>
+    </el-form> <!-- /students form ends -->
+
     <el-form ref="parentForm" :model="parentForm" v-if="active === 2"> <!-- /parents form begins -->
       <el-col :span="11">
         <el-form-item label="First Name">
