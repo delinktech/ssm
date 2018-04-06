@@ -18,7 +18,7 @@ class School extends Model
       }
 
        public function schoolTeacher(){
-        return $this->belongstoMany('App\Teacher');
+        return $this->belongsToMany('App\Teacher');
     }
 
 }
