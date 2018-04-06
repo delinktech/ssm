@@ -46,7 +46,6 @@ class ParentsController extends Controller
             'national_id' => $request->national_id,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
-            'parent_id' => 0,
             'county'=>request->county,
             'sub_county'=>request->sub_county,
             'ward'=>request->ward
