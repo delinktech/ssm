@@ -14,7 +14,7 @@ class Student extends Model
 
   public function studentClass()
   {
-    return $this->hasOne(Classes::class, 'id', 'class_id');
+    return $this->hasOne(Classes::class, 'id', 'class_id' 'forign-key');
   }
 
   public function studentSchool()
