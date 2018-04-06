@@ -19,10 +19,10 @@ class Teacher extends Model
 
   // database relationship 
   public function studentTeacher(){
-    return $this->hasMany(studentTeacher::class,'student_id','id');
+    return $this->hasMany('App\Student');
   } 
 
   public function schoolTeacher(){
-    return $this->hasOne(schoolTeacher::class,'school_id','id');
+    return $this->belongsTo('App\School');
   }
 }

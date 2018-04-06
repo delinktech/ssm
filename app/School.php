@@ -14,11 +14,11 @@ class School extends Model
 
      public function studentSchool()
     {
-        return $this->hasMany(studentSchool::class, 'student_id', 'id');
+        return $this->belongsTo('App\Student');
       }
 
        public function schoolTeacher(){
-        return $this->hasMany(schoolTeacher::class,'teacher_id','id');
+        return $this->belongstoMany('App\Teacher');
     }
 
 }
