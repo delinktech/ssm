@@ -32,7 +32,8 @@ class UserController extends Controller
         'password' => 'required',
         'school' => 'required',
         'roles' => 'required',
-        'level' => 'required'
+        'level' => 'required',
+        'hasTeacherObject' => 'required'
       ]);
 
     $user = new User([
