@@ -37,3 +37,11 @@ Route::get('teacher/{id}', ['uses' => 'TeacherController@show', 'middleware' => 
 Route::post('teacher', ['uses' => 'TeacherController@store', 'middleware' => 'auth.jwt']); // add a teacher
 Route::put('teacher', ['uses' => 'TeacherController@store', 'middleware' => 'auth.jwt']); // update a teacher
 Route::delete('teacher/{id}', ['uses' => 'TeacherController@destroy', 'middleware' => 'auth.jwt']); // delete a teacher
+
+/* Parents routes */
+Route::get('parent', ['uses' => 'ParentController@index', 'middleware' => 'auth.jwt']);
+	// get all the parents
+Route::get('parent/{id}', ['uses' => 'ParentController@show', 'middleware' => 'auth.jwt']);	// get a single parent
+Route::post('parent', ['uses' => 'ParentController@store', 'middleware' => 'auth.jwt']);	// add a single parent
+Route::put('parent', ['uses' => 'ParentController@store', 'middleware' => 'auth.jwt']);	// update a single parent
+Route::delete('parent/{id}', ['uses' => 'ParentController@destroy', 'middleware' => 'auth.jwt']);	// delete a single parent
