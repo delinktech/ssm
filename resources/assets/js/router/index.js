@@ -110,25 +110,25 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/results',
+    path: '/results/',
     component: Layout,
-    redirect: '/results/export',
+    redirect: 'noredirect',
     name: 'results',
-    meta: { title: 'Results', icon: 'excel' },
+    meta: { title: 'Upload Results', icon: 'excel' },
     children: [
-      {
-        path: 'export',
-        name: 'export',
-        component: view('results/export/ResultsExportComponent'),
-        meta: { title: 'Export Result' }
-      },
+      // {
+      //   path: 'export',
+      //   name: 'export',
+      //   component: view('results/export/ResultsExportComponent'),
+      //   meta: { title: 'Export Result' }
+      // },
       {
         path: 'upload',
-        name: 'upload',
+        // name: 'upload',
         component: view('results/upload/ResultsUploadComponent'),
         meta: { title: 'Upload Results' }
       }
-    ]
+    ] 
   },
   {
     path: '/users',
