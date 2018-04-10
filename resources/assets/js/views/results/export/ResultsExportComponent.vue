@@ -1,9 +1,9 @@
 <template>
  <!-- $t is vue-i18n global function to translate lang -->
   <div class="app-container">
-    <el-input style='width:340px;' :placeholder="$t('excel.placeholder')" prefix-icon="el-icon-document" v-model="filename"></el-input>
-    <el-button style='margin-bottom:20px;' type="primary" icon="document" @click="handleDownload" :loading="downloadLoading">{{$t('excel.export')}} excel</el-button>
-    <el-table :data="list" v-loading.body="listLoading" element-loading-text="拼命加载中" border fit highlight-current-row>
+    <el-input style='width:340px;' :placeholder="('excel.placeholder')" prefix-icon="el-icon-document" v-model="filename"></el-input>
+    <el-button style='margin-bottom:20px;' type="primary" icon="document" @click="handleDownload" :loading="downloadLoading">{{('excel.export')}} excel</el-button>
+    <!-- <el-table :data="list" v-loading.body="listLoading" element-loading-text="loading.." border fit highlight-current-row>
       <el-table-column align="center" label='Id' width="95">
         <template slot-scope="scope">
           {{scope.$index}}
@@ -30,7 +30,7 @@
           <span>{{scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table> -->
   </div>
 </template>
 
@@ -63,8 +63,8 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       // Export2Excel.then(excel => {
-      //   const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
-      //   const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+      //   const tHeader = ['Id', 'First Name', 'Last Name', 'Parent']
+      //   const filterVal = ['Id', 'First Name', 'Last Name', 'Parent']
       //   const list = this.list
       //   const data = this.formatJson(filterVal, list)
       //   excel.export_json_to_excel(tHeader, data, this.filename)
