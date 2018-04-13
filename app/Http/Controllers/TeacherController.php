@@ -30,7 +30,39 @@ class TeacherController extends Controller
      */
     public function create()
     {
-      //
+       $this->validate($request, [
+            'first_name' => 'required',
+            'surname' => 'required',
+            'id_number' => 'required',
+            'email' => 'required',
+            'username' => 'required',
+            'teacher_dev_reg' => 'required',
+            'password' => 'required',
+            'status' => 'required',
+            'school_id' => 'required',
+            'class_id' => 'required',
+            'subjects' => 'required'
+            
+        ]);
+       $teacher = Teacher::create([
+            'first_name' => $request->first_name,
+            'sur_name' => $request->sur_name,
+            'id_number' => $request->id_number,
+            'email' => $request->email,
+            'username' => $request->username,
+            'username' => $request->username,
+            'teacher_dev_reg' => $request->teacher_dev_reg,
+            'password' => $request->password,
+            'status' => $request->status,
+            'school_id' => $this->organisation_info->id,
+            'class_id' => $request->class_id,
+            'subjects' => $request->subjects
+
+        ]);
+          return response()->json([
+            'success' => true,
+            'id' => $teacher->id
+        ]);
     }
 
     /**
@@ -70,6 +102,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
+      
       // get single teacher details
       $teacher = Teacher::findOrFail($id);
 
