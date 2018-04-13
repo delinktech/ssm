@@ -25,7 +25,19 @@ class ParentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $id_no_exists=Parent::where('id_number','=',$request->id_number)->get()->first();
+
+        if($id_no_exists!=null){
+            return APIResponse::failResponse('The id number is already registered.');
+        }
+
+        $email_exists=Parent::where('email','=',$request->email)->get()->first();
+
+        if($email_exists!=null){
+            return APIResponse::failResponse('The email is already used.');
+        }
+
         $this->validate($request, [
             'first_name' => 'required',
             'second_name' => 'required',
@@ -94,7 +106,18 @@ class ParentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [];
+        $data["parent"] = Parent::find($id);
+        
+        return view('../components/parent-component/list/ParentListComponent', $data);
+    }
+
+      public function getParent($id)
+    {
+        $parent = Parent::find($id);
+        $student->parent = SchoolParent::where('student_id', '=', $id)->get()->first();
+
+        return response()->json($student);
     }
 
     /**

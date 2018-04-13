@@ -18,3 +18,4 @@ class Result extends Model
     return $this->hasOne(Student::class, 'id', 'student_id' 'forign-key');
   }
 }
+`

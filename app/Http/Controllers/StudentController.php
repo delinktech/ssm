@@ -248,7 +248,74 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $student = Student::find($id);
+        if ($student == null) {
+            return response("Could not update. No record found", 500);
+        }
+       q if ($student->reg_no == $request->reg_no) {
+            $this->validate($request, [
+            'first_name' => 'required',
+            'reg_no' => 'required|unique:students,reg_no,NULL,id,organisation_info,' . $this->organisation_info->id,
+            'surname' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'reg_date' => 'required',
+            'student_gender' => 'required',
+            'passport_photo' => 'required',
+            'student_school' => 'required'
+            ]);
+        } else {
+            $this->validate($request, [
+            'first_name' => 'required',
+            'reg_no' => 'required|unique:students,reg_no,NULL,id,organisation_info,' . $this->organisation_info->id,
+            'surname' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'reg_date' => 'required',
+            'student_gender' => 'required',
+            'passport_photo' => 'required',
+            'student_school' => 'required'
+            ]);
+        }
+
+           $student->student_first_name = $request->input('student_first_name');
+          $student->student_second_name = $request->input('student_second_name');
+          $student->student_last_surname = $request->input('student_last_surname');
+          $student->student_dob = $request->input('student_dob');
+          $student->student_gender = $request->input('student_gender');
+          $student->reg_date = $request->input('reg_date');
+          $student->student_gender = $request->input('student_gender');
+          $student->passport_photo = $request->input('passport_photo');
+          $student->student_school = $request->input('student_school');
+          $student->save();
+
+        $parent = SchoolParent::where('student_id', '=', $student->id)->get()->first();
+        if ($parent == null) {
+            $parent = SchoolParent::create([
+              'first_name' => $request->first_name,
+              'second_name' => $request->second_name,
+              'national_id' => $request->national_id,
+              'phone_number' => $request->phone_number,
+              'email' => $request->email,
+              'county'=>request->county,
+              'sub_county'=>request->sub_county,
+              'ward'=>request->ward
+
+            ]);
+        } else {
+            
+              $parent->first_name = $request->input('first_name');
+              $parent->second_name = $request->input('second_name');
+              $parent->national_id = $request->input('national_id');
+              $parent->phone_number = $request->input('phone_number');
+              $parent->email = $request->input('email');
+              $parent->parent_id = $request->input('parent_id');
+              $parent->county = $request->input('county');
+              $parent->sub_county = $request->input('sub_county');
+              $parent->ward = $request->input('ward');
+               $parent->save();
+        }
     }
 
     /**
