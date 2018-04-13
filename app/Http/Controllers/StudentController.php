@@ -318,6 +318,126 @@ class StudentController extends Controller
         }
     }
 
+     private static function getStudentSubjects($id)
+    {
+        $studentSubjects = [];
+        $subjects = StudentSubject::where('student_id', '=', $id)->orderBy('id', 'desc')->get();
+
+        foreach ($subjects as $subject) {
+            $subject->name = Subject::find($subject->id)->subject;
+            array_push($studentSubjects, $subject);
+        }
+        $student = Student::find($id);
+
+        $schoolSubjects = Subject::where('school_id', $student->school_id)
+            ->where('is_compulsory', true)
+            ->get();
+        foreach ($schoolSubjects as $schoolSubject) {
+            $studentSubject = new StudentSubject();
+            $studentSubject->id = -1;
+            $studentSubject->student_id = $id;
+            $studentSubject->subject_id = $schoolSubject->id;
+            $studentSubject->name = $schoolSubject->subject;
+
+            array_push($studentSubjects, $studentSubject);
+        }
+
+        return $studentSubjects;
+    }
+
+     public function studentRecords()
+    {
+        $user = Auth::user();
+        $data = [];
+        if ($user->user_type == 2) {
+            $teacher = Teacher::where('user_id', $user->id)->get()->first();
+            if ($teacher == null) {
+                return response()->json([
+
+                ]);
+            }
+            $records = StudentRecord::where('teacher_id', $teacher->id)->get();
+            $data['records'] = $records;
+            $data['students'] = $this->getTeacherStudents();
+            return view('dashboard.pages.students.view-student-records', $data);
+        }
+        $data['records'] = [];
+        $data['students'] = Student::where('school_id', $this->organisation_info->id)->orderBy('id', 'desc')->get();
+
+        return view('views/students/studentcomponent.vue', $data);
+
+    }
+
+    public function createStudentRecord(Request $request)
+    {
+        $user = Auth::user();
+        $teacher = Teacher::where('user_id', $user->id)->get()->first();
+
+        if ($teacher == null) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+        $record = StudentRecord::create([
+            'student_id' => $request->student_id,
+            'teacher_id' => $teacher->id,
+            'description' => $request->description,
+            'date' => new \DateTime($request->date),
+            'type' => $request->type,
+            'status' => Constants::ACTIVE_RECORD
+        ]);
+        $record->student = Student::find($request->student_id);
+        $record->date = $request->date;
+
+        try {
+            $record->teacher = $teacher;
+            $profile = new TargetProfile($request->student_id, '', Constants::STUDENT);
+            $data = new PushNotificationMessage();
+            $data->type = 'RECORD';
+            $data->target = $profile->id;
+            $data->data = $record;
+            $this->pushNotification($profile, $data);
+        } catch (\Exception $e) {
+
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $record
+        ]);
+    }
+
+    public function updateStudentRecord(Request $request, $id)
+    {
+        $record = StudentRecord::find($id);
+        if ($record == null) {
+            return APIResponse::failResponse('No Record found');
+        }
+        $record->student_id = $request->student_id;
+        $record->description = $request->description;
+        $record->date = new \DateTime($request->date);
+        $record->type = $request->type;
+        $record->save();
+        try {
+            $teacher = Teacher::find($record->teacher_id);
+            $record->teacher = $teacher;
+            $profile = new TargetProfile($request->student_id, '', Constants::STUDENT);
+            $data = new PushNotificationMessage();
+            $data->type = 'RECORD';
+            $data->target = $profile->id;
+            $data->data = $record;
+            $this->pushNotification($profile, $data);
+        } catch (\Exception $e) {
+
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $record
+        ]);
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *
