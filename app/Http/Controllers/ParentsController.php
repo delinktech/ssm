@@ -128,7 +128,13 @@ class ParentsController extends Controller
      */
     public function edit($id)
     {
-        //
+         $data = [];
+        $data["parent"] = Parent::find($id);
+        $data["student"] = self::getParentStudent($id);
+        if ($id != -1) {
+
+        }
+        return view('../components/parent-component/list/ParentsListComponent', $data);
     }
 
     /**
