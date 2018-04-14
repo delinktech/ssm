@@ -248,8 +248,195 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $student = Student::find($id);
+        if ($student == null) {
+            return response("Could not update. No record found", 500);
+        }
+       q if ($student->reg_no == $request->reg_no) {
+            $this->validate($request, [
+            'first_name' => 'required',
+            'reg_no' => 'required|unique:students,reg_no,NULL,id,organisation_info,' . $this->organisation_info->id,
+            'surname' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'reg_date' => 'required',
+            'student_gender' => 'required',
+            'passport_photo' => 'required',
+            'student_school' => 'required'
+            ]);
+        } else {
+            $this->validate($request, [
+            'first_name' => 'required',
+            'reg_no' => 'required|unique:students,reg_no,NULL,id,organisation_info,' . $this->organisation_info->id,
+            'surname' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'reg_date' => 'required',
+            'student_gender' => 'required',
+            'passport_photo' => 'required',
+            'student_school' => 'required'
+            ]);
+        }
+
+           $student->student_first_name = $request->input('student_first_name');
+          $student->student_second_name = $request->input('student_second_name');
+          $student->student_last_surname = $request->input('student_last_surname');
+          $student->student_dob = $request->input('student_dob');
+          $student->student_gender = $request->input('student_gender');
+          $student->reg_date = $request->input('reg_date');
+          $student->student_gender = $request->input('student_gender');
+          $student->passport_photo = $request->input('passport_photo');
+          $student->student_school = $request->input('student_school');
+          $student->save();
+
+        $parent = SchoolParent::where('student_id', '=', $student->id)->get()->first();
+        if ($parent == null) {
+            $parent = SchoolParent::create([
+              'first_name' => $request->first_name,
+              'second_name' => $request->second_name,
+              'national_id' => $request->national_id,
+              'phone_number' => $request->phone_number,
+              'email' => $request->email,
+              'county'=>request->county,
+              'sub_county'=>request->sub_county,
+              'ward'=>request->ward
+
+            ]);
+        } else {
+            
+              $parent->first_name = $request->input('first_name');
+              $parent->second_name = $request->input('second_name');
+              $parent->national_id = $request->input('national_id');
+              $parent->phone_number = $request->input('phone_number');
+              $parent->email = $request->input('email');
+              $parent->parent_id = $request->input('parent_id');
+              $parent->county = $request->input('county');
+              $parent->sub_county = $request->input('sub_county');
+              $parent->ward = $request->input('ward');
+               $parent->save();
+        }
     }
+
+     private static function getStudentSubjects($id)
+    {
+        $studentSubjects = [];
+        $subjects = StudentSubject::where('student_id', '=', $id)->orderBy('id', 'desc')->get();
+
+        foreach ($subjects as $subject) {
+            $subject->name = Subject::find($subject->id)->subject;
+            array_push($studentSubjects, $subject);
+        }
+        $student = Student::find($id);
+
+        $schoolSubjects = Subject::where('school_id', $student->school_id)
+            ->where('is_compulsory', true)
+            ->get();
+        foreach ($schoolSubjects as $schoolSubject) {
+            $studentSubject = new StudentSubject();
+            $studentSubject->id = -1;
+            $studentSubject->student_id = $id;
+            $studentSubject->subject_id = $schoolSubject->id;
+            $studentSubject->name = $schoolSubject->subject;
+
+            array_push($studentSubjects, $studentSubject);
+        }
+
+        return $studentSubjects;
+    }
+
+     public function studentRecords()
+    {
+        $user = Auth::user();
+        $data = [];
+        if ($user->user_type == 2) {
+            $teacher = Teacher::where('user_id', $user->id)->get()->first();
+            if ($teacher == null) {
+                return response()->json([
+
+                ]);
+            }
+            $records = StudentRecord::where('teacher_id', $teacher->id)->get();
+            $data['records'] = $records;
+            $data['students'] = $this->getTeacherStudents();
+            return view('dashboard.pages.students.view-student-records', $data);
+        }
+        $data['records'] = [];
+        $data['students'] = Student::where('school_id', $this->organisation_info->id)->orderBy('id', 'desc')->get();
+
+        return view('views/students/studentcomponent.vue', $data);
+
+    }
+
+    public function createStudentRecord(Request $request)
+    {
+        $user = Auth::user();
+        $teacher = Teacher::where('user_id', $user->id)->get()->first();
+
+        if ($teacher == null) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+        $record = StudentRecord::create([
+            'student_id' => $request->student_id,
+            'teacher_id' => $teacher->id,
+            'description' => $request->description,
+            'date' => new \DateTime($request->date),
+            'type' => $request->type,
+            'status' => Constants::ACTIVE_RECORD
+        ]);
+        $record->student = Student::find($request->student_id);
+        $record->date = $request->date;
+
+        try {
+            $record->teacher = $teacher;
+            $profile = new TargetProfile($request->student_id, '', Constants::STUDENT);
+            $data = new PushNotificationMessage();
+            $data->type = 'RECORD';
+            $data->target = $profile->id;
+            $data->data = $record;
+            $this->pushNotification($profile, $data);
+        } catch (\Exception $e) {
+
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $record
+        ]);
+    }
+
+    public function updateStudentRecord(Request $request, $id)
+    {
+        $record = StudentRecord::find($id);
+        if ($record == null) {
+            return APIResponse::failResponse('No Record found');
+        }
+        $record->student_id = $request->student_id;
+        $record->description = $request->description;
+        $record->date = new \DateTime($request->date);
+        $record->type = $request->type;
+        $record->save();
+        try {
+            $teacher = Teacher::find($record->teacher_id);
+            $record->teacher = $teacher;
+            $profile = new TargetProfile($request->student_id, '', Constants::STUDENT);
+            $data = new PushNotificationMessage();
+            $data->type = 'RECORD';
+            $data->target = $profile->id;
+            $data->data = $record;
+            $this->pushNotification($profile, $data);
+        } catch (\Exception $e) {
+
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $record
+        ]);
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -39,8 +39,27 @@ Route::put('teacher', ['uses' => 'TeacherController@store', 'middleware' => 'aut
 Route::delete('teacher/{id}', ['uses' => 'TeacherController@destroy', 'middleware' => 'auth.jwt']); // delete a teacher
 
 /* Parents routes */
+<<<<<<< Updated upstream
 Route::get('parents', ['uses' => 'ParentController@index', 'middleware' => 'auth.jwt']); // get all the parents
 Route::get('parent/{id}', ['uses' => 'ParentController@show', 'middleware' => 'auth.jwt']);	// get a single parent
 Route::post('parent', ['uses' => 'ParentController@store', 'middleware' => 'auth.jwt']);	// add a single parent
 Route::put('parent', ['uses' => 'ParentController@store', 'middleware' => 'auth.jwt']);	// update a single parent
 Route::delete('parent/{id}', ['uses' => 'ParentController@destroy', 'middleware' => 'auth.jwt']);	// delete a single parent
+=======
+Route::get('parents', ['uses' => 'ParentsController@index', 'middleware' => 'auth.jwt']);
+	// get all the parents
+Route::get('parent/{id}', ['uses' => 'ParentsController@show', 'middleware' => 'auth.jwt']);	// get a single parent
+Route::post('parent', ['uses' => 'ParentsController@store', 'middleware' => 'auth.jwt']);	// add a single parent
+Route::put('parent', ['uses' => 'ParentsController@store', 'middleware' => 'auth.jwt']);	// update a single parent
+Route::delete('parent/{id}', ['uses' => 'ParentsController@destroy', 'middleware' => 'auth.jwt']);	
+// delete a single parent
+
+
+/* Result routes */
+Route::get('results', ['uses' => 'ResultsController@index', 'middleware' => 'auth.jwt']);
+	// get all the results
+Route::get('results/{id}', ['uses' => 'ResultsController@show', 'middleware' => 'auth.jwt']);	// get a single result
+Route::post('result', ['uses' => 'ResultsController@store', 'middleware' => 'auth.jwt']);	// add a single result
+Route::put('result', ['uses' => 'ResultsController@store', 'middleware' => 'auth.jwt']);	// update a single result
+Route::delete('result/{id}', ['uses' => 'ResultsController@destroy', 'middleware' => 'auth.jwt']);	
+>>>>>>> Stashed changes
