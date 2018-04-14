@@ -78,8 +78,14 @@ export default {
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false
             this.$router.push({ path: '/' })
-          }).catch(() => {
+          }).catch((e) => {
             this.loading = false
+            this.loginForm.username = this.loginForm.password = null
+
+            // check for the error
+            if (e.status === 401) {
+              console.log(e.body.error)
+            }
           })
         } else {
           console.log('error submit!!')
