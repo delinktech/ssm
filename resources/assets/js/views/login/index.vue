@@ -37,14 +37,16 @@ export default {
   name: 'login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (value === null | value === '') {
+      if (value === '' || value === null) {
         callback(new Error('Please enter your username'))
       } else {
         callback()
       }
     }
     const validatePass = (rule, value, callback) => {
-      if (value.length < 5) {
+      if (value === '' || value === null) {
+        callback(new Error('Password cannot be empty!'))
+      } else if (value.length < 5) {
         callback(new Error('Password cannot be less than 5 characters'))
       } else {
         callback()
@@ -52,8 +54,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: 'admin'
+        username: null,
+        password: null
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
