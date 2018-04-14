@@ -37,8 +37,8 @@ export default {
   name: 'login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('Please enter the correct username'))
+      if (value === null | value === '') {
+        callback(new Error('Please enter your username'))
       } else {
         callback()
       }
