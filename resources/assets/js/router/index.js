@@ -113,7 +113,7 @@ export const constantRouterMap = [
       {
         path: 'list',
         name: 'list',
-        component: view('schools/list/SchoolListComponent'),
+        component: view('schools/list/SchoolsListComponent'),
         meta: { title: 'All Schools' }
       },
       {
