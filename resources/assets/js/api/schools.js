@@ -15,13 +15,14 @@ export const getSchool = (_id) => {
 }
 
 /* save Schools through the api */
-export const saveSchool = () => {
-  return Vue.http.post('/api/school', { params: { 'token': getToken() }} )
+export const saveSchool = (formData) => {
+  console.log('saving school...', formData)
+  return Vue.http.post('/api/school', formData, { params: { 'token': getToken() }} )
 }
 
 /* save edits of Schools through the api */
-export const saveEditSchool = () => {
-  return Vue.http.put('/api/school', { params: { 'token': getToken() }} )
+export const saveEditSchool = (formData) => {
+  return Vue.http.put('/api/school', formData, { params: { 'token': getToken() }} )
 }
 
 /* delete a Schools through the api */
