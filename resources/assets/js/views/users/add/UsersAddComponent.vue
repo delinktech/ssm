@@ -148,9 +148,14 @@
         if (this.active++ > 2) this.active = 1;
       },
       onSubmit() {
-        // save user
-        saveUser(this.form).then(res => {
-          // successful save
+        // set users information
+        const data = this.form
+        data.avatar = 'https://cdn.pixabay.com/photo/2016/03/31/19/57/avatar-1295406_960_720.png'
+        data.roles = this.form.roles[0]
+        console.log('data', data)
+        // proceed to save to db
+        saveUser(data).then(res => {
+          this.form = null
         })
           .catch(err => {
             console.log(err)
