@@ -42,8 +42,8 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (value === '' || value === null) {
         callback(new Error('Password cannot be empty!'))
-      } else if (value.length < 5) {
-        callback(new Error('Password cannot be less than 5 characters'))
+      // } else if (value.length < 5) {
+      //   callback(new Error('Password cannot be less than 5 characters'))
       } else {
         callback()
       }
