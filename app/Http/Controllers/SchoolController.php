@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SchoolsController extends Controller
+use App\Http\Resources\School as SchoolResource;
+
+class SchoolController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,8 @@ class SchoolsController extends Controller
      */
     public function index()
     {
-        //
+      $schools = School::Paginate(15);
+      return SchoolResource::collection($schools);
     }
 
     /**
@@ -35,7 +39,7 @@ class SchoolsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
     }
 
     /**
