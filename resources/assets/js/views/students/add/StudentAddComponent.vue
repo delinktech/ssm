@@ -64,7 +64,7 @@
       <el-col :span="7">
         <el-form-item label="Class">
           <el-select v-model="studentForm.class" placeholder="Please select class" size="medium">
-            <el-option label="4 West" value="324545"></el-option>
+            <el-option label="4 West" value="32"></el-option>
             <el-option label="3 North" value="233"></el-option>
             <el-option label="8 South" value="1324"></el-option>
           </el-select>
@@ -82,7 +82,7 @@
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Last Name">
-          <el-input v-model="parentForm.seconname" size="medium"></el-input>
+          <el-input v-model="parentForm.secondname" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
@@ -123,16 +123,18 @@
       </el-col>
 
       <el-col :span="24">
-        <el-button type="success" style="margin-top: 12px;" @click="onSubmit">All Done Save</el-button>
+        <el-button type="success" style="margin-top: 12px;" @click="onSubmit()">All Done Save</el-button>
       </el-col>
     </el-form> <!-- /parents form ends -->
 
-    <el-button style="margin-top: 12px;" @click="next">Next step</el-button>
+    <el-button style="margin-top: 12px;" @click="next">Next step <i class="el-icon-arrow-right el-icon-right"></i></el-button>
   </div>
 </template>
 
 <script>
   import { getSchool } from '../../../api/schools'
+  import { saveStudent } from '../../../api/students'
+  import { saveParent } from '../../../api/parents'
 
   export default {
     name: 'StudentAddComponent',
@@ -180,26 +182,60 @@
       // this.fetchSchool()
     },
     methods: {
+      openSucess() {
+        this.$message({
+          message: 'Student & Parent Saved Successfuly',
+          type: 'success'
+        })
+      },
+      openError(object) {
+        this.$message({
+          message: `Oops! Something went wrong while saving! ${object}`,
+          type: 'error'
+        })
+      },
       fetchSchool() {
-        // getSchool(1).then(res => {
-        //   this.school = res.data
+        getSchool(1).then(res => {
+          this.school = res.data.data
 
-        //   // TODO: get the schools classes
-        //   // getClasses().then(r => {
-        //   //   schClasses = r.data
-        //   // })
-        // })
+          // TODO: get the schools classes
+          // getClasses().then(r => {
+          //   schClasses = r.data
+        })
       },
       onSubmit() {
-        if (this.parentForm.valid) {
+        if (this.parentForm && this.studentForm) {
           // post data to api
           console.log('parent=>', this.parentForm)
           console.log('student=>', this.studentForm)
           // TODO: on success parent save get parent and save student
+
+          saveParent(this.parentForm)
+            .then(resParent => {
+              console.log('res 1', resParent)
+
+              const updateStudent = this.studentForm
+              updateStudent.parent = resParent.id
+
+              // save student
+              saveStudent(updateStudent)
+                .then(resStudent => {
+                  this.openSucess()
+                  console.log('res 1', resStudent)
+                })
+                .catch(e => {
+                  this.openError('Student')
+                  console.log('error saving student', e)
+                })
+            })
+            .catch(e => {
+              this.openError('Parent')
+              console.log('error saving parent', e)
+            })
         }
       },
       next() {
-        if (this.active++ > 1) this.active = 1;
+        if (this.active++ > 1) this.active = 1
       }
     }
   }
