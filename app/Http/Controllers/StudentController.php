@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Student;
+use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\School;
 use App\FileUpload;

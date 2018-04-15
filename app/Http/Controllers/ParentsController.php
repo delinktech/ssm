@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Parent;
+use App\Models\Parent;
 
 class ParentsController extends Controller
 {

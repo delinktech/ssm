@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Teacher::class, function (Faker $faker) {
+$factory->define(App\Models\Teacher::class, function (Faker $faker) {
   static $password;
   return [
     'first_name' => $faker->firstName,

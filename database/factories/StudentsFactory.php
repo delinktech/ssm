@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Student::class, function (Faker $faker) {
+$factory->define(App\Models\Student::class, function (Faker $faker) {
     return [
         'student_reg' => $faker->unique()->text(10),
         'class_id' => $faker->numberBetween(1-2),
