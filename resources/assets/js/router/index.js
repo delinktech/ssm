@@ -121,6 +121,12 @@ export const constantRouterMap = [
     redirect: 'noredirect',
     name: 'results',
     meta: { title: 'Upload Results', icon: 'excel' },
+  {
+    path: '/schools',
+    component: Layout,
+    redirect: '/schools/list',
+    name: 'schools',
+    meta: { title: 'Schools', icon: 'school' },
     children: [
       // {
       //   path: 'export',
@@ -133,6 +139,11 @@ export const constantRouterMap = [
         // name: 'upload',
         component: view('results/upload/ResultsUploadComponent'),
         meta: { title: 'Upload Results' }
+        path: 'list',
+        name: 'list',
+        component: view('schools/list/SchoolListComponent'),
+        meta: { title: 'All Schools' }
+      },
       }
     ] 
   },
