@@ -2,13 +2,6 @@
   <div class="content-container">
     <h3>Add School</h3>
 
-    <!-- alert -->
-    <el-alert v-if="successSave"
-      title="success alert"
-      type="success"
-      show-icon>
-    </el-alert>
-
     <!-- form starts -->
     <el-form ref="form" :model="schoolForm">
       <el-col :span="11">
