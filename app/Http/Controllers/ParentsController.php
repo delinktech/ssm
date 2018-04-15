@@ -74,32 +74,40 @@ class ParentsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+    */
     public function store(Request $request)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Parent Saved Success'
-        ]);
-         // store parent in the databse
-      // $parent = $request->isMethod('put') ? Parent::findOrFail($request->parent_id) : new Parent;
+      // validate inputs on server side
+      $this->validate($request, [
+        'firstname' => 'required',
+        'secondname' => 'required',
+        'nationalId' => 'required',
+        'phone' => 'required',
+        'county' => 'required',
+        'sub_county' => 'required',
+        'ward' => 'required'
+      ]);
 
-      // $parent->id = $request->input('parent_id');
-      
-      // $parent->first_name = $request->input('first_name');
-      // $parent->second_name = $request->input('second_name');
-      // $parent->national_id = $request->input('national_id');
-      // $parent->phone_number = $request->input('phone_number');
-      // $parent->email = $request->input('email');
-      // $parent->parent_id = $request->input('parent_id');
-      // $parent->county = $request->input('county');
-      // $parent->sub_county = $request->input('sub_county');
-      // $parent->ward = $request->input('ward');
-        
-      //   if ($parent->save()) {
-      //   return new ParentResource($parent);
-      // }
-     
+      // create the parent object
+      $parent = new Parent([
+        'parent_first_name' => $request->firstname,
+        'parent_second_name' => $request->secondname,
+        'parent_national_id' => $request->nationalId,
+        'parent_Phone_number' => $request->phone,
+        'parent_email' => $request->email,
+        'parent_county'=>$request->county,
+        'parent_sub_county'=>$request->sub_county,
+        'parent_ward'=>$request->ward
+      ]);
+
+      // store parent in the databse
+      if ($parent->save()) {
+        return response()->json([
+          'success' => true,
+          'parentId' => $parent->id;
+          'message' => 'Parent Saved Success'
+        ], 200); 
+      }     
     }
 
     /**
