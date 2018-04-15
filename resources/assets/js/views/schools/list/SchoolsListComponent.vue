@@ -39,8 +39,8 @@
       </el-table-column>
       <el-table-column label="Actions" align="center">
         <template slot-scope="scope">
-          <md-icon>edit </md-icon>
-          <md-icon>delete </md-icon>
+          <md-icon @click="editSchool(1)">edit </md-icon>
+          <md-icon @click="deleteSchool(1)">delete </md-icon>
         </template>
       </el-table-column>
     </el-table>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import { getSchools } from '../../../api/schools'
+  import { getSchools, deleteSchool } from '../../../api/schools'
 
   export default {
     name: 'SchoolListComponent',
@@ -91,7 +91,7 @@
             school_ward: '',
             school_logo: ''
           }]
-          
+
           this.listLoading = false
         })
           .catch(err => {
@@ -99,7 +99,27 @@
             this.openError()
             console.log(err)
           })
-      }
+      },
+      // delete a single school 
+      deleteSchool(_id) { 
+        // TODO: replce this with dialog
+        if (confirm('Are you sure want to delete the school?')) {
+          deleteSchool(_id) 
+            .then(res => { 
+              // TODO: add snackbar for success here 
+   
+              // fetch the teachers list again 
+              this.fetchTeachers()
+            })
+            .catch(err => {
+              console.log('ERROR: deleting teacher ->', err); 
+              // TODO: add snackbar here 
+            })
+        }
+      },
+      editSchool(_id) {
+        // edit selected school
+      } 
     }
   }
 </script>
