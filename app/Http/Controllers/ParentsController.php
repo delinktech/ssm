@@ -77,24 +77,28 @@ class ParentsController extends Controller
      */
     public function store(Request $request)
     {
+        return response()->json([
+            'success' => true,
+            'message' => 'Parent Saved Success'
+        ]);
          // store parent in the databse
-      $parent = $request->isMethod('put') ? Parent::findOrFail($request->parent_id) : new Parent;
+      // $parent = $request->isMethod('put') ? Parent::findOrFail($request->parent_id) : new Parent;
 
-      $parent->id = $request->input('parent_id');
+      // $parent->id = $request->input('parent_id');
       
-      $parent->first_name = $request->input('first_name');
-      $parent->second_name = $request->input('second_name');
-      $parent->national_id = $request->input('national_id');
-      $parent->phone_number = $request->input('phone_number');
-      $parent->email = $request->input('email');
-      $parent->parent_id = $request->input('parent_id');
-      $parent->county = $request->input('county');
-      $parent->sub_county = $request->input('sub_county');
-      $parent->ward = $request->input('ward');
+      // $parent->first_name = $request->input('first_name');
+      // $parent->second_name = $request->input('second_name');
+      // $parent->national_id = $request->input('national_id');
+      // $parent->phone_number = $request->input('phone_number');
+      // $parent->email = $request->input('email');
+      // $parent->parent_id = $request->input('parent_id');
+      // $parent->county = $request->input('county');
+      // $parent->sub_county = $request->input('sub_county');
+      // $parent->ward = $request->input('ward');
         
-        if ($parent->save()) {
-        return new ParentResource($parent);
-      }
+      //   if ($parent->save()) {
+      //   return new ParentResource($parent);
+      // }
      
     }
 
