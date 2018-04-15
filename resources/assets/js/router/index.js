@@ -33,46 +33,22 @@ export const constantRouterMap = [
   { path: '/404', component: view('404'), hidden: true },
 
   {
-    path: '/',
+    path: '',
     component: Layout,
     redirect: '/dashboard',
-    name: 'Dashboard',
-    // hidden: true,
+    name: 'dashboard',
     children: [{
       path: 'dashboard',
       component: view('dashboard/index'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('.views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('.views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree' }
-  //     }
-  //   ]
-  // },
-
   {
     path: '/students',
     component: Layout,
     redirect: '/students/list',
     name: 'Students',
-    meta: { title: 'Students', icon: 'table' },
+    meta: { title: 'Students', icon: 'list' },
     children: [
       {
         path: 'list',
@@ -99,7 +75,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/teachers/list',
     name: 'Teachers',
-    meta: { title: 'Teachers', icon: 'table' },
+    meta: { title: 'Teachers', icon: 'list' },
     children: [
       {
         path: 'list',
@@ -116,11 +92,17 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/results/',
+    path: '/results',
     component: Layout,
-    redirect: 'noredirect',
+    redirect: 'upload',
     name: 'results',
-    meta: { title: 'Upload Results', icon: 'excel' },
+    children: [{
+      path: 'upload',
+      name: 'upload',
+      component: view('results/upload/ResultsUploadComponent'),
+      meta: { title: 'Results', icon: 'cloud_upload' }
+    }]
+  },
   {
     path: '/schools',
     component: Layout,
@@ -128,31 +110,26 @@ export const constantRouterMap = [
     name: 'schools',
     meta: { title: 'Schools', icon: 'school' },
     children: [
-      // {
-      //   path: 'export',
-      //   name: 'export',
-      //   component: view('results/export/ResultsExportComponent'),
-      //   meta: { title: 'Export Result' }
-      // },
       {
-        path: 'upload',
-        // name: 'upload',
-        component: view('results/upload/ResultsUploadComponent'),
-        meta: { title: 'Upload Results' }
         path: 'list',
         name: 'list',
         component: view('schools/list/SchoolListComponent'),
         meta: { title: 'All Schools' }
       },
+      {
+        path: 'add',
+        name: 'add',
+        component: view('schools/add/SchoolAddComponent'),
+        meta: { title: 'Add School' }
       }
-    ] 
+    ]
   },
   {
     path: '/users',
     component: Layout,
     redirect: '/users/list',
     name: 'users',
-    meta: { title: 'Users', icon: 'form' },
+    meta: { title: 'Users', icon: 'account_circle' },
     children: [
       {
         path: 'list',
