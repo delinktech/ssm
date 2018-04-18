@@ -6,32 +6,37 @@
           {{scope.$index+1}}
         </template>
       </el-table-column>
+      <el-table-column label="Id Number">
+        <template slot-scope="scope">
+          {{scope.row.teacher_id_number}}
+        </template>
+      </el-table-column>
       <el-table-column label="First Name">
         <template slot-scope="scope">
-          {{scope.row.student_first_name}}
+          {{scope.row.first_name}}
         </template>
       </el-table-column>
-      <el-table-column label="Last Name" align="center">
+      <el-table-column label="SurName" align="center">
         <template slot-scope="scope">
-          <span>{{scope.row.student_last_surname}}</span>
+          <span>{{scope.row.teacher_surname}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Parent" align="center">
+      <el-table-column label="Email" align="center">
         <template slot-scope="scope">
-          {{scope.row.student_parent}}
+          {{scope.row.teacher_email}}
         </template>
       </el-table-column>
-      <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <el-table-column label="Code" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
+          {{scope.row.teacher_code}}
         </template>
-      </el-table-column> -->
-      <!-- <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      </el-table-column>
+      <el-table-column label="Operations">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span>{{scope.row.display_time}}</span>
+          <el-button @click="editTeacher(scope.row)" type="text" size="small"><md-icon>edit</md-icon></el-button>
+          <el-button @click="confirmDeleteTeacher(scope.row.id)" type="text" size="small"><md-icon>delete</md-icon></el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
   </div>
 </template>
