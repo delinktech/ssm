@@ -253,7 +253,7 @@ class StudentController extends Controller
         if ($student == null) {
             return response("Could not update. No record found", 500);
         }
-       q if ($student->reg_no == $request->reg_no) {
+       if ($student->reg_no == $request->reg_no) {
             $this->validate($request, [
             'first_name' => 'required',
             'reg_no' => 'required|unique:students,reg_no,NULL,id,organisation_info,' . $this->organisation_info->id,
@@ -298,9 +298,9 @@ class StudentController extends Controller
               'national_id' => $request->national_id,
               'phone_number' => $request->phone_number,
               'email' => $request->email,
-              'county'=>request->county,
-              'sub_county'=>request->sub_county,
-              'ward'=>request->ward
+              'county'=>$request->county,
+              'sub_county'=>$request->sub_county,
+              'ward'=>$request->ward
 
             ]);
         } else {
