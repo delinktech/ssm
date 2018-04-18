@@ -6,6 +6,16 @@
           {{scope.$index+1}}
         </template>
       </el-table-column>
+      <el-table-column label="Registration">
+        <template slot-scope="scope">
+          {{scope.row.student_reg}}
+        </template>
+      </el-table-column>
+      <el-table-column label="Class">
+        <template slot-scope="scope">
+          {{scope.row.class_id}}
+        </template>
+      </el-table-column>
       <el-table-column label="First Name">
         <template slot-scope="scope">
           {{scope.row.student_first_name}}
@@ -16,22 +26,21 @@
           <span>{{scope.row.student_last_surname}}</span>
         </template>
       </el-table-column>
+      <el-table-column label="Sex" align="center">
+        <template slot-scope="scope">
+          {{scope.row.student_gender}}
+        </template>
+      </el-table-column>
       <el-table-column label="Parent" align="center">
         <template slot-scope="scope">
           {{scope.row.student_parent}}
         </template>
       </el-table-column>
-      <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <el-table-column label="Age" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
+          {{scope.row.student_dob}}
         </template>
-      </el-table-column> -->
-      <!-- <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span>{{scope.row.display_time}}</span>
-        </template>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
   </div>
 </template>
