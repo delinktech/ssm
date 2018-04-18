@@ -90,10 +90,11 @@
       },
       fetchData() {
         this.listLoading = true
-        getStudents().then(response => {
-          this.list = response.data.data
-          this.listLoading = false
-        })
+        getStudents()
+          .then(response => {
+            this.list = response.data.data
+            this.listLoading = false
+          })
           .catch(err => {
             // TODO: add a snackbar
             console.log(err)
