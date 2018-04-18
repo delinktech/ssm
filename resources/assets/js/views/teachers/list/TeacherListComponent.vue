@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import { getTeachers } from '../../../api/teachers'
+  import { getTeachers, deleteTeacher } from '../../../api/teachers'
 
   export default {
     name: 'TeacherListComponent',
@@ -101,6 +101,27 @@
             // do nothing
           });
       },
+      deleteTeacher(_id) {
+        this.errorMessage()
+        deleteTeacher(_id)
+          .then(res => {
+            // fetch the list of teachers again
+            this.fetchData()
+
+            // display success message
+            this.successMesssage()
+            console.log(res)
+          })
+          .catch(err => {
+            // display error message to the user
+            this.errorMessage()
+            console.log('error =>', err)
+          })
+
+        console.log(_id)
+      },
+      editTeacher(teacher) {
+        console.log('teacher', teacher)
       }
     }
   }
