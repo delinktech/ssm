@@ -61,6 +61,18 @@
       this.fetchData()
     },
     methods: {
+      successMesssage() {
+        this.$message({
+          message: 'Teacher delete successfuly',
+          type: 'success'
+        });
+      },
+      errorMessage() {
+        this.$message({
+          message: 'Error, deleting teacher try again later',
+          type: 'error'
+        });
+      },
       fetchData() {
         this.listLoading = true
         getTeachers().then(response => {
