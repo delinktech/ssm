@@ -41,6 +41,12 @@
           {{scope.row.student_dob}}
         </template>
       </el-table-column>
+      <el-table-column label="Operations">
+        <template slot-scope="scope">
+          <el-button @click="editStudent(scope.row)" type="text" size="small"><md-icon>edit</md-icon></el-button>
+          <el-button @click="confirmDeleteStudent(scope.row.id)" type="text" size="small"><md-icon>delete</md-icon></el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
