@@ -1,6 +1,6 @@
 {
   "name": "ssm",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Delink-Inc",
   "scripts": {
     "dev": "npm run development",
