@@ -98,6 +98,19 @@
             // TODO: add a snackbar
             console.log(err)
           })
+      },
+      confirmDeleteStudent(id) {
+        this.$confirm('Are you sure you want to delete this student?')
+          .then(_ => {
+            // call function to delete the student
+            this.deleteStudent(id)
+            
+            done();
+          })
+          .catch(_ => {
+            // do nothing
+          });
+      },
       deleteStudent(_id) {
         deleteStudent(_id)
           .then(res => {
