@@ -52,7 +52,7 @@
 </template>
 
 <script>
-  import { getStudents } from '../../../api/students'
+  import { getStudents, deleteStudent } from '../../../api/students'
 
   export default {
     name: 'StudentListComponent',
@@ -98,6 +98,24 @@
             // TODO: add a snackbar
             console.log(err)
           })
+      deleteStudent(_id) {
+        deleteStudent(_id)
+          .then(res => {
+            // fetch the list of students again
+            this.fetchData()
+
+            // display success message
+            this.successMesssage()
+            console.log(res)
+          })
+          .catch(err => {
+            // display error message to the user
+            this.errorMessage()
+            console.log('error =>', err)
+          })
+      },
+      editStudent(student) {
+        console.log('student', student)
       }
     }
   }
