@@ -72,9 +72,9 @@
           type: 'success'
         });
       },
-      errorMessage() {
+      errorMessage(action) {
         this.$message({
-          message: 'Error, deleting teacher try again later',
+          message: `Oops!, an error occured while ${action}, try again later`,
           type: 'error'
         });
       },
@@ -85,7 +85,8 @@
           this.listLoading = false
         })
           .catch(err => {
-            // TODO: add a snackbar
+            //  call error message to dislay to the user
+            this.errorMessage('fetching teachers')
             console.log(err)
           })
       },
@@ -102,7 +103,6 @@
           });
       },
       deleteTeacher(_id) {
-        this.errorMessage()
         deleteTeacher(_id)
           .then(res => {
             // fetch the list of teachers again
@@ -110,15 +110,12 @@
 
             // display success message
             this.successMesssage()
-            console.log(res)
           })
           .catch(err => {
             // display error message to the user
-            this.errorMessage()
+            this.errorMessage('deleting a teacher')
             console.log('error =>', err)
           })
-
-        console.log(_id)
       },
       editTeacher(teacher) {
         console.log('teacher', teacher)
