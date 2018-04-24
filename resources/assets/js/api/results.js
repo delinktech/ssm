@@ -10,7 +10,7 @@ export const getResults = () => {
 }
 
 /* fetch results by student through api */
-export const getResults = (_id) => {
+export const getStudentResults = (_id) => {
   return Vue.http.get(`/api/results/student/${_id}`, { params: { 'token': getToken() }} )
 }
 
