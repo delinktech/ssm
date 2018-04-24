@@ -42,22 +42,22 @@
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
-      <el-col :span="7">
+      <el-col :span="8">
         <el-form-item label="Last Name">
           <el-input v-model="studentForm.lastName" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
-      <el-col :span="7">
+      <el-col :span="8">
         <el-form-item label="Date of Bith">
           <el-date-picker v-model="studentForm.dob" type="date" placeholder="Pick Date of Birth" :picker-options="pickerOptions" size="medium"></el-date-picker>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
-        <el-form-item label="Gender">
-          <el-radio v-model="studentForm.gender" label="Male" border size="medium">Male</el-radio>
-          <el-radio v-model="studentForm.gender" label="Female" border size="medium">Female</el-radio>
+        <el-form-item label="Gender"><br>
+          <el-radio v-model="studentForm.gender" label="Male">Male</el-radio>
+          <el-radio v-model="studentForm.gender" label="Female">Female</el-radio>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
