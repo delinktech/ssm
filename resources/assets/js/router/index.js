@@ -86,7 +86,7 @@ export const constantRouterMap = [
       {
         path: 'add',
         name: 'TeachersAdd',
-        component: view('teachers/add/TeacherAddComponent'),
+        component: view('users/add/UsersAddComponent'),
         meta: { title: 'Teachers Add' }
       }
     ]
