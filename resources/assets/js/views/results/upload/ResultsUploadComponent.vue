@@ -11,7 +11,13 @@
       <el-table-column v-for='item of tableHeader' :prop="item" :label="item" :key='item'>
       </el-table-column>
     </el-table>
-    
+
+    <div class="block">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="tableData.length">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
