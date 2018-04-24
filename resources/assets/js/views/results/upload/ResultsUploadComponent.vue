@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { saveUpload } from '../../../api/results'
 import UploadExcelComponent from '../../../components/UploadResults/index.vue'
 
 export default {
@@ -50,8 +51,23 @@ export default {
       this.tableData = data.results
       this.tableHeader = data.header
     },
-    getData(data) {
-      console.log('data', data.length)
+    getData(dataResults) {
+      // post results to the api
+      saveUpload(dataResults)
+        .then(res => {
+          // uloaded successuly
+          this.openSucess()
+
+          // TODO: navigate to list of reults
+
+          // empty the table
+          this.tableData = []
+          this.tableHeader = []
+        })
+        .catch(err => {
+          // error while uloading
+          this.openError('results')
+        })
     }
   }
 }
