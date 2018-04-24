@@ -34,6 +34,18 @@ export default {
     }
   },
   methods: {
+    openSucess() {
+      this.$message({
+        message: 'Successfuly Uploaded the results',
+        type: 'success'
+      })
+    },
+    openError(object) {
+      this.$message({
+        message: `Oops! Something went wrong while uploading! ${object}`,
+        type: 'error'
+      })
+    },
     selected(data) {
       this.tableData = data.results
       this.tableHeader = data.header
