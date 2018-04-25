@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ResultssController extends Controller
+class ResultsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class ResultssController extends Controller
      */
     public function index()
     {
-        
+         $results = Result::Paginate(15);
+        return ResultResource::collection($results);
     }
 
     /**
@@ -24,7 +25,25 @@ class ResultssController extends Controller
      */
     public function create()
     {
-        //
+        $this->validate($request, [
+            'student_id' => 'required',
+            'grade' => 'required',
+            'marks' => 'required'
+            ]);
+
+         $school = School::create([
+            'student_id' => $request->student_id,
+            'grade' => $request->grade,
+            'marks' => $request->marks
+
+            ]);
+
+
+            return response()->json([
+            'success' => true,
+            'id' => $results->id
+            ]);
+
     }
 
     /**
@@ -35,7 +54,17 @@ class ResultssController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // store result in the database
+       $result = $request->isMethod('put') ? Result::findOrFail($request->result_id) : new Result;
+       $result->id = $request->input('result_id');
+
+       $result->student_id = $request->input('student_id');
+       $result->grade = $request->input('grade');
+       $result->marks = $request->input('marks');
+
+       if ($result->save()) {
+        return new ResultResource($result);
+      }
     }
 
     /**
@@ -46,7 +75,13 @@ class ResultssController extends Controller
      */
     public function show($id)
     {
-        //
+        
+         $data = [];
+        $data["result"] = Scchool::find($id);
+          if ($id != -1) {
+
+        }
+        return new ResultResource($result);
     }
 
     /**
@@ -57,7 +92,7 @@ class ResultssController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

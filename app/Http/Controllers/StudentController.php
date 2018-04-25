@@ -189,7 +189,7 @@ class StudentController extends Controller
         if ($id != -1) {
 
         }
-        return view('../components/students-component/list/StudentsListComponent', $data);
+        return new StudentResource($student);
     }
 
       public function getStudent($id)
