@@ -7,44 +7,42 @@ use App\Http\Controllers\Controller;
 
 class ResultsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-         $results = Result::Paginate(15);
-        return ResultResource::collection($results);
-    }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+  */
+  public function index()
+  {
+    $results = Result::Paginate(15);
+    return ResultResource::collection($results);
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $this->validate($request, [
-            'student_id' => 'required',
-            'grade' => 'required',
-            'marks' => 'required'
-            ]);
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+  */
+  public function create()
+  {
+    $this->validate($request, [
+      'student_id' => 'required',
+      'grade' => 'required',
+      'marks' => 'required'
+    ]);
 
-         $school = School::create([
-            'student_id' => $request->student_id,
-            'grade' => $request->grade,
-            'marks' => $request->marks
+    $school = School::create([
+      'student_id' => $request->student_id,
+      'grade' => $request->grade,
+      'marks' => $request->marks
+    ]);
 
-            ]);
+    return response()->json([
+      'success' => true,
+      'id' => $results->id
+    ], 200);
 
-
-            return response()->json([
-            'success' => true,
-            'id' => $results->id
-            ]);
-
-    }
+  }
 
     /**
      * Store a newly created resource in storage.
