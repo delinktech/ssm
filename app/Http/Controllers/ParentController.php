@@ -121,7 +121,7 @@ class ParentsController extends Controller
         $data = [];
         $data["parent"] = Parent::find($id);
         
-        return view('../components/parent-component/list/ParentListComponent', $data);
+        return view($parent);
     }
 
       public function getParent($id)
