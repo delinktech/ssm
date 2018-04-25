@@ -91,7 +91,12 @@ class SchoolController extends Controller
        $school->school_email = $request->input('school_email');
 
        if ($school->save()) {
-        return new SchoolResource($school);
+
+        // return a json response
+        return response()->json([
+            'success' => true,
+            'obj_saved' => $school
+            ], 200);
       }
       
     }
@@ -137,19 +142,24 @@ class SchoolController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function destroy($id)
     {
-        
+
       // delete school
       $school = School::findOrFail($id);
 
       if ($school->delete()) {
-        // return sngle school as a resource
-        return new SchoolResource($school);
+
+        // return a json response
+        return response()->json([
+          'success' => true,
+          'obj_deleted' => $school
+        ], 200);
+      }
     }
 }
