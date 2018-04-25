@@ -28,11 +28,7 @@ class CreateSchoolsTable extends Migration
 
       $table->text('school_phone');
       $table->text('school_email');
-
-      $table->integer('createdBy');
-      $table->text('updatedBy');
-
-      $table->text('school_logo')->nullable();
+      $table->text('school_logo');
       $table->timestamps();
     });
   }
