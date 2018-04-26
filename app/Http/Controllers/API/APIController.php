@@ -10,3 +10,23 @@ use App\Http\Controllers\ResultsController
 use App\Http\Controllers\SchoolController
 
 
+class APIController extends Controller
+{
+
+	 public function getStudentProfile($id)
+    {
+        $profile = StudentsController::getStudentProfile( $id);
+
+        return response()->json($profile);
+
+    }
+     public function getTeacherProfile($id)
+    {
+        $profile = new TeachersController();
+        $profile->teacherProfile($id);
+
+        return response()->json($profile);
+    }
+
+}
+
