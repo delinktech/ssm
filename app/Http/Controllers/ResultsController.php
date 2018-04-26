@@ -115,6 +115,19 @@ class ResultsController extends Controller
      */
     public function destroy($id)
     {
-        //
+    
+    }
+    public function marks()
+    {
+        $marks = new Marks;
+         if ($marks => 90) && $marks !< 75 {
+             $grade = 'A'
+         }elseif ($marks => 75 && $marks!<60) {
+                $grade = 'B'
+         }elseif ($marks => 50 && $marks!<35) {
+                $grade = 'C'
+
+    }else{
+        $grade = 'D'
     }
 }
