@@ -58,6 +58,11 @@ class UserController extends Controller
     ]);
     
     if ($user->save()) {
+
+      // call event to send activation
+      event(new UserRegistered($user));
+
+      // return a json response
       return response()->json([
         'message' => 'Sussesfuly added User'
       ], 201);
