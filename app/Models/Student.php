@@ -11,28 +11,27 @@ class Student extends Model
   protected $primaryKey='id';
 
   protected $fillable=['student_reg','class_id','student_first_name','student_second_name','student_last_surname','student_dob','student_gender','passport_photo','student_school'];
-
  
   public function studentParent()
   {
-    return $this->hasOne('App\Parent', 'foreign_key');
+    return $this->hasOne('App\Models\Parent', 'foreign_key');
   }
 
   public function studentSchool()
   {
-   return $this->belongsToMany('App\School');
+    return $this->belongsToMany('App\Models\School');
   }
 
   public function studentTeacher(){
-   return $this->belongsToMany('App\Teacher');
+    return $this->belongsToMany('App\Models\Teacher');
   }
 
   public function studentResults()
   {
-      return $this->hasMany('App\Results'); 
- }
+    return $this->hasMany('App\Models\Results'); 
+  }
 
   public function getName(){
-    return $this->first_name." ".$this->other_name;
+    return $this->student_first_name." ".$this->student_last_surname;
   }
 }
