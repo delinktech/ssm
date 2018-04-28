@@ -14,7 +14,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\UserRegistered' => [
-            'App\Listeners\SendActivation'
+            'App\Listeners\SendActivation',
+            'App\Listeners\CreateProfile'
         ],
     ];
 
