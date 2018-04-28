@@ -83,7 +83,7 @@
       </el-col>
 
       <el-col :span="24">
-        <el-button type="success" style="margin-top: 12px;" @click="onSubmit(form)">Save</el-button>
+        <el-button type="primary" :disabled=isValid style="margin-top: 12px;" @click="onSubmit('userForm')">Save</el-button>
       </el-col>
 
     </el-form>
@@ -108,7 +108,7 @@
         }
       };
       return {
-        form: {
+        userForm: {
           firstname: '',
           lastname: '',
           username: '',
@@ -116,8 +116,8 @@
           phone: '',
           roles: [],
           school: '',
-          password: '',
           level: '',
+          password: '',
           avatar: '',
           hasTeacherObject: '',
           checkPass: ''
