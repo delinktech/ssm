@@ -178,19 +178,32 @@
       next() {
         if (this.active++ > 2) this.active = 1;
       },
-      onSubmit() {
+      onSubmit(userForm) {
         // set users information
-        const data = this.form
+        const data = this.userForm
         data.avatar = 'https://cdn.pixabay.com/photo/2016/03/31/19/57/avatar-1295406_960_720.png'
-        data.roles = this.form.roles[0]
-        console.log('data', data)
-        // proceed to save to db
-        saveUser(data).then(res => {
-          this.form = null
-        })
-          .catch(err => {
-            console.log(err)
-          })
+
+        this.$refs[userForm].validate((valid) => {
+          if (valid) {
+            data.roles = this.userForm.roles[0]
+
+            // proceed to save to db
+            saveUser(data)
+              .then(res => {
+                // success saved the user
+                this.userForm = null
+                this.openSucess()
+              })
+              .catch(err => {
+                // error while saving user
+                this.openError(err.body.message)
+              })
+          } else {
+            // not a valid form
+            console.log('fill all fields!!');
+            return false;
+          }
+        });
       }
     }
   }
