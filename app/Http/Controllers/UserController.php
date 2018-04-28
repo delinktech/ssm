@@ -6,6 +6,7 @@ use App\Models\User;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
+use App\Events\UserRegistered;
 
 use App\Http\Resources\User as UserResource;
 

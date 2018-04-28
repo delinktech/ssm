@@ -39,6 +39,10 @@ class CreateUsersTable extends Migration
     });
   }
 
+  public function profile() {
+    return $this=>hasOne(Profile::class);
+  }
+
   /**
    * Reverse the migrations.
    *
