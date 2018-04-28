@@ -97,16 +97,6 @@
   export default {
     name: 'UsersAddComponent',
     data() {
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password'));
-        } else {
-          if (this.form.password !== '') {
-            this.$refs.form.validateField('checkPass');
-          }
-          callback();
-        }
-      };
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'))
@@ -118,7 +108,6 @@
         }
       };
       return {
-        active: 1,
         form: {
           firstname: '',
           lastname: '',
