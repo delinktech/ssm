@@ -173,10 +173,22 @@
         }
       };
     },
-
+    computed: {
+      // TODO: check form validation at this point
+      isValid () { return false}
+    },
     methods: {
-      next() {
-        if (this.active++ > 2) this.active = 1;
+      openSucess() {
+        this.$message({
+          message: 'User Saved Successfuly :)',
+          type: 'success'
+        })
+      },
+      openError(object) {
+        this.$message({
+          message: `Oops! ${object}`,
+          type: 'error'
+        })
       },
       onSubmit(userForm) {
         // set users information
