@@ -58,3 +58,10 @@ Route::get('school/{id}', ['uses' => 'SchoolController@show', 'middleware' => 'a
 Route::post('school', ['uses' => 'SchoolController@store', 'middleware' => 'auth.jwt']);	// add a single school
 Route::put('school', ['uses' => 'SchoolController@store', 'middleware' => 'auth.jwt']);	// update a single school
 Route::delete('school/{id}', ['uses' => 'SchoolController@destroy', 'middleware' => 'auth.jwt']);	// delete school
+
+/* Classes routes */
+Route::get('classes', ['uses' => 'ClassController@index', 'middleware' => 'auth.jwt']);	// get all the schools
+Route::get('class/{id}', ['uses' => 'ClassController@show', 'middleware' => 'auth.jwt']);	// get a single school
+Route::post('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// add a single school
+Route::put('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// update a single school
+Route::delete('class/{id}', ['uses' => 'ClassController@destroy', 'middleware' => 'auth.jwt']);	// delete school
