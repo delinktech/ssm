@@ -133,8 +133,39 @@
         },
         checkPass: '',
         rules: {
+          firstname: [
+            { required: true, message: 'Please input first name', trigger: 'blur' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          lastname: [
+            { required: true, message: 'Please input last name', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          username: [
+            { required: true, message: 'Please input the username', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          email: [
+            { required: true, message: 'Please input user', trigger: 'change' },
+            { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change']  }
+          ],
+          phone: [
+          // TODO: validate phone number
+            { required: true, message: 'Please input the username number', trigger: 'change' },
+            { min: 10, message: 'Please input the correct phone format', trigger: ['blur', 'change'] }
+          ],
+          roles: [
+           { type: 'array', required: true, message: 'Please select at least one role', trigger: 'change' }
+          ],
+          school: [
+           { required: true, message: 'Please select the school', trigger: 'change' }
+          ],
+          level: [
+           { required: true, message: 'Please select user level', trigger: 'change' }
+          ],
           password: [
-            { validator: validatePass, trigger: 'blur' }
+            { required: true, message: 'Please input user password', trigger: 'blur' },
+            { min: 5, message: 'Password should be atleast 5 chars', trigger: 'blur' }
           ],
           checkPass: [
             { validator: validatePass2, trigger: 'blur' }
