@@ -109,9 +109,10 @@
       };
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('Please input the password again'));
-        } else if (value !== this.form.password) {
-          callback(new Error('Two inputs don\'t match!'));
+          callback(new Error('Please input the password again'))
+        } else if (value !== this.userForm.password) {
+          alert(value)
+          callback(new Error('Two inputs don\'t match!'))
         } else {
           callback();
         }
