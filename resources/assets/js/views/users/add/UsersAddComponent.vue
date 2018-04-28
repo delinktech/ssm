@@ -78,7 +78,7 @@
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="checkPass" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="userForm.checkPass" size="medium" auto-complete="off"></el-input>
         </el-form-item>
       </el-col>
 
@@ -129,9 +129,9 @@
           password: '',
           level: '',
           avatar: '',
-          hasTeacherObject: ''
+          hasTeacherObject: '',
+          checkPass: ''
         },
-        checkPass: '',
         rules: {
           firstname: [
             { required: true, message: 'Please input first name', trigger: 'blur' },
