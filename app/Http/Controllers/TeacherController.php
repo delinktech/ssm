@@ -17,7 +17,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::orderBy('created_at', 'desc')->paginate(15);
+      // TODO: get only teachers for a secific school
+      // get all teachers
+      $teachers = Teacher::orderBy('created_at', 'desc')->paginate(15);
  
       // return a collection of teachers
       return TeacherResource::collection($teachers);
@@ -102,12 +104,21 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-      
+      $teacherinfo = [];
       // get single teacher details
-      $teacher = Teacher::findOrFail($id);
+      $teacherinfo['teacher'] = Teacher::findOrFail($id);
 
-      // return sngle teacher as a resource
-      return new TeacherResource($teacher);
+      // get school details
+      $teacherinfo['school'] = School::findOrFail($teacherinfo['teacher']->teacher_school_id);
+
+      // get class teacher
+
+      // get teacher profile
+
+      // return sngle teacher as a json
+      return response()->json([
+          'teacher' => $teacherinfo
+          ]);
     }
 
     /**
@@ -145,8 +156,11 @@ class TeacherController extends Controller
       $teacher = Teacher::findOrFail($id);
 
       if ($teacher->delete()) {
-      // return sngle teacher as a resource
-      return new TeacherResource($teacher);
+        // return sngle teacher as a resource
+        return response()->json([
+          'success' => true,
+          'teacher' => $teacher
+          ]);
       }
     }
 }
