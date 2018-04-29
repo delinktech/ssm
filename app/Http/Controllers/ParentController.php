@@ -131,6 +131,49 @@ class ParentsController extends Controller
 
         return response()->json($student);
     }
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+  */
+  public function store(Request $request)
+  {
+    // validate inputs on server side
+    $this->validate($request, [
+      'firstname' => 'required',
+      'secondname' => 'required',
+      'nationalId' => 'required',
+      'phone' => 'required',
+      'county' => 'required',
+      'sub_county' => 'required',
+      'ward' => 'required'
+    ]);
+
+    // check if its put or post
+    $parent = $request->isMethod('put') ? Parent::findOrFail($request->parent_id) : new Parent;
+
+    $parent->id = $request->input('parent_id');
+
+    // create the parent object
+    $parent->parent_first_name = $request->('firstname');
+    $parent->parent_second_name = $request->('secondname');
+    $parent->parent_national_id = $request->('nationalId');
+    $parent->parent_Phone_number = $request->('phone');
+    $parent->parent_email = $request->('email');
+    $parent->parent_county = $request->('county');
+    $parent->parent_sub_county = $request->('sub_county');
+    $parent->parent_ward = $request->('ward');
+
+    // store parent in the databse
+    if ($parent->save()) {
+      return response()->json([
+        'success' => true,
+        'parentId' => $parent->id,
+        'message' => 'Parent Saved Successfuly'
+      ], 200); 
+    }     
+  }
 
     /**
      * Show the form for editing the specified resource.
@@ -148,6 +191,7 @@ class ParentsController extends Controller
         }
         return view('../components/parent-component/list/ParentsListComponent', $data);
     }
+  /**
 
     /**
      * Update the specified resource in storage.
