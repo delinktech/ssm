@@ -72,7 +72,7 @@
       </el-col>
 
       <br>
-      <el-button style="margin-top: 12px;" @click="next('studentForm')">Next step <i class="el-icon-arrow-right el-icon-right"></i></el-button>
+      <el-button style="margin-top: 12px; clear: both; float: left;" @click="next('studentForm')">Next step <i class="el-icon-arrow-right el-icon-right"></i></el-button>
     </el-form> <!-- /students form ends -->
 
     <el-form ref="parentForm" :model="parentForm" :rules="parentRules" v-if="active === 2"> <!-- /parents form begins -->
@@ -124,7 +124,7 @@
         </el-form-item>
       </el-col>
 
-      <el-button type="success" style="margin-top: 12px; float: right;" @click="onSubmit('parentForm')">All Done Save</el-button>
+      <el-button type="success" style="margin-top: 12px; float: right;" @click="onSubmit('parentForm', 'studentForm')">All Done Save</el-button>
 
       <br>
       <el-button style="margin-top: 12px;" @click="prev"><i class="el-icon-arrow-left el-icon-left"></i> Prev step</el-button>
@@ -133,6 +133,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import { getSchool } from '../../../api/schools'
   import { saveStudent } from '../../../api/students'
   import { saveParent } from '../../../api/parents'
@@ -140,6 +141,7 @@
   export default {
     name: 'StudentAddComponent',
     data() {
+      const stuReg = 'SCH/' + moment(new Date()).format('YYYY-DD/hmmss');
       return {
         active: 1,
         schoolInfo: null,
@@ -155,7 +157,7 @@
           ward: ''
         },
         studentForm: {
-          student_reg: 'MTNT/2018/2579',
+          student_reg: stuReg,
 
           firstName: '',
           secondName: '',
@@ -163,7 +165,7 @@
           gender: '',
           dob: '',
 
-          school: 'Imara Daima Pri School',
+          school: 1,
           class: '',
 
           parent: ''
@@ -270,7 +272,7 @@
           //   schClasses = r.data
         })
       },
-      onSubmit(parentForm) {
+      onSubmit(parentForm, studentForm) {
         this.$refs[parentForm].validate((valid) => {
           if (valid) {
             // all good valid forms
@@ -281,15 +283,17 @@
 
                 // get parent id 
                 const updateStudent = this.studentForm
-                updateStudent.parent = resParent.id
+                updateStudent.dob = moment(this.studentForm.dob).format('YYYY-MM-DD')
+                updateStudent.parent = resParent.data.parent.id
 
                 // save student
                 saveStudent(updateStudent)
                   .then(resStudent => {
                     // reset forms
-                    this.resetForm(this.parentForm) // reset parent form
-                    this.resetForm(this.studentForm) // reset student form
+                    // this.resetForm(parentForm) // reset parent form
+                    // this.resetForm(studentForm) // reset student form
 
+                    console.log('student', resStudent.data)
                     // successsaving student
                     this.openSucess()
                   })
