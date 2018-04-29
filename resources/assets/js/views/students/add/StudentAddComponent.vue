@@ -171,6 +171,40 @@
           disabledDate(time) {
             return time.getTime() > Date.now()
           }
+        },
+        studentRules: {
+          // student form rules
+          student_reg: [
+            { required: true, message: 'Please input student reg number', trigger: 'blur' },
+            { min: 5, message: 'Length should be more than 5', trigger: 'blur' }
+          ],
+          firstName: [
+            { required: true, message: 'Please input first name', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          secondName: [
+            { required: true, message: 'Please input the second name', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          lastName: [
+            { required: true, message: 'Please input last name', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          gender: [
+            { required: true, message: 'Please pick gender', trigger: 'change' },
+          ],
+          dob: [
+           { type: 'date', required: true, message: 'Please pick date of birth', trigger: 'change' }
+          ],
+          school: [
+           { required: true, message: 'School is required', trigger: 'change' }
+          ],
+          class: [
+           { required: true, message: 'Please Pick a class', trigger: 'change' }
+          ]
+        },
+        parentRules: {
+          // parent form rules
         }
       }
     },
