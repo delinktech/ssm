@@ -205,8 +205,40 @@
         },
         parentRules: {
           // parent form rules
+          firstname: [
+            { required: true, message: 'Please input parent name', trigger: 'blur' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          secondname: [
+            { required: true, message: 'Please input second name', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          phone: [
+            { required: true, message: 'Please input parent phone number', trigger: 'change' },
+            { min: 10, message: 'Length should be more than 10', trigger: 'blur' }
+          ],
+          email: [
+            // { required: true, message: 'Please input parent email', trigger: 'change' },
+            { type: 'email', message: 'Use the email format', trigger: 'blur' }
+          ],
+          nationalId: [
+            { required: true, message: 'Please input parent id number', trigger: 'change' },
+            { min: 5, message: 'Length should be more than 5', trigger: 'blur' }
+          ],
+          county: [
+           { required: true, message: 'Please indicate county residence', trigger: 'change' },
+           { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          sub_county: [
+           { required: true, message: 'PLease indicate sub-county of residence', trigger: 'change' },
+           { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          ward: [
+           { required: true, message: 'PLease indicate ward of residence', trigger: 'change' },
+           { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ]
         }
-      }
+      };
     },
     filters: {
       
