@@ -51,7 +51,7 @@ class StudentController extends Controller
     {
       // validate the students form data
       $this->validate($request, [
-        'regNum' => 'required|unique:students,',
+        'student_reg' => 'required|unique:students',
         'firstName' => 'required',
         'secondName' => 'required',
         'lastName' => 'required',
@@ -67,7 +67,7 @@ class StudentController extends Controller
 
       $student->id = $request->input('student_id');
       
-      $student->student_reg = $request->input('regNum');
+      $student->student_reg = $request->input('student_reg');
       $student->class_id = $request->input('class');
       $student->student_first_name = $request->input('firstName');
       $student->student_second_name = $request->input('secondName');
@@ -79,7 +79,10 @@ class StudentController extends Controller
       $student->passport_photo = $request->input('photo');
 
       if ($student->save()) {
-        return new StudentResource($student);
+        return response()->json([
+          'success' => true,
+          'student' => $student
+          ], 200);
       }
     }
 
