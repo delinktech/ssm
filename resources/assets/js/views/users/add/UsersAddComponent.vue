@@ -202,8 +202,8 @@
               })
           } else {
             // not a valid form
-            console.log('fill all fields!!');
-            return false;
+            console.log('fill all fields!!')
+            return false
           }
         });
       }

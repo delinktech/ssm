@@ -10,16 +10,16 @@ export const getParents = () => {
 }
 
 /* save parent through the api */
-export const saveParent = () => {
-  return Vue.http.post('/api/parent', { params: { 'token': getToken() }} )
+export const saveParent = (formData) => {
+  return Vue.http.post('/api/parent', formData, { params: { 'token': getToken() }} )
 }
 
 /* save edits of parent through the api */
-export const saveEditParent = () => {
-  return Vue.http.put('/api/parents', { params: { 'token': getToken() }} )
+export const saveEditParent = (formData) => {
+  return Vue.http.put('/api/parent', formData, { params: { 'token': getToken() }} )
 }
 
 /* delete a parent through the api */
 export const deleteParent = (_id) => {
-  return Vue.http.delete('/api/parent', { params: {'id': _id, 'token': getToken() }} )
+  return Vue.http.delete(`/api/parent${_id}`, { params: { 'token': getToken() }} )
 }
