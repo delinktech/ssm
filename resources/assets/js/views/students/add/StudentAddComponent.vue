@@ -154,7 +154,7 @@
           ward: ''
         },
         studentForm: {
-          regNum: 'MTNT/2018/2579',
+          student_reg: 'MTNT/2018/2579',
 
           firstName: '',
           secondName: '',
