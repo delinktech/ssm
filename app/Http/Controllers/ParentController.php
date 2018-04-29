@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\Parent;
+use App\Models\ParentModel;
 
-class ParentsController extends Controller
+use App\Http\Resources\Parent as ParentResource;
+
+class ParentController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -16,7 +18,7 @@ class ParentsController extends Controller
   public function index()
   {   
     // get parents of a particuler school
-    $parents = Parent::Paginate(30);
+    $parents = ParentModel::Paginate(30);
     return ParentResource::collection($parents);
   }
 
@@ -85,7 +87,7 @@ class ParentsController extends Controller
     $studentdetails = [];
 
     // get single parent
-    $studentdetails['parent'] = Parent::findOrFail($id);
+    $studentdetails['parent'] = ParentModel::findOrFail($id);
 
     // get students
     $studentdetails['students'] = Student::where('student_parent', $studentdetails['parent']->id);
@@ -123,7 +125,7 @@ class ParentsController extends Controller
     public function destroy($id)
     {
       //delete parent
-      $parent = Parent::findOrFail($id);
+      $parent = ParentModel::findOrFail($id);
 
       if ($parent->delete()) {
         return response()->json([
