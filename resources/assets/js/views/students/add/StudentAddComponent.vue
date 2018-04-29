@@ -300,6 +300,11 @@
               console.log('error saving parent', e)
             })
         }
+      resetForm(formName) {
+        this.$refs[formName].resetFields()
+      },
+      prev() {
+        this.active--
       },
       next(studentForm) {
         this.$refs[studentForm].validate((valid) => {
