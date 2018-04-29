@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Models\School;
 use App\Models\Teacher;
 use App\Http\Resources\Teacher as TeacherResource;
 
@@ -32,20 +33,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-       $this->validate($request, [
-            'first_name' => 'required',
-            'surname' => 'required',
-            'id_number' => 'required',
-            'email' => 'required',
-            'username' => 'required',
-            'teacher_dev_reg' => 'required',
-            'password' => 'required',
-            'status' => 'required',
-            'school_id' => 'required',
-            'class_id' => 'required',
-            'subjects' => 'required'
-            
-        ]);
+       
        $teacher = Teacher::create([
             'first_name' => $request->first_name,
             'sur_name' => $request->sur_name,
@@ -57,7 +45,6 @@ class TeacherController extends Controller
             'password' => $request->password,
             'status' => $request->status,
             'school_id' => $this->organisation_info->id,
-            'class_id' => $request->class_id,
             'subjects' => $request->subjects
 
         ]);
@@ -75,24 +62,41 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-      // store teacher in the databse
+      // validate the teachers data
+      $this->validate($request, [
+        'teacher_code' => 'required|unique:teachers',
+        'first_name' => 'required',
+        'surname' => 'required',
+        'id_number' => 'required',
+        'email' => 'required',
+        'status' => 'required',
+        'school_id' => 'required',
+        'subjects' => 'required' 
+      ]);
+
+      // store teacher in the databse check if put else is post
       $teacher = $request->isMethod('put') ? Teacher::findOrFail($request->teacher_id) : new Teacher;
 
       $teacher->id = $request->input('teacher_id');
+
       $teacher->teacher_code = $request->input('teacher_code');
-      $teacher->class_id = $request->input('class_id');
-      $teacher->teacher_school_id = $request->input('teacher_school_id');
-      $teacher->teacher_id_number = $request->input('teacher_id_number');
-      $teacher->teacher_surname = $request->input('teacher_surname');
-      $teacher->teacher_email = $request->input('teacher_email');
+      $teacher->teacher_school_id = $request->input('school_id');
+      $teacher->first_name = $request->input('first_name');
+      $teacher->teacher_surname = $request->input('surname');
+      $teacher->teacher_id_number = $request->input('id_number');
+      $teacher->subjects = $request->input('subjects');
+      $teacher->teacher_email = $request->input('email');
       $teacher->teacher_dev_reg = $request->input('teacher_dev_reg');
       $teacher->teacher_api_session = $request->input('teacher_api_session');
-      $teacher->teacher_status = $request->input('teacher_status');
-      $teacher->teacher_user_id = $request->input('teacher_user_id');
-      $teacher->teacher_password = $request->input('teacher_password');
+      $teacher->teacher_status = $request->input('status');
+      // remove
+      $teacher->teacher_username = 'username';
 
       if ($teacher->save()) {
-        return new TeacherResource($teacher);
+        return response()->json([
+          'success' => true,
+          'teacher' => $teacher
+          ], 200);
       }
     }
 
