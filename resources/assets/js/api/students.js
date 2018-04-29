@@ -15,13 +15,13 @@ export const getStudent = (_id) => {
 }
 
 /* save student through the api */
-export const saveStudent = () => {
-  return Vue.http.post('/api/student', { params: { 'token': getToken() }} )
+export const saveStudent = (formData) => {
+  return Vue.http.post('/api/student', formData, { params: { 'token': getToken() }} )
 }
 
 /* save edits of student through the api */
-export const saveEditStudent = () => {
-  return Vue.http.put('/api/student', { params: { 'token': getToken() }} )
+export const saveEditStudent = (formData) => {
+  return Vue.http.put('/api/student', formData, { params: { 'token': getToken() }} )
 }
 
 /* delete a student through the api */
