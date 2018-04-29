@@ -17,52 +17,52 @@
       <el-step title="Parent Info"></el-step>
     </el-steps>
 
-    <el-form ref="studentForm" :model="studentForm" v-if="active === 1"> <!-- student form starts -->
+    <el-form ref="studentForm" :model="studentForm" :rules="studentRules" v-if="active === 1"> <!-- student form starts -->
       <el-col :span="11">
-        <el-form-item label="School">
-          <el-input v-model="studentForm.school" size="medium"></el-input>
+        <el-form-item label="School" prop="school">
+          <el-input disabled v-model="studentForm.school" size="medium" placeholder="School"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
-        <el-form-item label="Registration Num">
-          <el-input v-model="studentForm.regNum" size="medium"></el-input>
+        <el-form-item label="Registration Num" prop="student_reg">
+          <el-input v-model="studentForm.student_reg" size="medium" placeholder="Reg Number"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="7">
-        <el-form-item label="First Name">
-          <el-input v-model="studentForm.firstName" size="medium"></el-input>
+        <el-form-item label="First Name" prop="firstName">
+          <el-input v-model="studentForm.firstName" size="medium" placeholder="First Name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
-        <el-form-item label="Second Name">
-          <el-input v-model="studentForm.secondName" size="medium"></el-input>
+        <el-form-item label="Second Name" prop="secondName">
+          <el-input v-model="studentForm.secondName" size="medium" placeholder="Second Name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="8">
-        <el-form-item label="Last Name">
-          <el-input v-model="studentForm.lastName" size="medium"></el-input>
+        <el-form-item label="Last Name" prop="lastName">
+          <el-input v-model="studentForm.lastName" size="medium" placeholder="Last Name"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="8">
-        <el-form-item label="Date of Bith">
+        <el-form-item label="Date of Bith" prop="dob"><br>
           <el-date-picker v-model="studentForm.dob" type="date" placeholder="Pick Date of Birth" :picker-options="pickerOptions" size="medium"></el-date-picker>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
-        <el-form-item label="Gender"><br>
+        <el-form-item label="Gender" prop="gender"><br>
           <el-radio v-model="studentForm.gender" label="Male">Male</el-radio>
           <el-radio v-model="studentForm.gender" label="Female">Female</el-radio>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
-        <el-form-item label="Class">
+        <el-form-item label="Class" prop="class"><br>
           <el-select v-model="studentForm.class" placeholder="Please select class" size="medium">
             <el-option label="4 West" value="32"></el-option>
             <el-option label="3 North" value="233"></el-option>
@@ -75,59 +75,59 @@
 
     <el-form ref="parentForm" :model="parentForm" v-if="active === 2"> <!-- /parents form begins -->
       <el-col :span="11">
-        <el-form-item label="First Name">
+        <el-form-item label="First Name" prop="firstname">
           <el-input v-model="parentForm.firstname" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
-        <el-form-item label="Last Name">
+        <el-form-item label="Last Name" prop="secondname">
           <el-input v-model="parentForm.secondname" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="7">
-        <el-form-item label="Phone">
+        <el-form-item label="Phone" prop="phone">
           <el-input v-model="parentForm.phone" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="8">
-        <el-form-item label="E-Mail">
+        <el-form-item label="E-Mail" prop="email">
           <el-input v-model="parentForm.email" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
-        <el-form-item label="Natioanl ID">
+        <el-form-item label="Natioanl ID" prop="nationalId">
           <el-input v-model="parentForm.nationalId" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="7">
-        <el-form-item label="County">
+        <el-form-item label="County" prop="county">
           <el-input v-model="parentForm.county" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="8">
-        <el-form-item label="Sub-County">
+        <el-form-item label="Sub-County" prop="sub_county">
           <el-input v-model="parentForm.sub_county" size="medium"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="7">
-        <el-form-item label="Ward">
+        <el-form-item label="Ward" prop="">
           <el-input v-model="parentForm.ward" size="medium"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="24">
-        <el-button type="success" style="margin-top: 12px;" @click="onSubmit()">All Done Save</el-button>
+        <el-button type="success" style="margin-top: 12px; float: right;" @click="onSubmit()">All Done Save</el-button>
       </el-col>
     </el-form> <!-- /parents form ends -->
-
-    <el-button style="margin-top: 12px;" @click="next">Next step <i class="el-icon-arrow-right el-icon-right"></i></el-button>
+    <br>
+    <el-button style="margin-top: 12px;" @click="next('studentForm')">Next step <i class="el-icon-arrow-right el-icon-right"></i></el-button>
   </div>
 </template>
 
