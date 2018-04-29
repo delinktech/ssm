@@ -16,8 +16,8 @@
         </el-form-item>
       </el-col>
 
-      <el-col :span="11">
-        <el-form-item label="School Gender">
+      <el-col :span="7">
+        <el-form-item label="School Gender"><br>
           <el-select v-model="schoolForm.school_gender" placeholder="Select School Gender">
             <el-option label="Girls" value="Girls"></el-option>
             <el-option label="Boys" value="Boys"></el-option>
@@ -25,9 +25,15 @@
           </el-select>
         </el-form-item>
       </el-col>
-      <el-col :span="2">&nbsp;</el-col>
-      <el-col :span="11">
-        <el-form-item>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="7">
+        <el-form-item label="Logo url">
+          <el-input v-model="schoolForm.school_level" size="medium" placeholder="School Level"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="8">
+        <el-form-item label="Logo url">
           <el-input v-model="schoolForm.school_logo" size="medium" placeholder="School Logo (url)"></el-input>
         </el-form-item>
       </el-col>
@@ -91,6 +97,7 @@
           school_phone: '',
           school_email: '',
           school_gender: '',
+          school_level: '',
           school_county: '',
           school_sub_county: '',
           school_ward: '',
