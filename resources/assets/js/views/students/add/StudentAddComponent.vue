@@ -270,36 +270,44 @@
           //   schClasses = r.data
         })
       },
-      onSubmit() {
-        if (this.parentForm && this.studentForm) {
-          // post data to api
-          console.log('parent=>', this.parentForm)
-          console.log('student=>', this.studentForm)
-          // TODO: on success parent save get parent and save student
+      onSubmit(parentForm) {
+        this.$refs[parentForm].validate((valid) => {
+          if (valid) {
+            // all good valid forms
+            // post data to api
+            saveParent(this.parentForm)
+              .then(resParent => {
+                // success saving parent
 
-          saveParent(this.parentForm)
-            .then(resParent => {
-              console.log('res 1', resParent)
+                // get parent id 
+                const updateStudent = this.studentForm
+                updateStudent.parent = resParent.id
 
-              const updateStudent = this.studentForm
-              updateStudent.parent = resParent.id
+                // save student
+                saveStudent(updateStudent)
+                  .then(resStudent => {
+                    // reset forms
+                    this.resetForm(this.parentForm) // reset parent form
+                    this.resetForm(this.studentForm) // reset student form
 
-              // save student
-              saveStudent(updateStudent)
-                .then(resStudent => {
-                  this.openSucess()
-                  console.log('res 1', resStudent)
-                })
-                .catch(e => {
-                  this.openError('Student')
-                  console.log('error saving student', e)
-                })
-            })
-            .catch(e => {
-              this.openError('Parent')
-              console.log('error saving parent', e)
-            })
-        }
+                    // successsaving student
+                    this.openSucess()
+                  })
+                  .catch(e => {
+                    this.openError('Student')
+                    console.log('error saving student', e)
+                  })
+              })
+              .catch(e => {
+                this.openError('Parent')
+                console.log('error saving parent', e)
+              })
+          } else {
+            // invalid form
+            return false
+          }
+        })
+      },
       resetForm(formName) {
         this.$refs[formName].resetFields()
       },
