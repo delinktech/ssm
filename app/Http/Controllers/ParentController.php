@@ -169,6 +169,14 @@ class ParentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      //delete parent
+      $parent = Parent::findOrFail($id);
+
+      if ($parent->delete()) {
+        return response()->json([
+          'success' => true,
+          'parent' => $parent
+          ], 200);
+      }
     }
 }
