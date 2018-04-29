@@ -78,19 +78,8 @@
         getSchools().then(response => {
           // this.list = response.data.data
 
-          // TODO: remove mocke data
-          this.list = [{
-            school_name: 'School of THought',
-            school_code: '2567',
-            school_type: 'Bording',
-            school_phone: '0998765',
-            school_email: 'sch@thought.com',
-            school_gender: 'Mixed',
-            school_county: 'Nairobi',
-            school_sub_county: '',
-            school_ward: '',
-            school_logo: ''
-          }]
+          console.log('schools:', response.data.data)
+          this.list = response.data.data
 
           this.listLoading = false
         })
