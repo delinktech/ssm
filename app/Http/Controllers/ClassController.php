@@ -43,27 +43,27 @@ class ClassController extends Controller
   public function store(Request $request)
   {
     $class = $request->isMethod('put') ? ClassModel::findOrFail($request->id) : new ClassModel;
-    
+
     // validating the forms data
     $this->validate($request, [
-      'code' => 'required',
+      'code' => 'required|unique:classes',
       'name' => 'required',
-      'school' => 'school',
+      'school' => 'required',
       'classteacher' => 'required'
     ]);
 
-    $class = new ClassModel([
-        'code' => $request->code,
-        'name' => $request->name,
-        'school' => $request->school,
-        'classteacher' => $request->classteacher
-    ]);
+    $class->id = $request->input('id');
+
+    $class->code = $request->input('code');
+    $class->name = $request->input('name');
+    $class->school = $request->input('school');
+    $class->classteacher = $request->input('classteacher');
 
     if ($class->save()) {
       // return a json
       return response()->json([
         'success' => true,
-        'student' => $class
+        'class' => $class
       ], 200); 
     }
   }
