@@ -50,25 +50,25 @@ class ParentsController extends Controller
     ]);
 
     // check if its put or post
-    $parent = $request->isMethod('put') ? Parent::findOrFail($request->parent_id) : new Parent;
+    $parent = $request->isMethod('put') ? ParentModel::findOrFail($request->parent_id) : new ParentModel;
 
     $parent->id = $request->input('parent_id');
 
     // create the parent object
-    $parent->parent_first_name = $request->('firstname');
-    $parent->parent_second_name = $request->('secondname');
-    $parent->parent_national_id = $request->('nationalId');
-    $parent->parent_Phone_number = $request->('phone');
-    $parent->parent_email = $request->('email');
-    $parent->parent_county = $request->('county');
-    $parent->parent_sub_county = $request->('sub_county');
-    $parent->parent_ward = $request->('ward');
+    $parent->parent_first_name = $request->input('firstname');
+    $parent->parent_second_name = $request->input('secondname');
+    $parent->parent_national_id = $request->input('nationalId');
+    $parent->parent_Phone_number = $request->input('phone');
+    $parent->parent_email = $request->input('email');
+    $parent->parent_county = $request->input('county');
+    $parent->parent_sub_county = $request->input('sub_county');
+    $parent->parent_ward = $request->input('ward');
 
     // store parent in the databse
     if ($parent->save()) {
       return response()->json([
         'success' => true,
-        'parentId' => $parent->id,
+        'parent' => $parent,
         'message' => 'Parent Saved Successfuly'
       ], 200); 
     }     
