@@ -268,8 +268,21 @@
             })
         }
       },
-      next() {
-        if (this.active++ > 1) this.active = 1
+      next(studentForm) {
+        if (this.active === 1) {
+          this.$refs[studentForm].validate((valid) => {
+            if (valid) {
+              // valid form
+              if (this.active++ > 1) this.active = 1
+            } else {
+              // invalid form
+              return false
+            }
+          })
+        } else {
+          // go back to page 1
+          if (this.active++ > 1) this.active = 1
+        }
       }
     }
   }
