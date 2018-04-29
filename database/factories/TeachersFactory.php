@@ -11,11 +11,9 @@ $factory->define(App\Models\Teacher::class, function (Faker $faker) {
     'teacher_email' => preg_replace('/@example\..*/', '@domain.com', $faker->unique()->safeEmail),
     'teacher_dev_reg' => str_random(10),
     'teacher_api_session' => str_random(16),
-    'teacher_password' => $password ?: $password = bcrypt('secret'),
     'teacher_status' => $faker->numberBetween(1-5),
     'teacher_school_id' => $faker->numberBetween(1-5),
     'teacher_username' => $faker->numberBetween(1-5),
-    'teacher_class_id' => $faker->numberBetween(1-5),
     'teacher_code' => $faker->unique()->text(5),
     'subjects' => $faker->unique()->text(5)
   ];

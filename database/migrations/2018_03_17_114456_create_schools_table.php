@@ -16,19 +16,22 @@ class CreateSchoolsTable extends Migration
     Schema::create('schools', function (Blueprint $table) {
       $table->increments('id');
       
-      $table->text('school_code');
-      $table->text('school_name');
-      $table->integer('school_level');
-      $table->integer('school_type');
-      $table->text('school_gender');
+      $table->string('school_code');
+      $table->string('school_name');
+      $table->string('school_level');
+      $table->string('school_type');
+      $table->string('school_gender');
 
-      $table->text('school_county');
-      $table->text('school_sub_county');
-      $table->text('school_ward');
+      $table->string('school_county');
+      $table->string('school_sub_county');
+      $table->string('school_ward');
 
-      $table->text('school_phone');
-      $table->text('school_email');
-      $table->text('school_logo');
+      $table->string('school_phone');
+      $table->string('school_email');
+      $table->string('school_logo');
+      
+      $table->string('createdBy');
+      $table->string('updatedBy');
       $table->timestamps();
     });
   }

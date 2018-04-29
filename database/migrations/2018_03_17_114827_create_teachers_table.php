@@ -15,20 +15,19 @@ class CreateTeachersTable extends Migration
   {
     Schema::create('teachers', function (Blueprint $table) {
       $table->increments('id');
-      $table->text('first_name');
-      $table->text('teacher_surname');
-      $table->text('teacher_id_number');
-      $table->text('teacher_email');
-      $table->integer('teacher_username')->unique();
-      $table->text('teacher_dev_reg')->nullable();
-      $table->text('teacher_api_session')->nullable();
-      $table->text('teacher_password')->nullable();
-      $table->integer('teacher_status')->nullable();
+      $table->string('teacher_code');
+      $table->string('first_name');
+      $table->string('teacher_surname');
+      $table->string('teacher_id_number');
+      $table->string('teacher_email');
+      $table->string('teacher_dev_reg')->nullable();
+      $table->string('teacher_api_session')->nullable();
+      $table->string('teacher_status')->nullable();
       $table->integer('teacher_school_id');
-      $table->integer('teacher_class_id')->nullable();
       $table->string('subjects')->nullable();
+
+      $table->string('teacher_username')->nullable();
       // $table->json('meta')->nullable();
-      $table->text('teacher_code')->nullable();
       $table->timestamps();
     });
   }

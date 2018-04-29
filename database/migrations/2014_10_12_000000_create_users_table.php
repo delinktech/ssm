@@ -40,7 +40,7 @@ class CreateUsersTable extends Migration
   }
 
   public function profile() {
-    return $this=>hasOne(Profile::class);
+    return $this->hasOne(Profile::class);
   }
 
   /**
