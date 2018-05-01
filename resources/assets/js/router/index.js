@@ -44,6 +44,27 @@ export const constantRouterMap = [
     }]
   },
   {
+    path: '/classes',
+    component: Layout,
+    redirect: '/class/list',
+    name: 'Class',
+    meta: { title: 'Class', icon: 'library_books' },
+    children: [
+      {
+        path: 'list',
+        name: 'StudentsList',
+        component: view('classes/list/ClassListComponent'),
+        meta: { title: 'Class List' }
+      },
+      {
+        path: 'add',
+        name: 'StudentAdd',
+        component: view('classes/add/ClassAddComponent'),
+        meta: { title: 'Class Add' }
+      }
+    ]
+  },
+  {
     path: '/students',
     component: Layout,
     redirect: '/students/list',
