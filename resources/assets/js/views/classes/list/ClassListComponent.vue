@@ -51,9 +51,15 @@
       this.fetchData()
     },
     methods: {
-      openError() {
+      successMesssage() {
         this.$message({
-          message: 'Oops! Something went wrong!',
+          message: 'Class deleted successfuly',
+          type: 'success'
+        });
+      },
+      openError(err) {
+        this.$message({
+          message: `Oops! Something went wrong! ${err}`,
           type: 'error'
         })
       },
