@@ -21,6 +21,12 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_SCHOOL: (state, school) => {
+      state.school = school
+    },
+    SET_TEACHERS: (state, teachers) => {
+      state.teachers = teachers
     }
   },
 
@@ -45,9 +51,13 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response.data
-          commit('SET_ROLES', data.roles)
-          commit('SET_NAME', data.username)
-          commit('SET_AVATAR', data.avatar)
+          commit('SET_ROLES', data.user.roles)
+          commit('SET_NAME', data.user.username)
+          commit('SET_AVATAR', data.user.avatar)
+
+          // set school info
+          commit('SET_SCHOOL', data.schInfo.school[0])
+          commit('SET_TEACHERS', data.schInfo.teachers)
           resolve(response)
         }).catch(error => {
           reject(error)
