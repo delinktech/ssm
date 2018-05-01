@@ -1,0 +1,84 @@
+<template>
+  <div class="app-container">
+    <h3>List of All Classes</h3>
+    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+      <el-table-column align="center" label='ID'>
+        <template slot-scope="scope">
+          {{scope.$index+1}}
+        </template>
+      </el-table-column>
+      <el-table-column label="Class Code">
+        <template slot-scope="scope">
+          {{scope.row.code}}
+        </template>
+      </el-table-column>
+      <el-table-column label="Class Name" align="center">
+        <template slot-scope="scope">
+          <span>{{scope.row.name}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Class Teacher" align="center">
+        <template slot-scope="scope">
+          {{scope.row.classteacher}}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="Operations">
+        <template slot-scope="scope">
+          <el-button @click="editClass(scope.row)" type="text" size="small"><md-icon>edit</md-icon></el-button>
+          <el-button @click="confirmDeleteClass(scope.row.id)" type="text" size="small"><md-icon>delete</md-icon></el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+  import { getClasses, deleteClass } from '../../../api/class'
+
+  export default {
+    name: 'ClassListComponent',
+    data() {
+      return {
+        list: null,
+        listLoading: true
+      }
+    },
+    filters: {
+
+    },
+    created() {
+      this.fetchData()
+    },
+    methods: {
+      openError() {
+        this.$message({
+          message: 'Oops! Something went wrong!',
+          type: 'error'
+        })
+      },
+      fetchData() {
+        this.listLoading = true
+
+        // get schools
+        getClasses().then(response => {
+          // this.list = response.data.data
+
+          console.log('classes:', response.data.data)
+          this.list = response.data.data
+
+          this.listLoading = false
+        })
+          .catch(err => {
+            // catch error and display to user
+            this.openError()
+            console.log(err)
+          })
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  
+</style>
