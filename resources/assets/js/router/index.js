@@ -46,7 +46,7 @@ export const constantRouterMap = [
   {
     path: '/classes',
     component: Layout,
-    redirect: '/class/list',
+    redirect: '/classes/list',
     name: 'Class',
     meta: { title: 'Class', icon: 'library_books' },
     children: [
