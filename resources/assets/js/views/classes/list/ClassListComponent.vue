@@ -71,8 +71,38 @@
         })
           .catch(err => {
             // catch error and display to user
-            this.openError()
+            this.openError('fetching classes')
             console.log(err)
+          })
+      },
+      editClass(_class) {
+        console.log('class', _class)
+      },
+      confirmDeleteClass(_id) {
+        this.$confirm('Are you sure you want to delete this Class?')
+          .then(_ => {
+            // call function to delete the student
+            this.deleteClass(_id)
+            
+            done();
+          })
+          .catch(_ => {
+            // do nothing
+          });
+      },
+      deleteClass(_id) {
+        // delete the class
+        deleteClass(_id)
+          .then(res => {
+            // success deleted the class
+            this.successMesssage()
+
+            // call the function to refetch the data
+            this.fetchData()
+          })
+          .catch(err => {
+            // catch the error
+            this.openError('deleting student')
           })
       }
     }
