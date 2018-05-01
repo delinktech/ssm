@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\School;
+use App\Models\Teacher;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
@@ -98,5 +100,27 @@ class UserController extends Controller
     return response()->json([
       'token' => $token
       ], 201); 
+  }
+
+  /*
+    function to get a the loged in user info and the school data
+  */
+  public function userInfo() {
+    // get the current user by passing the token
+    $user = JWTAuth::parseToken()->authenticate();
+    $schoolId = JWTAuth::parseToken()->toUser()->school;
+
+    $schoolInfo = [];
+
+    // get school info
+    $schoolInfo['school'] = School::where('id', $schoolId)->get();
+
+    // get teachers of school
+    $schoolInfo['teachers'] = Teacher::where('teacher_school_id', $schoolId)->get();
+
+    return response()->json([
+      'user' => $user,
+      'schInfo' => $schoolInfo
+      ]);
   }
 }
