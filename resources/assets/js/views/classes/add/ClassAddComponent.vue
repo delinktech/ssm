@@ -1,6 +1,6 @@
 <template>
   <div class="content-container">
-    <h3>Add Class</h3>
+    <h3>Add Class in {{school.school_name}}</h3>
 
     <!-- form starts -->
     <el-form ref="form" :model="classForm">
@@ -19,15 +19,13 @@
       <el-col>
         <el-form-item label="Class Teacher"><br>
           <el-select v-model="classForm.classTeacher" placeholder="lease Select Class Teacher">
-            <el-option label="Mr.Ngugi" value="1"></el-option>
-            <el-option label="Mrs.Karanja" value="2"></el-option>
-            <el-option label="Ms.Otieno" value="3"></el-option>
+            <el-option v-for="teacher in teachers" :key="teacher.first_name" :label="teacher.first_name + ' ' + teacher.teacher_surname" :value="teacher.id"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
 
       <el-col :span="24">
-        <el-button type="success" style="margin-top: 12px;" @click="onSubmit(classForm)">Save</el-button>
+        <el-button type="success" style="margin-top: 12px;" @click="onSubmit(classForm, school.id)">Save</el-button>
       </el-col>
 
     </el-form>
@@ -36,6 +34,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import { saveClass } from '../../../api/class'
 
   export default {
@@ -45,11 +44,17 @@
         classForm: {
           code: '',
           name: '',
-          school: 1,
+          school: '',
           classTeacher: ''
         },
         successSave: false
       };
+    },
+    computed: {
+      ...mapGetters([
+        'school',
+        'teachers'
+      ])
     },
     methods: {
       openSucess() {
@@ -64,14 +69,15 @@
           type: 'error'
         })
       },
-      onSubmit() {
+      onSubmit(classForm, school) {
+        console.log('>>',school)
         // set users information
         const _class = this.classForm
-        console.log('data', _class)
+        _class.school = school
 
         // proceed to save to db
         saveClass(_class)
-            .then(res => {
+          .then(res => {
             this.successSave = true
             this.classForm = null
             this.openSucess()
