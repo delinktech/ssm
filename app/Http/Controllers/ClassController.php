@@ -49,7 +49,7 @@ class ClassController extends Controller
       'code' => 'required|unique:classes',
       'name' => 'required',
       'school' => 'required',
-      'classteacher' => 'required'
+      'classTeacher' => 'required'
     ]);
 
     $class->id = $request->input('id');
@@ -57,7 +57,7 @@ class ClassController extends Controller
     $class->code = $request->input('code');
     $class->name = $request->input('name');
     $class->school = $request->input('school');
-    $class->classteacher = $request->input('classteacher');
+    $class->classteacher = $request->input('classTeacher');
 
     if ($class->save()) {
       // return a json
