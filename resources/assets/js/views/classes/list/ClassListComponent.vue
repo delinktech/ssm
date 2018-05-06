@@ -66,19 +66,17 @@
       fetchData() {
         this.listLoading = true
 
-        // get schools
-        getClasses().then(response => {
-          // this.list = response.data.data
+        // get classes
+        getClasses()
+          .then(response => {
+            this.list = response.data.data
 
-          console.log('classes:', response.data.data)
-          this.list = response.data.data
-
-          this.listLoading = false
-        })
+            this.listLoading = false
+          })
           .catch(err => {
             // catch error and display to user
+            // console.log(err)
             this.openError('fetching classes')
-            console.log(err)
           })
       },
       editClass(_class) {
