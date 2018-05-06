@@ -98,6 +98,10 @@
             this.openError()
             console.log(err)
           })
+                // reset form
+                this.resetForm(classForm)
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }
