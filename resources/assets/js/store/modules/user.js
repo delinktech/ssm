@@ -25,6 +25,9 @@ const user = {
     SET_SCHOOL: (state, school) => {
       state.school = school
     },
+    SET_CLASSES: (state, classes) => {
+      state.classes = classes
+    },
     SET_TEACHERS: (state, teachers) => {
       state.teachers = teachers
     }
@@ -57,6 +60,7 @@ const user = {
 
           // set school info
           commit('SET_SCHOOL', data.schInfo.school[0])
+          commit('SET_CLASSES', data.schInfo.classes)
           commit('SET_TEACHERS', data.schInfo.teachers)
           resolve(response)
         }).catch(error => {

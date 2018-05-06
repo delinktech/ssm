@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Teacher;
+use App\Models\ClassModel;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
@@ -117,6 +118,9 @@ class UserController extends Controller
 
     // get teachers of school
     $schoolInfo['teachers'] = Teacher::where('teacher_school_id', $schoolId)->get();
+
+    // get classes of school
+    $schoolInfo['classes'] = ClassModel::where('school', $schoolId)->get();
 
     return response()->json([
       'user' => $user,
