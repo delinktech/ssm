@@ -1,6 +1,8 @@
 <template>
   <div class="app-container">
-    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+    <h3>List of Students <small>{{school.school_name}}</small></h3>
+
+    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" highlight-current-row>
       <el-table-column align="center" label='ID'>
         <template slot-scope="scope">
           {{scope.$index+1}}
