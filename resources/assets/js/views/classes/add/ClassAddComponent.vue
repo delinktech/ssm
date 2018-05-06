@@ -3,21 +3,21 @@
     <h3>Add Class in {{school.school_name}}</h3>
 
     <!-- form starts -->
-    <el-form ref="form" :model="classForm">
+    <el-form ref="classForm" :model="classForm" :rules="classRules">
       <el-col :span="11">
-        <el-form-item label="Class Name">
+        <el-form-item label="Class Name" prop="name">
           <el-input v-model="classForm.name" size="medium" placeholder="Class Code"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
-        <el-form-item label="Class Code">
+        <el-form-item label="Class Code" prop="code">
           <el-input v-model="classForm.code" size="medium" placeholder="Class Code"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col>
-        <el-form-item label="Class Teacher"><br>
+        <el-form-item label="Class Teacher" prop="classTeacher"><br>
           <el-select v-model="classForm.classTeacher" placeholder="lease Select Class Teacher">
             <el-option v-for="teacher in teachers" :key="teacher.first_name" :label="teacher.first_name + ' ' + teacher.teacher_surname" :value="teacher.id"></el-option>
           </el-select>
@@ -47,7 +47,19 @@
           school: '',
           classTeacher: ''
         },
-        successSave: false
+        classRules: {
+          code: [
+            { required: true, message: 'Please the class code', trigger: 'blur' },
+            { min: 2, max: 5,  message: 'Length should be more than 2', trigger: 'blur' }
+          ],
+          name: [
+            { required: true, message: 'Please class Name', trigger: 'blur' },
+            { min: 5, message: 'Length should be more than 5', trigger: 'blur' }
+          ],
+          classTeacher: [
+            { required: true, message: 'Please select the class teacher', trigger: 'blur' }
+          ]
+        }
       };
     },
     computed: {
