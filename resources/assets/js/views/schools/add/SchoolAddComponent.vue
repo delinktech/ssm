@@ -157,24 +157,32 @@
           type: 'error'
         })
       },
-      onSubmit() {
-        // set users information
-        const schoolData = this.schoolForm
-        console.log('data', schoolData)
+      onSubmit(schoolForm) {
+        this.$refs[schoolForm].validate(valid => {
+          if (valid) {
+            // set users information
+            const schoolData = this.schoolForm
 
-        // proceed to save to db
-        saveSchool(schoolData).then(res => {
-          this.successSave = true
-          this.schoolForm = null
-          this.openSucess()
+            // proceed to save to db
+            saveSchool(schoolData)
+              .then(res => {
+                // success save
+                this.openSucess()
 
                 // reset form
                 this.resetForm(schoolForm)
+              })
+              .catch(err => {
+                // error saving
+                console.log(err)
+                this.openError()
+              })
+          } else {
+            // not valid
+            return
+          }
         })
-          .catch(err => {
-            this.openError()
-            console.log(err)
-          })
+      },
       resetForm(formName) {
         this.$refs[formName].resetFields()
       }
