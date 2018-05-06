@@ -74,9 +74,9 @@ class ResultsController extends Controller
     public function show($id)
     {
         
-         $data = [];
-        $data["result"] = Scchool::find($id);
-          if ($id != -1) {
+       $data = [];
+       $data["result"] = Scchool::find($id);
+       if ($id != -1) {
 
         }
         return new ResultResource($result);
@@ -115,17 +115,5 @@ class ResultsController extends Controller
     {
     
     }
-    public function marks()
-    {
-        $marks = new Marks;
-         if ($marks => 90) && $marks !< 75 {
-             $grade = 'A'
-         }elseif ($marks => 75 && $marks!<60) {
-                $grade = 'B'
-         }elseif ($marks => 50 && $marks!<35) {
-                $grade = 'C'
-
-    }else{
-        $grade = 'D'
-    }
+   
 }

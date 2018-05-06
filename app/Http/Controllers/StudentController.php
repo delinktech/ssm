@@ -129,6 +129,13 @@ class StudentController extends Controller
     {
       // 
     }
+    public function getStudentProfile($id)
+  {
+    $profile = StudentsController::getStudentProfile( $id);
+
+    return response()->json($profile);
+
+}
 
     /**
      * Remove the specified resource from storage.

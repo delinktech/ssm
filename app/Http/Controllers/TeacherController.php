@@ -124,6 +124,7 @@ class TeacherController extends Controller
           'teacher' => $teacherinfo
           ]);
     }
+  
 
     /**
      * Show the form for editing the specified resource.
