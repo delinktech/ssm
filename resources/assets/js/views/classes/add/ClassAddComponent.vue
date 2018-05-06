@@ -1,6 +1,6 @@
 <template>
   <div class="content-container">
-    <h3>Add Class in {{school.school_name}}</h3>
+    <h3>Add Class in <small>{{school.school_name}}</small></h3>
 
     <!-- form starts -->
     <el-form ref="classForm" :model="classForm" :rules="classRules">

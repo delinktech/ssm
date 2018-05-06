@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <h3>List of All Classes</h3>
-    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+    <h3>List of All Classes <small>{{school.school_name}}</small></h3>
+    <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" highlight-current-row>
       <el-table-column align="center" label='ID'>
         <template slot-scope="scope">
           {{scope.$index+1}}
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import { getClasses, deleteClass } from '../../../api/class'
 
   export default {
@@ -44,8 +45,10 @@
         listLoading: true
       }
     },
-    filters: {
-
+    computed: {
+      ...mapGetters([
+        'school'
+      ])
     },
     created() {
       this.fetchData()
