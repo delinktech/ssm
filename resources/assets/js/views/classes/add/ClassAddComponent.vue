@@ -82,24 +82,31 @@
         })
       },
       onSubmit(classForm, school) {
-        console.log('>>',school)
-        // set users information
-        const _class = this.classForm
-        _class.school = school
+        this.$refs[classForm].validate((valid) => {
+          if (valid) {
+            // set school id
+            const _class = this.classForm
+            _class.school = school
 
-        // proceed to save to db
-        saveClass(_class)
-          .then(res => {
-            this.successSave = true
-            this.classForm = null
-            this.openSucess()
-          })
-          .catch(err => {
-            this.openError()
-            console.log(err)
-          })
+            // proceed to save to db
+            saveClass(_class)
+              .then(res => {
+                // saved success
+                this.openSucess()
+
                 // reset form
                 this.resetForm(classForm)
+              })
+              .catch(err => {
+                // console.log(err)
+                this.openError()
+              })
+          } else {
+            // invalid form
+            return false
+          }
+        })
+      },
       resetForm(formName) {
         this.$refs[formName].resetFields();
       }
