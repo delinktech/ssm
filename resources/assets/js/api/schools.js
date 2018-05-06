@@ -16,7 +16,6 @@ export const getSchool = (_id) => {
 
 /* save Schools through the api */
 export const saveSchool = (formData) => {
-  console.log('saving school...', formData)
   return Vue.http.post('/api/school', formData, { params: { 'token': getToken() }} )
 }
 
