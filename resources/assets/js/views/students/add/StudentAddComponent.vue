@@ -64,9 +64,7 @@
       <el-col :span="7">
         <el-form-item label="Class" prop="class"><br>
           <el-select v-model="studentForm.class" placeholder="Please select class" size="medium">
-            <el-option label="4 West" value="32"></el-option>
-            <el-option label="3 North" value="233"></el-option>
-            <el-option label="8 South" value="1324"></el-option>
+            <el-option v-for="cls in classes" :key="cls.code" :label="cls.name" :value="cls.id"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -134,6 +132,7 @@
 
 <script>
   import moment from 'moment'
+  import { mapGetters } from 'vuex'
   import { getSchool } from '../../../api/schools'
   import { saveStudent } from '../../../api/students'
   import { saveParent } from '../../../api/parents'
@@ -243,12 +242,12 @@
         }
       };
     },
-    filters: {
-      
-    },
-    created() {
-      // TODO: fatch data required before saving students
-      // this.fetchSchool()
+    computed: {
+      ...mapGetters([
+        'school',
+        'teachers',
+        'classes'
+      ])
     },
     methods: {
       openSucess() {
