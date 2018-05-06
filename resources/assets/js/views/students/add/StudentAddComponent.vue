@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <h3>Add Student</h3>
+    <h3>Add Student in <small>{{school.school_name}}</small></h3>
 
     <!--
       TODO: add steps to add the parent information on this component
@@ -20,7 +20,7 @@
     <el-form ref="studentForm" :model="studentForm" :rules="studentRules" v-if="active === 1"> <!-- student form starts -->
       <el-col :span="11">
         <el-form-item label="School" prop="school">
-          <el-input disabled v-model="studentForm.school" size="medium" placeholder="School"></el-input>
+          <el-input disabled size="medium" :placeholder="school.school_name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
@@ -122,7 +122,7 @@
         </el-form-item>
       </el-col>
 
-      <el-button type="success" style="margin-top: 12px; float: right;" @click="onSubmit('parentForm', 'studentForm')">All Done Save</el-button>
+      <el-button type="success" style="margin-top: 12px; float: right;" @click="onSubmit('parentForm', 'studentForm', school)">All Done Save</el-button>
 
       <br>
       <el-button style="margin-top: 12px;" @click="prev"><i class="el-icon-arrow-left el-icon-left"></i> Prev step</el-button>
@@ -164,7 +164,7 @@
           gender: '',
           dob: '',
 
-          school: 1,
+          school: '',
           class: '',
 
           parent: ''
@@ -197,9 +197,6 @@
           ],
           dob: [
            { type: 'date', required: true, message: 'Please pick date of birth', trigger: 'change' }
-          ],
-          school: [
-           { required: true, message: 'School is required', trigger: 'change' }
           ],
           class: [
            { required: true, message: 'Please Pick a class', trigger: 'change' }
@@ -265,13 +262,9 @@
       fetchSchool() {
         getSchool(1).then(res => {
           this.school = res.data.data
-
-          // TODO: get the schools classes
-          // getClasses().then(r => {
-          //   schClasses = r.data
         })
       },
-      onSubmit(parentForm, studentForm) {
+      onSubmit(parentForm, studentForm, school) {
         this.$refs[parentForm].validate((valid) => {
           if (valid) {
             // all good valid forms
@@ -280,20 +273,22 @@
               .then(resParent => {
                 // success saving parent
 
-                // get parent id 
+                // set student info parent | school | date
                 const updateStudent = this.studentForm
                 updateStudent.dob = moment(this.studentForm.dob).format('YYYY-MM-DD')
                 updateStudent.parent = resParent.data.parent.id
+                updateStudent.school = school.id
 
                 // save student
                 saveStudent(updateStudent)
                   .then(resStudent => {
                     // reset forms
-                    // this.resetForm(parentForm) // reset parent form
+                    this.resetForm(parentForm) // reset parent form
                     // this.resetForm(studentForm) // reset student form
 
                     console.log('student', resStudent.data)
                     // successsaving student
+                    this.active = 1
                     this.openSucess()
                   })
                   .catch(e => {
