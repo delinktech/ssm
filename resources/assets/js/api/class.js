@@ -11,7 +11,7 @@ export const getClasses = () => {
 
 /* fetch single School function via api */
 export const getClass = (_id) => {
-  return Vue.http.get('/api/class', { params: { 'id': _id, 'token': getToken() }} )
+  return Vue.http.get(`/api/class/${_id}`, { params: { 'token': getToken() }} )
 }
 
 /* save Schools through the api */
@@ -26,5 +26,5 @@ export const saveEditClass = (formData) => {
 
 /* delete a Schools through the api */
 export const deleteClass = (_id) => {
-  return Vue.http.delete('/api/class', { params: { 'id': _id, 'token': getToken() }} )
+  return Vue.http.delete(`/api/class/${_id}`, { params: { 'token': getToken() }} )
 }
