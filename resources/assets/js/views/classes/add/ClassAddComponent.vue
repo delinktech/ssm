@@ -25,7 +25,7 @@
       </el-col>
 
       <el-col :span="24">
-        <el-button type="success" style="margin-top: 12px;" @click="onSubmit(classForm, school.id)">Save</el-button>
+        <el-button type="success" style="margin-top: 12px;" @click="onSubmit('classForm', school.id)">Save</el-button>
       </el-col>
 
     </el-form>
