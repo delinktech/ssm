@@ -129,11 +129,16 @@
           this.successSave = true
           this.schoolForm = null
           this.openSucess()
+
+                // reset form
+                this.resetForm(schoolForm)
         })
           .catch(err => {
             this.openError()
             console.log(err)
           })
+      resetForm(formName) {
+        this.$refs[formName].resetFields()
       }
     }
   }
