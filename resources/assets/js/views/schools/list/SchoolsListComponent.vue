@@ -37,10 +37,10 @@
           {{scope.row.school_county}}
         </template>
       </el-table-column>
-      <el-table-column label="Actions" align="center">
+      <el-table-column label="Operations">
         <template slot-scope="scope">
-          <md-icon @click="editSchool(1)">edit </md-icon>
-          <md-icon @click="deleteSchool(1)">delete </md-icon>
+          <el-button @click="editSchool(scope.row)" type="text" size="small"><md-icon>edit</md-icon></el-button>
+          <el-button @click="confirmDeleteSchool(scope.row.id)" type="text" size="small"><md-icon>delete</md-icon></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -58,16 +58,19 @@
         listLoading: true
       }
     },
-    filters: {
-
-    },
     created() {
       this.fetchData()
     },
     methods: {
-      openError() {
+      successMesssage() {
         this.$message({
-          message: 'Oops! Something went wrong!',
+          message: 'School deleted successfuly',
+          type: 'success'
+        });
+      },
+      openError(err) {
+        this.$message({
+          message: `Oops! Something went wrong! while ${err} try again`,
           type: 'error'
         })
       },
@@ -75,40 +78,49 @@
         this.listLoading = true
 
         // get schools
-        getSchools().then(response => {
-          // this.list = response.data.data
+        getSchools()
+          .then(response => {
+            this.list = response.data.data
 
-          console.log('schools:', response.data.data)
-          this.list = response.data.data
-
-          this.listLoading = false
-        })
+            // finished loading data
+            this.listLoading = false
+          })
           .catch(err => {
             // catch error and display to user
-            this.openError()
-            console.log(err)
+            // console.log(err)
+            this.openError('fetching schools')
           })
       },
-      // delete a single school 
-      deleteSchool(_id) { 
-        // TODO: replce this with dialog
-        if (confirm('Are you sure want to delete the school?')) {
-          deleteSchool(_id) 
-            .then(res => { 
-              // TODO: add snackbar for success here 
-   
-              // fetch the teachers list again 
-              this.fetchTeachers()
-            })
-            .catch(err => {
-              console.log('ERROR: deleting teacher ->', err); 
-              // TODO: add snackbar here 
-            })
-        }
+      editSchool(school) {
+        console.log('edit school', school)
       },
-      editSchool(_id) {
-        // edit selected school
-      } 
+      confirmDeleteSchool(_id) {
+        this.$confirm('Are you sure you want to delete this School?')
+          .then(_ => {
+            // call function to delete the school
+            this.deleteSchool(_id)
+            
+            done()
+          })
+          .catch(_ => {
+            // do nothing
+          })
+      },
+      deleteSchool(_id) { 
+        deleteSchool(_id) 
+          .then(res => { 
+            // open success delete
+            this.successMesssage()
+
+            // fetch the teachers list again 
+            this.fetchData()
+          })
+          .catch(err => {
+            // error deleteing
+            console.log('error deleting school', err); 
+            this.openError('deleting school')
+          })
+      }
     }
   }
 </script>
