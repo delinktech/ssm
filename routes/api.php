@@ -68,3 +68,7 @@ Route::get('class/{id}', ['uses' => 'ClassController@show', 'middleware' => 'aut
 Route::post('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// add a single school
 Route::put('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// update a single school
 Route::delete('class/{id}', ['uses' => 'ClassController@destroy', 'middleware' => 'auth.jwt']);	// delete school
+
+// email
+
+Route::get('send','MailController@send');
