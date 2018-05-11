@@ -7,11 +7,14 @@ use Mail;
 
 class MailController extends Controller
 {
-    public function send()
-    {
-    	Mail::send(['text'=>'mail'],['name','Delink'],function($message){
-    		$message->to('kamaunewton78@gmail.com', 'To Kamau')->subject('Test Results');
-    		$message->from('schoolregistrar@gmail.com', 'School');
-    	});
-    }
+  /**
+  * function to send emails
+  */
+  public function send()
+  {
+    Mail::send(['text'=>'mail'],['name','Delink'],function($message){
+      $message->to('kamaunewton78@gmail.com', 'To Kamau')->subject('Test Results');
+      $message->from('schoolregistrar@gmail.com', 'School');
+    });
+  }
 }
