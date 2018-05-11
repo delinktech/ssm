@@ -54,6 +54,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import { getStudents, deleteStudent } from '../../../api/students'
 
   export default {
@@ -63,6 +64,11 @@
         list: null,
         listLoading: true
       }
+    },
+    computed: {
+      ...mapGetters([
+        'school'
+      ])
     },
     filters: {
       statusFilter(status) {
