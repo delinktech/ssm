@@ -61,6 +61,13 @@ class UserController extends Controller
       'updatedBy' => JWTAuth::parseToken()->toUser()->username
     ]);
     
+    // TODO: check if a user is a teacher | then add to teacher table
+    // if ($request->input('hasTeacherObject')) {
+    //   $teacher = new Teacher([
+    //     // set the fields for teacher
+    //   ]);
+    // }
+
     if ($user->save()) {
 
       // call event to send activation
