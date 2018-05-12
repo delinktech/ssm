@@ -13,8 +13,20 @@ class MailController extends Controller
   public function send()
   {
     Mail::send(['text'=>'mail'],['name','Delink'],function($message){
-      $message->to('kamaunewton78@gmail.com', 'To Kamau')->subject('Test Results');
-      $message->from('schoolregistrar@gmail.com', 'School');
+      $message
+        ->to('delinkdesigns@gmail.com', 'To Kamau')
+        ->subject('Test Results');
+        ->from('schoolregistrar@gmail.com', 'School');
     });
   }
+
+  // public function sendMail($value='')
+  // {
+  //   Mail::send('emails.test', [], function ($message) {
+  //     $message
+  //       ->from('delinkdesigns@gmail.com', 'Delink')
+  //       ->to('ngimwan@gmail..com', 'Ngich')
+  //       ->subject('From SparkPost with ❤');
+  //   });
+  // }
 }
