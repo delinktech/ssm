@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Results;
+use App\Models\Parents;
+use App\Models\Students;
 use Mail;
 
 class MailController extends Controller
@@ -12,7 +15,7 @@ class MailController extends Controller
   */
   public function send()
   {
-    Mail::send(['text'=>'mail'],['name','Delink'],function($message){
+    Mail::send('emails.send-results',['name','Delink'],function($message){
       $message
         ->to('delinkdesigns@gmail.com', 'To Kamau')
         ->subject('Test Results');
@@ -22,7 +25,7 @@ class MailController extends Controller
 
   // public function sendMail($value='')
   // {
-  //   Mail::send('emails.test', [], function ($message) {
+  //   Mail::send('emails.send-results', [], function ($message) {
   //     $message
   //       ->from('delinkdesigns@gmail.com', 'Delink')
   //       ->to('ngimwan@gmail..com', 'Ngich')
