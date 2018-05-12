@@ -25,23 +25,7 @@ class ResultsController extends Controller
   */
   public function create()
   {
-    $this->validate($request, [
-      'student_id' => 'required',
-      'grade' => 'required',
-      'marks' => 'required'
-    ]);
-
-    $school = School::create([
-      'student_id' => $request->student_id,
-      'grade' => $request->grade,
-      'marks' => $request->marks
-    ]);
-
-    return response()->json([
-      'success' => true,
-      'id' => $results->id
-    ], 200);
-
+    // code 
   }
 
     /**
