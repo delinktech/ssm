@@ -32,7 +32,6 @@ Route::put('student', ['uses' => 'StudentController@store', 'middleware' => 'aut
 Route::delete('student/{id}', ['uses' => 'StudentController@destroy', 'middleware' => 'auth.jwt']);	// delete a single student
 
 /* Teachers routes */
-
 Route::get('teachers', ['uses' => 'TeacherController@index', 'middleware' => 'auth.jwt']); // get all teachers
 Route::get('teacher/{id}', ['uses' => 'TeacherController@show', 'middleware' => 'auth.jwt']); // get a single teacher
 Route::post('teacher', ['uses' => 'TeacherController@store', 'middleware' => 'auth.jwt']); // add a teacher
@@ -61,14 +60,12 @@ Route::put('school', ['uses' => 'SchoolController@store', 'middleware' => 'auth.
 Route::delete('school/{id}', ['uses' => 'SchoolController@destroy', 'middleware' => 'auth.jwt']);	// delete school
 
 /* Classes routes */
-// CRUD
- 
 Route::get('classes', ['uses' => 'ClassController@index', 'middleware' => 'auth.jwt']);	// get all the schools
 Route::get('class/{id}', ['uses' => 'ClassController@show', 'middleware' => 'auth.jwt']);	// get a single school
 Route::post('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// add a single school
 Route::put('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// update a single school
 Route::delete('class/{id}', ['uses' => 'ClassController@destroy', 'middleware' => 'auth.jwt']);	// delete school
 
-// email
-
-Route::get('send','MailController@send');
+/* Send emails route */
+Route::get('send','MailController@send'); // send mail
+// Route::get('sparkpost','MailController@sendMail'); // send mail
