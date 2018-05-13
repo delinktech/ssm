@@ -40,7 +40,7 @@
       </el-table-column>
       <el-table-column label="Age" align="center">
         <template slot-scope="scope">
-          {{scope.row.student_dob}}
+          {{scope.row.student_dob | age}}
         </template>
       </el-table-column>
       <el-table-column label="Operations">
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import { mapGetters } from 'vuex'
   import { getStudents, deleteStudent } from '../../../api/students'
 
@@ -78,6 +79,10 @@
           deleted: 'danger'
         }
         return statusMap[status]
+      age(value) {
+        const age = moment().diff(value, 'years')
+        return age
+      },
       }
     },
     created() {
