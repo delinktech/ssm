@@ -84,6 +84,7 @@ export const constantRouterMap = [
         meta: { title: 'Students Add' }
       },
       {
+        hidden: true,
         path: 'records',
         name: 'StudentRecord',
         component: view('students/list/StudentDetailComponent'),
