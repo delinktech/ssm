@@ -17,8 +17,12 @@ import store from './store'
 import './icons' // icon
 import './permission' // permission control
 
+// custom filters
+// import age from './filters'
+
 Vue.use(ElementUI, { locale })
 Vue.use(VueMaterial)
+// Vue.use(age)
 
 Vue.config.productionTip = false
 
