@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Parent extends Resource
+class ParentRes extends Resource
 {
     /**
      * Transform the resource into an array.

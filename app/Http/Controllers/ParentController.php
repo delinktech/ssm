@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ParentModel;
 
-use App\Http\Resources\Parent as ParentResource;
+use App\Http\Resources\ParentRes as ParentResource;
 
 class ParentController extends Controller
 {
