@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
+use App\Models\School;
 
 class Teacher extends Model
 {
@@ -19,10 +21,10 @@ class Teacher extends Model
 
   // database relationship 
   public function studentTeacher(){
-    return $this->hasMany('App\Student');
+    return $this->hasMany(Student::class);
   } 
 
   public function schoolTeacher(){
-    return $this->belongsTo('App\School');
+    return $this->belongsTo(School::class);
   }
 }
