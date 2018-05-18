@@ -62,6 +62,7 @@
       ])
     },
     created() {
+      // TODO: find out if fetching again or using the saved copy on login
       this.fetchData()
     },
     methods: {
