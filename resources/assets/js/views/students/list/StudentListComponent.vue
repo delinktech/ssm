@@ -87,9 +87,9 @@
           type: 'success'
         });
       },
-      errorMessage() {
+      errorMessage(oppr) {
         this.$message({
-          message: 'Error, deleting student try again later',
+          message: `Error, ${oppr} try again later`,
           type: 'error'
         });
       },
@@ -97,12 +97,14 @@
         this.listLoading = true
         getStudents()
           .then(response => {
-            this.list = response.data.data
+            // console.log('students', response)
+            this.list = response.data.students
             this.listLoading = false
           })
           .catch(err => {
-            // TODO: add a snackbar
             console.log(err)
+            this.listLoading = false
+            this.errorMessage('fetching Students!')
           })
       },
       confirmDeleteStudent(id) {
@@ -129,7 +131,7 @@
           })
           .catch(err => {
             // display error message to the user
-            this.errorMessage()
+            this.errorMessage('deleting Student!')
             console.log('error =>', err)
           })
       },
