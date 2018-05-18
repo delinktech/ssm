@@ -22,6 +22,11 @@ import Layout from '../views/layout/Layout'
   }
 **/
 
+/**
+/**
+ * function return the view to display by pasing the name of the file
+ * @param {'name'} name
+ */
 function view(name) {
   return function(resolve) {
     require(['../views/' + name], resolve)
