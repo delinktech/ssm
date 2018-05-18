@@ -26,16 +26,35 @@
       this.fetchUsers()
     },
     methods: {
+      successMesssage() {
+        this.$message({
+          message: 'User deleted successfuly',
+          type: 'success'
+        });
+      },
+      openError(err) {
+        this.$message({
+          message: `Oops! Something went wrong! ${err}`,
+          type: 'error'
+        })
+      },
       fetchUsers() {
         this.loadingUsers = true
-        getUsers().then(res => {
-          // all good with users fetch
-          this.users = res.data.data
+        getUsers()
+          .then(res => {
+            // all good with users fetch
+            this.users = res.data.users
 
-          this.loadingUsers = false
-        })
+            // stop the loader
+            this.loadingUsers = false
+          })
           .catch(err => {
-            console.log('ERROR:', err)
+            // catch the error here
+            console.log('error::', err)
+            this.openError('fetching users')
+
+            // stop the loader
+            this.loadingUsers = false
           })
       }
     }
