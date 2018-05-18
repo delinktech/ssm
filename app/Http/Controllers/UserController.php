@@ -72,7 +72,7 @@ class UserController extends Controller
       'creatdBy' => JWTAuth::parseToken()->toUser()->username,
       'updatedBy' => JWTAuth::parseToken()->toUser()->username
     ]);
-    
+
     // TODO: check if a user is a teacher | then add to teacher table
     // if ($request->input('hasTeacherObject')) {
     //   $teacher = new Teacher([
@@ -94,7 +94,7 @@ class UserController extends Controller
 
   /*
     function to sigin users to the app
-  */ 
+  */
   public function signin(Request $request) {
     // validating the forms data
     $this->validate($request, [
@@ -119,7 +119,7 @@ class UserController extends Controller
     // succss creating token return the token
     return response()->json([
       'token' => $token
-      ], 201); 
+      ], 201);
   }
 
   /*
