@@ -12,6 +12,6 @@ class ClassModel extends Model
 
   public function student()
   {
-  	return $this hasMany(Student::class);
+  	return $this->hasMany(Student::class);
   }
 }
