@@ -2,24 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Teacher;
 use App\Models\ClassModel;
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use App\Events\UserRegistered;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Http\Resources\User as UserResource;
 
 class UserController extends Controller
 {
-
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
   public function index() {
-    $users = User::Paginate(15);
+    // get logged in user school id
+    $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    return UserResource::collection($users);
+    // get students of this school
+    $users = User::where('school', $user_school)->get();
+
+    // return a collection of users in a json format
+    return response()->json([
+      'success' => true,
+      'users' => $users
+    ], 200);
   }
 
   /*
