@@ -75,7 +75,6 @@
       age(value) {
         const age = moment().diff(value, 'years')
         return age
-      },
       }
     },
     created() {
@@ -111,7 +110,7 @@
           .then(_ => {
             // call function to delete the student
             this.deleteStudent(id)
-            
+
             done();
           })
           .catch(_ => {
@@ -142,5 +141,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>
