@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use JWTAuth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Student;
@@ -24,11 +24,17 @@ class StudentController extends Controller
      */
     public function index()
     {
-      // TODO: only get students by school of logedin user
-      $students = Student::Paginate(30);
+      // get logged in user school id
+      $user_school = JWTAuth::parseToken()->toUser()->school;
 
-      // return a collection of students
-      return StudentResource::collection($students);
+      // get students of this school
+      $students = Student::where('student_school', $user_school)->get();
+
+      // return a collection of students in a json format
+      return response()->json([
+        'success' => true,
+        'students' => $students
+      ], 200);
     }
 
     /**
@@ -38,7 +44,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-      // 
+      //
     }
 
     /**
@@ -66,7 +72,7 @@ class StudentController extends Controller
       $student = $request->isMethod('put') ? Student::findOrFail($request->student_id) : new Student;
 
       $student->id = $request->input('student_id');
-      
+
       $student->student_reg = $request->input('student_reg');
       $student->class_id = $request->input('class');
       $student->student_first_name = $request->input('firstName');
@@ -102,7 +108,7 @@ class StudentController extends Controller
       // get student results
 
       // get student parent
-      
+
       // return a json response
       return response()->json(['student' => $studentdetails], 200);
     }
@@ -127,7 +133,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-      // 
+      //
     }
     public function getStudentProfile($id)
   {
