@@ -33,12 +33,11 @@
           <el-input v-model="userForm.phone" size="medium"></el-input>
         </el-form-item>
       </el-col>
-      
+
       <el-col :span="7">
         <el-form-item label="School" prop="school">
           <el-select v-model="userForm.school" placeholder="Please select school" size="medium">
-            <el-option label="School one" value="1"></el-option>
-            <el-option label="School two" value="2"></el-option>
+            <el-option :label="school.school_name" :value="school.id"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -93,6 +92,7 @@
 
 <script>
   import { saveUser } from '../../../api/users'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'UsersAddComponent',
@@ -164,6 +164,10 @@
       };
     },
     computed: {
+      ...mapGetters([
+        'school'
+      ]),
+
       // TODO: check form validation at this point
       isValid () { return false}
     },
