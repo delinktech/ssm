@@ -52,22 +52,24 @@ export default {
       this.tableHeader = data.header
     },
     getData(dataResults) {
-      // post results to the api
-      saveUpload(dataResults)
-        .then(res => {
-          // uloaded successuly
-          this.openSucess()
+      dataResults.forEach(row => {
+        // post results to the api
+        saveUpload(row)
+          .then(res => {
+            // uloaded successuly
+            this.openSucess()
 
-          // TODO: navigate to list of reults
+            // TODO: navigate to list of reults
 
-          // empty the table
-          this.tableData = []
-          this.tableHeader = []
-        })
-        .catch(err => {
-          // error while uloading
-          this.openError('results')
-        })
+            // empty the table
+            this.tableData = []
+            this.tableHeader = []
+          })
+          .catch(err => {
+            // error while uloading
+            this.openError('results')
+          })
+      })
     }
   }
 }
