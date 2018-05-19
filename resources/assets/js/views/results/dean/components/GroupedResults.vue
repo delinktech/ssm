@@ -39,7 +39,129 @@
     data() {
       return {
         offset: 1,
-        currentDate: moment(new Date()).format('dddd MMM DD-YYYY')
+        currentDate: moment(new Date()).format('dddd MMM DD-YYYY'),
+        classes: [
+          {
+            name: 'Class 4 West',
+            code: '4 W',
+            teacher: 'Dancun Mwangi',
+            results: [
+              {
+                date: '2016-05-02',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-04',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-01',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-03',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }
+            ]
+          },
+          {
+            name: 'Class 8 North',
+            code: '8 N',
+            teacher: 'Dancun Mwangi',
+            results: [
+              {
+                date: '2016-05-02',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-04',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-01',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-03',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }
+            ]
+          },
+          {
+            name: 'Class 2 South',
+            code: '2 S',
+            teacher: 'Dancun Mwangi',
+            results: [
+              {
+                date: '2016-05-02',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-04',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-01',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-03',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }
+            ]
+          },
+          {
+            name: 'Class 4 East',
+            code: '4 E',
+            teacher: 'Dancun Mwangi',
+            results: [
+              {
+                date: '2016-05-02',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-04',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-01',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-03',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }
+            ]
+          },
+          {
+            name: 'Class 3 North',
+            code: '3 N',
+            teacher: 'Dancun Mwangi',
+            results: [
+              {
+                date: '2016-05-02',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-04',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-01',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }, {
+                date: '2016-05-03',
+                name: 'John Smith',
+                address: 'No.1518,  Jinshajiang Road, Putuo District'
+              }
+            ]
+          },
+        ]
       };
     }
   }
