@@ -3,19 +3,23 @@
     <el-col :span="7" v-for="o in 40" :key="o" :offset="offset" class="my-card">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span style="line-height: 36px;">Card name</span>
+          <span style="line-height: 24px;">Class 5 West</span>
         </div>
+
         <div>
-        <p>Form 1 Boys room 1</p>
+          <p>Form 1 Boys room 1</p>
         </div>
 
         <div>
           <span>Send Notifictions</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
-            <el-button type="text" class="button">Send</el-button>
+            <el-tooltip content="Notify Parents" placement="bottom">
+             <md-icon style="float: right;">send</md-icon>
+            </el-tooltip>
           </div>
         </div>
+
       </el-card>
     </el-col>
   </div>
