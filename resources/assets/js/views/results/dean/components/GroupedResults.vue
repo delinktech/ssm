@@ -3,15 +3,14 @@
     <el-col :span="7" v-for="o in 40" :key="o" :offset="offset" class="my-card">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span style="line-height: 24px;">Class 5 West</span>
+          <span style="line-height: 21px;">Class 5 West</span>
         </div>
 
         <div>
-          <p>Form 1 Boys room 1</p>
+          <p>5 W</p>
         </div>
 
         <div>
-          <span>Send Notifictions</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
 
@@ -56,16 +55,12 @@
     margin-top: 13px;
     line-height: 12px;
   }
-  .button {
-    padding: 0;
-    float: right;
-  }
   .clearfix:before,
   .clearfix:after {
-      display: table;
-      content: "";
+    display: table;
+    content: "";
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
 </style>
