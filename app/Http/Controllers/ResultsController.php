@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use App\Http\Resources\Result as ResultResource;
 
 class ResultsController extends Controller
 {
@@ -25,7 +29,7 @@ class ResultsController extends Controller
   */
   public function create()
   {
-    // code 
+    // code
   }
 
     /**
@@ -40,8 +44,11 @@ class ResultsController extends Controller
        $result = $request->isMethod('put') ? Result::findOrFail($request->result_id) : new Result;
        $result->id = $request->input('result_id');
 
-       $result->student_id = $request->input('student_id');
-       $result->grade = $request->input('grade');
+       $result->reg = $request->input('regnumber');
+       $result->student = 1;
+       $result->class = $request->input('class');
+       $result->teacher = $request->input('teacher');
+       $result->subject = $request->input('subjects');
        $result->marks = $request->input('marks');
 
        if ($result->save()) {
@@ -57,7 +64,7 @@ class ResultsController extends Controller
      */
     public function show($id)
     {
-        
+
        $data = [];
        $data["result"] = Scchool::find($id);
        if ($id != -1) {
@@ -97,7 +104,7 @@ class ResultsController extends Controller
      */
     public function destroy($id)
     {
-    
+
     }
-   
+
 }
