@@ -1,25 +1,23 @@
 <template>
   <div>
-    <el-col :span="7" v-for="o in 40" :key="o" :offset="offset" class="my-card">
+    <el-col :span="7" v-for="cls in classes" :key="cls.code" :offset="offset" class="my-card">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span style="line-height: 21px;">Class 5 West</span>
+          <span style="line-height: 21px;">{{cls.name}}</span>
         </div>
 
         <div>
-          <p>5 W</p>
+          <p>{{cls.code}}</p>
+          Last Edit: <time class="time">{{ currentDate }}</time>
         </div>
 
-        <div>
-          <div class="bottom clearfix">
-            <time class="time">{{ currentDate }}</time>
+        <div class="bottom clearfix">
           <!-- call component to display results modal -->
           <results-modal :cls="cls" class="footer-icons"></results-modal>
 
-            <!-- call component to show popover -->
-            <notify-popover></notify-popover>
+          <!-- call component to show popover -->
+          <notify-popover :cls="cls" class="footer-icons"></notify-popover>
 
-          </div>
         </div>
 
       </el-card>
@@ -66,5 +64,8 @@
   }
   .clearfix:after {
     clear: both
+  }
+  .footer-icons {
+    display: inline-block;
   }
 </style>
