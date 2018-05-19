@@ -23,6 +23,14 @@ import Layout from '../views/layout/Layout'
 **/
 
 /**
+ * list of users available
+ * @param Admin | @param HeadMaster | @param Dean | @param Teacher
+ * -> admin show all the routes                       [have all the power add{ schools, users}]
+ * -> hedmaster show all school info disable edits    [can view all reports and every record of school cant make edits]
+ * -> Dean show all school routes enable edits        [can add {teachers, students, classes}, edit of the same, approve results & send notifications]
+ * -> teacher disable some edits                      [can add students, upload results, view list users and teachers disable{adding teachers, users, deleting}]
+ */
+
 /**
  * function return the view to display by pasing the name of the file
  * @param {'name'} name
