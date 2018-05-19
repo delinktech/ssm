@@ -137,13 +137,13 @@ export const constantRouterMap = [
         path: 'upload',
         name: 'upload',
         component: view('results/upload/ResultsUploadComponent'),
-        meta: { title: 'Results', icon: 'cloud_upload' }
+        meta: { title: 'Upload' }
       },
       {
         path: 'approve',
         name: 'approve',
         component: view('results/dean/AllResutsComponent'),
-        meta: { title: 'Approve', icon: 'cloud_upload' }
+        meta: { title: 'Approve' }
       }
     ]
   },
