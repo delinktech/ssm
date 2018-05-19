@@ -14,6 +14,6 @@ class Result extends Model
 
   public function studentResults()
   {
-    return $this->belongsTo(Student::class, 'id', 'student_id' 'forign-key');
+    return $this->belongsTo(Student::class);
   }
 }
