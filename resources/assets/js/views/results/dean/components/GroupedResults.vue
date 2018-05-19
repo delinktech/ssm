@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <el-col :span="7" v-for="cls in classes" :key="cls.code" :offset="offset" class="my-card">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
@@ -142,23 +143,7 @@
             code: '3 N',
             teacher: 'Dancun Mwangi',
             results: [
-              {
-                date: '2016-05-02',
-                name: 'John Smith',
-                address: 'No.1518,  Jinshajiang Road, Putuo District'
-              }, {
-                date: '2016-05-04',
-                name: 'John Smith',
-                address: 'No.1518,  Jinshajiang Road, Putuo District'
-              }, {
-                date: '2016-05-01',
-                name: 'John Smith',
-                address: 'No.1518,  Jinshajiang Road, Putuo District'
-              }, {
-                date: '2016-05-03',
-                name: 'John Smith',
-                address: 'No.1518,  Jinshajiang Road, Putuo District'
-              }
+
             ]
           },
         ]
