@@ -8,8 +8,9 @@
       </div>
     </el-popover>
 
+    <!-- display button to send emails -->
     <el-tooltip content="Notify Parents" placement="bottom">
-      <md-icon v-popover:popover style="float: right;">send</md-icon>
+      <el-button  v-popover:popover type="text" size="small"><md-icon>send</md-icon></el-button>
     </el-tooltip>
   </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
   export default {
     name: 'NotifyPopover',
+    props: ['cls'],
     data() {
       return {
         visible: false,
@@ -25,9 +27,7 @@
     methods: {
       sendMails() {
         this.visible = false
-        alert('sending emails.....')
       }
     }
   }
 </script>
-
