@@ -52,18 +52,27 @@ export default {
       this.tableHeader = data.header
     },
     getData(dataResults) {
+      // count to track when finished
+      let count = 0
+
+      // loop the excel data
       dataResults.forEach(row => {
         // post results to the api
         saveUpload(row)
           .then(res => {
-            // uloaded successuly
-            this.openSucess()
+            count++ // increment by one on every loop
 
-            // TODO: navigate to list of reults
+            // check if upload is finished
+            if(count === dataResults.length){
+              // uloaded successuly
+              this.openSucess()
 
-            // empty the table
-            this.tableData = []
-            this.tableHeader = []
+              // empty the table
+              this.tableData = []
+              this.tableHeader = []
+
+              // TODO: navigate to list of reults
+            }
           })
           .catch(err => {
             // error while uloading
