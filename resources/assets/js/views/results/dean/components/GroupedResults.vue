@@ -14,9 +14,10 @@
           <span>Send Notifictions</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
-            <el-tooltip content="Notify Parents" placement="bottom">
-             <md-icon style="float: right;">send</md-icon>
-            </el-tooltip>
+
+            <!-- call component to show popover -->
+            <notify-popover></notify-popover>
+
           </div>
         </div>
 
@@ -27,9 +28,13 @@
 
 <script>
   import moment from 'moment'
+  import NotifyPopover from './NotifyPopover'
 
   export default {
     name: 'GroupedResults',
+    components: {
+      NotifyPopover
+    },
     data() {
       return {
         offset: 1,
