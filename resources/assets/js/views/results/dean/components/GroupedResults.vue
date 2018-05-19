@@ -13,6 +13,8 @@
         <div>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
+          <!-- call component to display results modal -->
+          <results-modal :cls="cls" class="footer-icons"></results-modal>
 
             <!-- call component to show popover -->
             <notify-popover></notify-popover>
@@ -27,12 +29,14 @@
 
 <script>
   import moment from 'moment'
+  import ResultsModal from './ResultsModal'
   import NotifyPopover from './NotifyPopover'
 
   export default {
     name: 'GroupedResults',
     components: {
-      NotifyPopover
+      NotifyPopover,
+      ResultsModal
     },
     data() {
       return {
