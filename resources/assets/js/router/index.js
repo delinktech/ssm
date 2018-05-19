@@ -65,13 +65,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'StudentsList',
+        name: 'list_class',
         component: view('classes/list/ClassListComponent'),
         meta: { title: 'Class List' }
       },
       {
         path: 'add',
-        name: 'StudentAdd',
+        name: 'add_class',
         component: view('classes/add/ClassAddComponent'),
         meta: { title: 'Class Add' }
       }
@@ -86,13 +86,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'StudentsList',
+        name: 'list_student',
         component: view('students/list/StudentListComponent'),
         meta: { title: 'Students List' }
       },
       {
         path: 'add',
-        name: 'StudentAdd',
+        name: 'add_student',
         component: view('students/add/StudentAddComponent'),
         meta: { title: 'Students Add' }
       },
@@ -114,13 +114,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'TeachersList',
+        name: 'list_teacher',
         component: view('teachers/list/TeacherListComponent'),
         meta: { title: 'Teachers List' }
       },
       {
         path: 'add',
-        name: 'TeachersAdd',
+        name: 'add_teacher',
         component: view('users/add/UsersAddComponent'),
         meta: { title: 'Teachers Add' }
       }
@@ -156,13 +156,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'list',
+        name: 'list_school',
         component: view('schools/list/SchoolsListComponent'),
         meta: { title: 'All Schools' }
       },
       {
         path: 'add',
-        name: 'add',
+        name: 'add_school',
         component: view('schools/add/SchoolAddComponent'),
         meta: { title: 'Add School' }
       }
@@ -177,13 +177,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'list',
+        name: 'list_users',
         component: view('users/list/UsersListComponent'),
         meta: { title: 'Users List' }
       },
       {
         path: 'add',
-        name: 'add',
+        name: 'add_users',
         component: view('users/add/UsersAddComponent'),
         meta: { title: 'Add Users' }
       }
