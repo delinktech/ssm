@@ -121,14 +121,23 @@ export const constantRouterMap = [
   {
     path: '/results',
     component: Layout,
-    redirect: 'upload',
+    redirect: '/results/upload',
     name: 'results',
-    children: [{
-      path: 'upload',
-      name: 'upload',
-      component: view('results/upload/ResultsUploadComponent'),
-      meta: { title: 'Results', icon: 'cloud_upload' }
-    }]
+    meta: { title: 'Results', icon: 'cloud_upload' },
+    children: [
+      {
+        path: 'upload',
+        name: 'upload',
+        component: view('results/upload/ResultsUploadComponent'),
+        meta: { title: 'Results', icon: 'cloud_upload' }
+      },
+      {
+        path: 'approve',
+        name: 'approve',
+        component: view('results/dean/AllResutsComponent'),
+        meta: { title: 'Approve', icon: 'cloud_upload' }
+      }
+    ]
   },
   {
     path: '/schools',
