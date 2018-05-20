@@ -60,6 +60,33 @@
         </el-form-item>
       </el-col>
 
+      <!-- show this if user is a teacher -->
+      <div v-if="userForm.hasTeacherObject" id="teacher-div">
+        <el-col :span="11">
+          <el-form-item label="TSC Number"  prop="tscNum">
+            <el-input size="medium" placeholder="TSC Number"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="2">&nbsp;</el-col>
+        <!-- <el-col :span="11">
+          <el-form-item label="Last Name" prop="lastname">
+            <el-input v-model="userForm.lastname" size="medium" placeholder="Last Name"></el-input>
+          </el-form-item>
+        </el-col> -->
+
+        <el-col :span="24">
+          <el-form-item label="Subjects">
+            <el-checkbox-group>
+              <el-checkbox label="Mathematics" name="type"></el-checkbox>
+              <el-checkbox label="English" name="type"></el-checkbox>
+              <el-checkbox label="Kishwahili" name="type"></el-checkbox>
+              <el-checkbox label="Science" name="type"></el-checkbox>
+              <el-checkbox label="Social Studies" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-col>
+      </div>
+
       <el-col :span="24">
         <el-form-item label="User Role" prop="role">
           <el-radio-group v-model="userForm.role">
@@ -221,5 +248,11 @@
 <style scoped>
   .content-container {
     margin: 20px;
+  }
+  #teacher-div {
+    clear: both;
+    padding: 10px;
+    display: table;
+    border: 1px solid #304156;
   }
 </style>
