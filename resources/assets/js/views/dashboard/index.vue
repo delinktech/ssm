@@ -1,14 +1,20 @@
 <template>
   <div class="dashboard-container">
-    <school-info></school-info>
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+    <div class='my-card-panel clearfix'>
+      <div class="my-card-panel-desc">
+        <div class="my-card-panel-sch">{{school.school_name}}</div>
+        <div class="my-card-panel-user">Username: {{name}} as: {{roles}}</div>
+      </div>
+    </div>
+
+    <!-- call component to dislay school info -->
+    <school-info :school="school" :teachers="teachers" :classes="classes" :students="students" :users="users"></school-info>
+
+    <!-- <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData"></line-chart>
-    </el-row>
+    </el-row> -->
 
-    <div class="dashboard-text">name: {{name}}</div>
-    <div class="dashboard-text">roles: {{roles}}</div>
-    <div class="dashboard-text">school: {{school.school_name}}</div>
   </div>
 </template>
 
@@ -51,7 +57,11 @@ export default {
     ...mapGetters([
       'name',
       'roles',
-      'school'
+      'school',
+      'teachers',
+      'classes',
+      'students',
+      'users'
     ])
   },
   methods: {
@@ -70,6 +80,39 @@ export default {
   &-text {
     font-size: 30px;
     line-height: 46px;
+  }
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+.my-card-panel {
+  height: 108px;
+  font-size: 12px;
+  overflow: hidden;
+  color: #666;
+  background: #fff;
+  box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
+  border-color: rgba(0, 0, 0, .05);
+}
+.my-card-panel-desc {
+  font-weight: bold;
+  margin: 26px;
+  margin-left: 0px;
+  text-align: center;
+  .my-card-panel-user {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 12px;
+    color: rgba(0, 0, 0, 0.45);
+  }
+  .my-card-panel-sch {
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 }
 </style>
