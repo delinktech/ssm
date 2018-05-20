@@ -59,13 +59,13 @@
       </el-col>
 
       <el-col :span="24">
-        <el-form-item label="User Roles" prop="roles">
-          <el-checkbox-group v-model="userForm.roles">
-            <el-checkbox label="Admin" name="type"></el-checkbox>
-            <el-checkbox label="Head Master" name="type"></el-checkbox>
-            <el-checkbox label="Dean" name="type"></el-checkbox>
-            <el-checkbox label="Teacher" name="type"></el-checkbox>
-          </el-checkbox-group>
+        <el-form-item label="User Role" prop="role">
+          <el-radio-group v-model="userForm.role">
+            <el-radio label="Admin"></el-radio>
+            <el-radio label="Head Master"></el-radio>
+            <el-radio label="Dean"></el-radio>
+            <el-radio label="Teacher"></el-radio>
+            <el-radio label="Secretary"></el-radio>
         </el-form-item>
       </el-col>
 
