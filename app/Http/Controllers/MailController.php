@@ -18,7 +18,7 @@ class MailController extends Controller
     Mail::send('emails.send-results',['name','Delink'],function($message){
       $message
         ->to('delinkdesigns@gmail.com', 'To Kamau')
-        ->subject('Test Results');
+        ->subject('Test Results')
         ->from('schoolregistrar@gmail.com', 'School');
     });
   }

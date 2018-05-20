@@ -22,6 +22,19 @@ import Layout from '../views/layout/Layout'
   }
 **/
 
+/**
+ * list of users available
+ * @param Admin | @param HeadMaster | @param Dean | @param Teacher
+ * -> admin show all the routes                       [have all the power add{ schools, users}]
+ * -> hedmaster show all school info disable edits    [can view all reports and every record of school cant make edits]
+ * -> Dean show all school routes enable edits        [can add {teachers, students, classes}, edit of the same, approve results & send notifications]
+ * -> teacher disable some edits                      [can add students, upload results, view list users and teachers disable{adding teachers, users, deleting}]
+ */
+
+/**
+ * function return the view to display by pasing the name of the file
+ * @param {'name'} name
+ */
 function view(name) {
   return function(resolve) {
     require(['../views/' + name], resolve)
@@ -52,13 +65,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'StudentsList',
+        name: 'list_class',
         component: view('classes/list/ClassListComponent'),
         meta: { title: 'Class List' }
       },
       {
         path: 'add',
-        name: 'StudentAdd',
+        name: 'add_class',
         component: view('classes/add/ClassAddComponent'),
         meta: { title: 'Class Add' }
       }
@@ -73,13 +86,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'StudentsList',
+        name: 'list_student',
         component: view('students/list/StudentListComponent'),
         meta: { title: 'Students List' }
       },
       {
         path: 'add',
-        name: 'StudentAdd',
+        name: 'add_student',
         component: view('students/add/StudentAddComponent'),
         meta: { title: 'Students Add' }
       },
@@ -101,13 +114,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'TeachersList',
+        name: 'list_teacher',
         component: view('teachers/list/TeacherListComponent'),
         meta: { title: 'Teachers List' }
       },
       {
         path: 'add',
-        name: 'TeachersAdd',
+        name: 'add_teacher',
         component: view('users/add/UsersAddComponent'),
         meta: { title: 'Teachers Add' }
       }
@@ -116,14 +129,23 @@ export const constantRouterMap = [
   {
     path: '/results',
     component: Layout,
-    redirect: 'upload',
+    redirect: '/results/upload',
     name: 'results',
-    children: [{
-      path: 'upload',
-      name: 'upload',
-      component: view('results/upload/ResultsUploadComponent'),
-      meta: { title: 'Results', icon: 'cloud_upload' }
-    }]
+    meta: { title: 'Results', icon: 'cloud_upload' },
+    children: [
+      {
+        path: 'upload',
+        name: 'upload',
+        component: view('results/upload/ResultsUploadComponent'),
+        meta: { title: 'Upload' }
+      },
+      {
+        path: 'approve',
+        name: 'approve',
+        component: view('results/dean/AllResutsComponent'),
+        meta: { title: 'Approve' }
+      }
+    ]
   },
   {
     path: '/schools',
@@ -134,13 +156,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'list',
+        name: 'list_school',
         component: view('schools/list/SchoolsListComponent'),
         meta: { title: 'All Schools' }
       },
       {
         path: 'add',
-        name: 'add',
+        name: 'add_school',
         component: view('schools/add/SchoolAddComponent'),
         meta: { title: 'Add School' }
       }
@@ -155,13 +177,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'list',
-        name: 'list',
+        name: 'list_users',
         component: view('users/list/UsersListComponent'),
         meta: { title: 'Users List' }
       },
       {
         path: 'add',
-        name: 'add',
+        name: 'add_users',
         component: view('users/add/UsersAddComponent'),
         meta: { title: 'Add Users' }
       }

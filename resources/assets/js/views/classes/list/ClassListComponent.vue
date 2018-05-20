@@ -72,7 +72,7 @@
         // get classes
         getClasses()
           .then(response => {
-            this.list = response.data.data
+            this.list = response.data.classes
 
             this.listLoading = false
           })
@@ -90,7 +90,7 @@
           .then(_ => {
             // call function to delete the student
             this.deleteClass(_id)
-            
+
             done();
           })
           .catch(_ => {
@@ -117,5 +117,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>

@@ -48,7 +48,7 @@ Route::delete('parent/{id}', ['uses' => 'ParentController@destroy', 'middleware'
 /* Result routes */
 Route::get('results', ['uses' => 'ResultsController@index', 'middleware' => 'auth.jwt']);	// get all the results
 Route::get('results/{id}', ['uses' => 'ResultsController@show', 'middleware' => 'auth.jwt']);	// get a single result
-Route::post('result', ['uses' => 'ResultsController@store', 'middleware' => 'auth.jwt']);	// add a single result
+Route::post('results', ['uses' => 'ResultsController@store', 'middleware' => 'auth.jwt']);	// add a single result
 Route::put('result', ['uses' => 'ResultsController@store', 'middleware' => 'auth.jwt']);	// update a single result
 Route::delete('result/{id}', ['uses' => 'ResultsController@destroy', 'middleware' => 'auth.jwt']);	// delete result
 

@@ -2,24 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Teacher;
 use App\Models\ClassModel;
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use App\Events\UserRegistered;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 use App\Http\Resources\User as UserResource;
 
 class UserController extends Controller
 {
-
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
   public function index() {
-    $users = User::Paginate(15);
+    // get logged in user school id
+    $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    return UserResource::collection($users);
+    // get students of this school
+    $users = User::where('school', $user_school)->get();
+
+    // return a collection of users in a json format
+    return response()->json([
+      'success' => true,
+      'users' => $users
+    ], 200);
   }
 
   /*
@@ -60,7 +72,7 @@ class UserController extends Controller
       'creatdBy' => JWTAuth::parseToken()->toUser()->username,
       'updatedBy' => JWTAuth::parseToken()->toUser()->username
     ]);
-    
+
     // TODO: check if a user is a teacher | then add to teacher table
     // if ($request->input('hasTeacherObject')) {
     //   $teacher = new Teacher([
@@ -82,7 +94,7 @@ class UserController extends Controller
 
   /*
     function to sigin users to the app
-  */ 
+  */
   public function signin(Request $request) {
     // validating the forms data
     $this->validate($request, [
@@ -107,7 +119,7 @@ class UserController extends Controller
     // succss creating token return the token
     return response()->json([
       'token' => $token
-      ], 201); 
+      ], 201);
   }
 
   /*

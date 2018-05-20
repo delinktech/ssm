@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use Illuminate\Http\Request;
 use App\Models\ClassModel;
-// use DB;
 
 use App\Http\Resources\Classes as ClassResource;
 
@@ -17,11 +17,17 @@ class ClassController extends Controller
    */
   public function index()
   {
-    // TODO: get only classes for school of the user
-    // DB::select('SELECT * FROM classes WHERE school = user_school')
+    // get logged in user school id
+    $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    $classes = ClassModel::Paginate(30);
-    return ClassResource::collection($classes);
+    // get classes of this school
+    $classes = ClassModel::where('school', $user_school)->get();
+
+    // return a collection of classes in a json format
+    return response()->json([
+      'success' => true,
+      'classes' => $classes
+    ], 200);
   }
 
   /**
@@ -64,7 +70,7 @@ class ClassController extends Controller
       return response()->json([
         'success' => true,
         'class' => $class
-      ], 200); 
+      ], 200);
     }
   }
 
@@ -123,7 +129,7 @@ class ClassController extends Controller
       return response()->json([
         'success' => true,
         'student' => $student
-      ], 200); 
+      ], 200);
     }
   }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -18,12 +19,17 @@ class TeacherController extends Controller
      */
     public function index()
     {
-      // TODO: get only teachers for a secific school
-      // get all teachers
-      $teachers = Teacher::orderBy('created_at', 'desc')->paginate(15);
- 
-      // return a collection of teachers
-      return TeacherResource::collection($teachers);
+      // get logged in user school id
+      $user_school = JWTAuth::parseToken()->toUser()->school;
+
+      // get all teachers of this school
+      $teachers = Teacher::where('teacher_school_id', $user_school)->get();
+
+       // return a collection of teachers in a json format
+       return response()->json([
+        'success' => true,
+        'teachers' => $teachers
+      ], 200);;
     }
 
     /**
@@ -33,7 +39,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-       
+
        $teacher = Teacher::create([
             'first_name' => $request->first_name,
             'sur_name' => $request->sur_name,
@@ -71,7 +77,7 @@ class TeacherController extends Controller
         'email' => 'required',
         'status' => 'required',
         'school_id' => 'required',
-        'subjects' => 'required' 
+        'subjects' => 'required'
       ]);
 
       // store teacher in the databse check if put else is post
@@ -124,7 +130,7 @@ class TeacherController extends Controller
           'teacher' => $teacherinfo
           ]);
     }
-  
+
 
     /**
      * Show the form for editing the specified resource.

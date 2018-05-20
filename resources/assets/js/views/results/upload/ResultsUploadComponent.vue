@@ -52,22 +52,33 @@ export default {
       this.tableHeader = data.header
     },
     getData(dataResults) {
-      // post results to the api
-      saveUpload(dataResults)
-        .then(res => {
-          // uloaded successuly
-          this.openSucess()
+      // count to track when finished
+      let count = 0
 
-          // TODO: navigate to list of reults
+      // loop the excel data
+      dataResults.forEach(row => {
+        // post results to the api
+        saveUpload(row)
+          .then(res => {
+            count++ // increment by one on every loop
 
-          // empty the table
-          this.tableData = []
-          this.tableHeader = []
-        })
-        .catch(err => {
-          // error while uloading
-          this.openError('results')
-        })
+            // check if upload is finished
+            if(count === dataResults.length){
+              // uloaded successuly
+              this.openSucess()
+
+              // empty the table
+              this.tableData = []
+              this.tableHeader = []
+
+              // TODO: navigate to list of reults
+            }
+          })
+          .catch(err => {
+            // error while uloading
+            this.openError('results')
+          })
+      })
     }
   }
 }

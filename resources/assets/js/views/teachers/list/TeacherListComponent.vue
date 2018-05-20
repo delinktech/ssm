@@ -61,17 +61,8 @@
         'teachers'
       ])
     },
-    filters: {
-      statusFilter(status) {
-        const statusMap = {
-          published: 'success',
-          draft: 'gray',
-          deleted: 'danger'
-        }
-        return statusMap[status]
-      }
-    },
     created() {
+      // TODO: find out if fetching again or using the saved copy on login
       this.fetchData()
     },
     methods: {
@@ -81,16 +72,16 @@
           type: 'success'
         });
       },
-      errorMessage(action) {
+      errorMessage(oppr) {
         this.$message({
-          message: `Oops!, an error occured while ${action}, try again later`,
+          message: `Oops!, an error occured while ${oppr}, try again later`,
           type: 'error'
         });
       },
       fetchData() {
         this.listLoading = true
         getTeachers().then(response => {
-          this.list = response.data.data
+          this.list = response.data.teachers
           this.listLoading = false
         })
           .catch(err => {
@@ -104,7 +95,7 @@
           .then(_ => {
             // call function to delete the teacher
             this.deleteTeacher(id)
-            
+
             done();
           })
           .catch(_ => {
@@ -134,5 +125,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>
