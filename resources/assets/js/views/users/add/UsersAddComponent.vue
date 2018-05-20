@@ -144,7 +144,7 @@
           username: '',
           email: '',
           phone: '',
-          roles: [],
+          roles: '',
           school: '',
           level: '',
           password: '',
@@ -174,8 +174,8 @@
             { required: true, message: 'Please input the username number', trigger: 'change' },
             { min: 10, message: 'Please input the correct phone format', trigger: ['blur', 'change'] }
           ],
-          roles: [
-           { type: 'array', required: true, message: 'Please select at least one role', trigger: 'change' }
+          role: [
+           { required: true, message: 'Please select at least one role', trigger: 'change' }
           ],
           school: [
            { required: true, message: 'Please select the school', trigger: 'change' }
@@ -221,8 +221,6 @@
 
         this.$refs[userForm].validate((valid) => {
           if (valid) {
-            data.roles = this.userForm.roles[0]
-
             // proceed to save to db
             saveUser(data)
               .then(res => {
