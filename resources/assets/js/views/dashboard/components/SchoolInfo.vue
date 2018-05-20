@@ -7,18 +7,18 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Students</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="102400" :duration="2600"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="students" :duration="2600"></count-to>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
-          <md-icon class="my-icon">message</md-icon>
+          <md-icon class="my-icon">supervisor_account</md-icon>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Teachers</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="81212" :duration="3000"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="teachers.length" :duration="3000"></count-to>
         </div>
       </div>
     </el-col>
@@ -29,18 +29,18 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Classes</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="9280" :duration="3200"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="classes.length" :duration="3200"></count-to>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shoppingCard">
-          <svg-icon icon-class="shoppingCard" class-name="card-panel-icon" />
+           <md-icon class="my-icon">account_box</md-icon>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">Shoppings</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="13600" :duration="3600"></count-to>
+          <div class="card-panel-text">Users</div>
+          <count-to class="card-panel-num" :startVal="0" :endVal="users" :duration="3600"></count-to>
         </div>
       </div>
     </el-col>
@@ -51,6 +51,17 @@
 import CountTo from 'vue-count-to'
 
 export default {
+  name: "SchoolInfo",
+  props: [
+    'school',
+    'teachers',
+    'classes',
+    'students',
+    'users'
+  ],
+  data() {
+      return { }
+  },
   components: {
     CountTo
   },
