@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
 
 class Result extends Model
 {
@@ -14,6 +15,6 @@ class Result extends Model
 
   public function studentResults()
   {
-    return $this->belongsTo(Student::class, 'id', 'student_id' 'forign-key');
+    return $this->belongsTo(Student::class);
   }
 }
