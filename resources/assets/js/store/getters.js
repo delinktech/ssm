@@ -6,6 +6,8 @@ const getters = {
   roles: state => state.user.roles,
   school: state => state.user.school,
   classes: state => state.user.classes,
-  teachers: state => state.user.teachers
+  teachers: state => state.user.teachers,
+  students: state => state.user.students,
+  users: state => state.user.users
 }
 export default getters

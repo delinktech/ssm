@@ -30,6 +30,12 @@ const user = {
     },
     SET_TEACHERS: (state, teachers) => {
       state.teachers = teachers
+    },
+    SET_STUDENTS: (state, students) => {
+      state.students = students
+    },
+    SET_USERS: (state, users) => {
+      state.users = users
     }
   },
 
@@ -62,6 +68,9 @@ const user = {
           commit('SET_SCHOOL', data.schInfo.school[0])
           commit('SET_CLASSES', data.schInfo.classes)
           commit('SET_TEACHERS', data.schInfo.teachers)
+          commit('SET_STUDENTS', data.schInfo.students)
+          commit('SET_USERS', data.schInfo.users)
+
           resolve(response)
         }).catch(error => {
           reject(error)
