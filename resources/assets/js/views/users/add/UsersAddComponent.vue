@@ -12,25 +12,25 @@
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Last Name" prop="lastname">
-          <el-input v-model="userForm.lastname" size="medium"></el-input>
+          <el-input v-model="userForm.lastname" size="medium" placeholder="Last Name"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="11">
         <el-form-item label="User Name" prop="username">
-          <el-input v-model="userForm.username" size="medium"></el-input>
+          <el-input v-model="userForm.username" size="medium" placeholder="User Name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="E-mail" prop="email">
-          <el-input v-model="userForm.email" size="medium"></el-input>
+          <el-input v-model="userForm.email" size="medium" placeholder="E-Mail Address"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="24">
         <el-form-item label="Phone Number" prop="phone">
-          <el-input v-model="userForm.phone" size="medium"></el-input>
+          <el-input v-model="userForm.phone" size="medium" placeholder="Phone Number"></el-input>
         </el-form-item>
       </el-col>
 
@@ -45,9 +45,11 @@
       <el-col :span="7">
         <el-form-item label="User Level" prop="level">
           <el-select v-model="userForm.level" placeholder="Please user level" size="medium">
+            <el-option label="Admin" value="admin"></el-option>
             <el-option label="Head Master" value="head"></el-option>
+            <el-option label="School Dean" value="dean"></el-option>
             <el-option label="Teacher" value="teacher"></el-option>
-            <el-option label="Sec" value="sec"></el-option>
+            <el-option label="Secretary" value="sec"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -66,18 +68,19 @@
             <el-radio label="Dean"></el-radio>
             <el-radio label="Teacher"></el-radio>
             <el-radio label="Secretary"></el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-col>
 
       <el-col :span="11">
         <el-form-item label="Password" prop="password">
-          <el-input type="password" v-model="userForm.password" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="userForm.password" size="medium" auto-complete="off" placeholder="Password"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="userForm.checkPass" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="userForm.checkPass" size="medium" auto-complete="off" placeholder="Confirm Password"></el-input>
         </el-form-item>
       </el-col>
 
