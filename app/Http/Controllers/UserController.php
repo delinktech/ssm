@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\School;
 use App\Models\Teacher;
 use App\Models\ClassModel;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Events\UserRegistered;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -140,6 +141,12 @@ class UserController extends Controller
 
     // get classes of school
     $schoolInfo['classes'] = ClassModel::where('school', $schoolId)->get();
+
+    // get students count of school
+    $schoolInfo['students'] = Student::where('student_school', $schoolId)->count();
+
+    // get users count of school
+    $schoolInfo['users'] = User::where('school', $schoolId)->count();
 
     return response()->json([
       'user' => $user,

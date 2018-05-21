@@ -12,25 +12,25 @@
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Last Name" prop="lastname">
-          <el-input v-model="userForm.lastname" size="medium"></el-input>
+          <el-input v-model="userForm.lastname" size="medium" placeholder="Last Name"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="11">
         <el-form-item label="User Name" prop="username">
-          <el-input v-model="userForm.username" size="medium"></el-input>
+          <el-input v-model="userForm.username" size="medium" placeholder="User Name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="E-mail" prop="email">
-          <el-input v-model="userForm.email" size="medium"></el-input>
+          <el-input v-model="userForm.email" size="medium" placeholder="E-Mail Address"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :span="24">
         <el-form-item label="Phone Number" prop="phone">
-          <el-input v-model="userForm.phone" size="medium"></el-input>
+          <el-input v-model="userForm.phone" size="medium" placeholder="Phone Number"></el-input>
         </el-form-item>
       </el-col>
 
@@ -45,9 +45,11 @@
       <el-col :span="7">
         <el-form-item label="User Level" prop="level">
           <el-select v-model="userForm.level" placeholder="Please user level" size="medium">
+            <el-option label="Admin" value="admin"></el-option>
             <el-option label="Head Master" value="head"></el-option>
+            <el-option label="School Dean" value="dean"></el-option>
             <el-option label="Teacher" value="teacher"></el-option>
-            <el-option label="Sec" value="sec"></el-option>
+            <el-option label="Secretary" value="sec"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -58,26 +60,54 @@
         </el-form-item>
       </el-col>
 
+      <!-- show this if user is a teacher -->
+      <div v-if="userForm.hasTeacherObject" id="teacher-div">
+        <el-col :span="11">
+          <el-form-item label="TSC Number"  prop="tscNum">
+            <el-input size="medium" placeholder="TSC Number"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="2">&nbsp;</el-col>
+        <!-- <el-col :span="11">
+          <el-form-item label="Last Name" prop="lastname">
+            <el-input v-model="userForm.lastname" size="medium" placeholder="Last Name"></el-input>
+          </el-form-item>
+        </el-col> -->
+
+        <el-col :span="24">
+          <el-form-item label="Subjects">
+            <el-checkbox-group>
+              <el-checkbox label="Mathematics" name="type"></el-checkbox>
+              <el-checkbox label="English" name="type"></el-checkbox>
+              <el-checkbox label="Kishwahili" name="type"></el-checkbox>
+              <el-checkbox label="Science" name="type"></el-checkbox>
+              <el-checkbox label="Social Studies" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-col>
+      </div>
+
       <el-col :span="24">
-        <el-form-item label="User Roles" prop="roles">
-          <el-checkbox-group v-model="userForm.roles">
-            <el-checkbox label="Admin" name="type"></el-checkbox>
-            <el-checkbox label="Head Master" name="type"></el-checkbox>
-            <el-checkbox label="Dean" name="type"></el-checkbox>
-            <el-checkbox label="Teacher" name="type"></el-checkbox>
-          </el-checkbox-group>
+        <el-form-item label="User Role" prop="role">
+          <el-radio-group v-model="userForm.role">
+            <el-radio label="Admin"></el-radio>
+            <el-radio label="Head Master"></el-radio>
+            <el-radio label="Dean"></el-radio>
+            <el-radio label="Teacher"></el-radio>
+            <el-radio label="Secretary"></el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-col>
 
       <el-col :span="11">
         <el-form-item label="Password" prop="password">
-          <el-input type="password" v-model="userForm.password" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="userForm.password" size="medium" auto-complete="off" placeholder="Password"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="11">
         <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="userForm.checkPass" size="medium" auto-complete="off"></el-input>
+          <el-input type="password" v-model="userForm.checkPass" size="medium" auto-complete="off" placeholder="Confirm Password"></el-input>
         </el-form-item>
       </el-col>
 
@@ -114,7 +144,7 @@
           username: '',
           email: '',
           phone: '',
-          roles: [],
+          roles: '',
           school: '',
           level: '',
           password: '',
@@ -144,8 +174,8 @@
             { required: true, message: 'Please input the username number', trigger: 'change' },
             { min: 10, message: 'Please input the correct phone format', trigger: ['blur', 'change'] }
           ],
-          roles: [
-           { type: 'array', required: true, message: 'Please select at least one role', trigger: 'change' }
+          role: [
+           { required: true, message: 'Please select at least one role', trigger: 'change' }
           ],
           school: [
            { required: true, message: 'Please select the school', trigger: 'change' }
@@ -191,8 +221,6 @@
 
         this.$refs[userForm].validate((valid) => {
           if (valid) {
-            data.roles = this.userForm.roles[0]
-
             // proceed to save to db
             saveUser(data)
               .then(res => {
@@ -218,5 +246,11 @@
 <style scoped>
   .content-container {
     margin: 20px;
+  }
+  #teacher-div {
+    clear: both;
+    padding: 10px;
+    display: table;
+    border: 1px solid #304156;
   }
 </style>

@@ -6,7 +6,7 @@
     </el-tooltip>
 
     <!-- display rsults in a table -->
-    <el-dialog title="Shipping address" :visible.sync="dialogTableVisible" width="80%">
+    <el-dialog :title="cls.name + ' Results'" :visible.sync="dialogTableVisible" width="80%">
       <el-table :data="cls.results">
         <el-table-column property="date" label="Date" width="150"></el-table-column>
         <el-table-column property="name" label="Name" width="200"></el-table-column>
