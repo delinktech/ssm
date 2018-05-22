@@ -69,3 +69,8 @@ Route::delete('class/{id}', ['uses' => 'ClassController@destroy', 'middleware' =
 /* Send emails route */
 Route::get('send','MailController@send'); // send mail
 // Route::get('sparkpost','MailController@sendMail'); // send mail
+
+// Email Routes
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
