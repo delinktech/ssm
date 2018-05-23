@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Result;
+
 
 class School extends Model
 {
@@ -25,5 +27,9 @@ class School extends Model
 
     public function schoolUser(){
       return $this->hasMany(User::class);
+    }
+
+    public function schoolResult(){
+      return $this->hasMany(Result::class);
     }
 }
