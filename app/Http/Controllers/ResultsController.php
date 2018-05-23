@@ -30,7 +30,7 @@ class ResultsController extends Controller
     echo $result->term;
 }
 
-   
+
   }
 
   /**
@@ -55,11 +55,11 @@ class ResultsController extends Controller
        $result = $request->isMethod('put') ? Result::findOrFail($request->result_id) : new Result;
        $result->id = $request->input('result_id');
 
-       $result->reg = $request->input('regnumber');
        $result->term = $request->input('term');
-       $result->student = 1;
+       $result->student = $request->input('regnumber');
        $result->class = $request->input('class');
        $result->teacher = $request->input('teacher');
+       $result->school = $request->input('school');
        $result->subject = $request->input('subjects');
        $result->marks = $request->input('marks');
 
