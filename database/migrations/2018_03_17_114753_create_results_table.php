@@ -15,11 +15,12 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('reg');
             $table->string('student');
             $table->string('class');
             $table->string('subject');
             $table->string('marks');
+            $table->string('term');
+            $table->string('school');
             $table->string('teacher');
 
             $table->timestamps();
