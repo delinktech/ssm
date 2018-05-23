@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
+use App\Models\School;
 
 class Result extends Model
 {
@@ -11,10 +12,15 @@ class Result extends Model
 
   protected $primaryKey='id';
 
-  protected $fillable=['student_id','term','grade','marks'];
+  protected $fillable=['student', 'class', 'subject', 'marks', 'term', 'school', 'teacher'];
 
   public function studentResults()
   {
     return $this->belongsTo(Student::class);
+  }
+
+  public function schoolResults()
+  {
+    return $this->belongsTo(School::class);
   }
 }
