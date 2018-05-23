@@ -107,6 +107,12 @@ export default {
 
       // loop the excel data
       dataResults.forEach(row => {
+        // set the class | teacher | school
+        row.school = 1
+        row.term = this.resultsForm.term
+        row.class = this.resultsForm.cls
+        row.teacher = this.resultsForm.teacher
+
         // post results to the api
         saveUpload(row)
           .then(res => {
