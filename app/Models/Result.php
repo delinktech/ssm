@@ -11,7 +11,7 @@ class Result extends Model
 
   protected $primaryKey='id';
 
-  protected $fillable=['student_id','grade','marks'];
+  protected $fillable=['student_id','term','grade','marks'];
 
   public function studentResults()
   {
