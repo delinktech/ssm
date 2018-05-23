@@ -22,6 +22,7 @@ class CreateResultsTable extends Migration
             $table->string('term');
             $table->string('school');
             $table->string('teacher');
+            $table->string('year');
 
             $table->timestamps();
         });

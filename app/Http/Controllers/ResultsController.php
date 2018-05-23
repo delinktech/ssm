@@ -59,6 +59,7 @@ class ResultsController extends Controller
        $result->school = $request->input('school');
        $result->subject = $request->input('subjects');
        $result->marks = $request->input('marks');
+       $result->year = $request->input('year');
 
        if ($result->save()) {
         return new ResultResource($result);
