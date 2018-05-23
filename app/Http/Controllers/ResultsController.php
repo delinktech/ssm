@@ -17,20 +17,24 @@ class ResultsController extends Controller
    *
    * @return \Illuminate\Http\Response
   */
+  // public function index()
+  // {
+  //   $results = Result::Paginate(15);
+  //   return ResultResource::collection($results);
+  // }
+
   public function index()
   {
-    $results = Result::Paginate(15);
-    return ResultResource::collection($results);
-  }
+    // get logged in user school id
+    $user_school = JWTAuth::parseToken()->toUser()->school;
 
-  public function retrieveResultsByTerm()
-  {
-    $result = DB::table('results')->get();
+    $results = Result::where('school', $user_school)->get();
+
     foreach ($results as $result) {
-    echo $result->term;
-}
+      // TODO: start grouping them here
 
-
+      echo $result->term.'<br/>';
+    }
   }
 
   /**
