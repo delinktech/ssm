@@ -13,29 +13,17 @@ use App\Http\Resources\Result as ResultResource;
 class ResultsController extends Controller
 {
   /**
-   * Display a listing of the resource.
+   * Display a listing of the results grouped by name and term
    *
    * @return \Illuminate\Http\Response
   */
-  // public function index()
-  // {
-  //   $results = Result::Paginate(15);
-  //   return ResultResource::collection($results);
-  // }
-
   public function index()
   {
     // get logged in user school id
     $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    $results = Result::where('school', $user_school)->get();
-
-    foreach ($results as $result) {
-      // TODO: start grouping them here
     $results = Result::where('school', $user_school)->get()->groupBy(['class', 'term']);
 
-      echo $result->term.'<br/>';
-    }
     // return in json format
     return response()->json([
       'results' => $results
