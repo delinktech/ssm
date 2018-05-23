@@ -62,7 +62,26 @@ export default {
   data() {
     return {
       tableData: [],
-      tableHeader: []
+      tableHeader: [],
+      resultsForm: {
+        term: '',
+        cls: '',
+        teacher: ''
+      },
+      resultsRules: {
+          term: [
+            // { required: true, message: 'Please input first name', trigger: 'blur' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          cls: [
+            // { required: true, message: 'Please input last name', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ],
+          teacher: [
+            // { required: true, message: 'Please input the username', trigger: 'change' },
+            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+          ]
+      }
     }
   },
   methods: {
