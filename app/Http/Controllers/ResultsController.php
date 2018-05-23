@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use JWTAuth;
 use App\Models\Result;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 use App\Http\Resources\Result as ResultResource;
@@ -20,6 +21,16 @@ class ResultsController extends Controller
   {
     $results = Result::Paginate(15);
     return ResultResource::collection($results);
+  }
+
+  public function retrieveResultsByTerm()
+  {
+    $result = DB::table('results')->get();
+    foreach ($results as $result) {
+    echo $result->term;
+}
+
+   
   }
 
   /**
@@ -45,6 +56,7 @@ class ResultsController extends Controller
        $result->id = $request->input('result_id');
 
        $result->reg = $request->input('regnumber');
+       $result->term = $request->input('term');
        $result->student = 1;
        $result->class = $request->input('class');
        $result->teacher = $request->input('teacher');
@@ -104,7 +116,13 @@ class ResultsController extends Controller
      */
     public function destroy($id)
     {
+    // delete single result
+      $result = Result::findOrFail($id);
 
+      if ($result->delete()) {
+        // return sngle result as a resource
+        return new ResultResource($result);
+      }
     }
 
 }
