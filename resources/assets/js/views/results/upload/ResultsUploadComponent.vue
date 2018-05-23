@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { saveUpload } from '../../../api/results'
 import UploadExcelComponent from '../../../components/UploadResults/index.vue'
 
@@ -83,6 +84,13 @@ export default {
           ]
       }
     }
+  },
+  computed: {
+    ...mapGetters([
+      'school',
+      'teachers',
+      'classes'
+    ])
   },
   methods: {
     openSucess() {
