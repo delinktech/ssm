@@ -32,9 +32,14 @@ class ResultsController extends Controller
 
     foreach ($results as $result) {
       // TODO: start grouping them here
+    $results = Result::where('school', $user_school)->get()->groupBy(['class', 'term']);
 
       echo $result->term.'<br/>';
     }
+    // return in json format
+    return response()->json([
+      'results' => $results
+    ], 200);
   }
 
   /**
