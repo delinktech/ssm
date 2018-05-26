@@ -7,10 +7,11 @@
 
     <!-- display rsults in a table -->
     <el-dialog :title="cls.name + ' Results'" :visible.sync="dialogTableVisible" width="80%">
-      <el-table :data="cls.results">
-        <el-table-column property="date" label="Date" width="150"></el-table-column>
-        <el-table-column property="name" label="Name" width="200"></el-table-column>
-        <el-table-column property="address" label="Address"></el-table-column>
+      <el-table :data="cls">
+        <el-table-column property="student" label="Student" width="150"></el-table-column>
+        <el-table-column property="subject" label="Subject" width="200"></el-table-column>
+        <el-table-column property="marks" label="Marks"></el-table-column>
+        <el-table-column property="term" label="Term"></el-table-column>
       </el-table>
     </el-dialog>
   </div>
