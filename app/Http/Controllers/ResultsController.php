@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use JWTAuth;
 use App\Models\Result;
+use App\Models\Student;
+use App\Models\ClassModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -22,7 +24,25 @@ class ResultsController extends Controller
     // get logged in user school id
     $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    $results = Result::where('school', $user_school)->get()->groupBy(['class', 'term']);
+    $results = Result::where('school', $user_school)->get()->groupBy(['year', 'class']);
+
+    foreach ($results as $i => $year) {
+
+      foreach ($year as $key => $class) {
+
+        foreach ($class as $key => $value) {
+
+          $student = Student::where('student_reg', $value->student)->get()->first();
+          $class = ClassModel::where('id', $value->class)->get()->first();
+
+          // set the info
+          $value->studentInfo = $student;
+          $value->classInfo = $class;
+        }
+
+      }
+
+    }
 
     // return in json format
     return response()->json([
