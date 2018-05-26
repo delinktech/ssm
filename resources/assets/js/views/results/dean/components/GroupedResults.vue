@@ -10,33 +10,41 @@
       </div>
     </el-col>
 
-    <el-col :span="7" v-for="cls in classes" :key="cls.code" :offset="offset" class="my-card">
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span style="line-height: 21px;">{{cls.name}}</span>
-        </div>
-
+    <div v-if="selectedYear && selectedYearData" class="clearfix">
+      <p>
+        <el-button @click="goBack"><i class="el-icon-arrow-left el-icon-left"></i> Back</el-button>
+      </p>
+      <el-col :span="7" v-for="(cls, indx) in selectedYearData" :key="indx" :offset="offset" class="my-card">
         <div>
-          <p>{{cls.code}}</p>
-          Last Edit: <time class="time">{{ currentDate }}</time>
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span style="line-height: 21px;">{{cls[0].classInfo.name}}</span>
+            </div>
+            <div>
+              <!-- <p>{{cls[indx].classInfo.code}}</p> -->
+              Last Edit: <time class="time">{{ currentDate }}</time>
+            </div>
+
+            <div class="bottom clearfix">
+              <!-- call component to display results modal -->
+              <results-modal :cls="cls" class="footer-icons"></results-modal>
+
+              <!-- call component to show popover -->
+              <notify-popover :cls="cls" class="footer-icons"></notify-popover>
+
+            </div>
+
+          </el-card>
         </div>
+      </el-col>
+    </div>
 
-        <div class="bottom clearfix">
-          <!-- call component to display results modal -->
-          <results-modal :cls="cls" class="footer-icons"></results-modal>
-
-          <!-- call component to show popover -->
-          <notify-popover :cls="cls" class="footer-icons"></notify-popover>
-
-        </div>
-
-      </el-card>
-    </el-col>
   </div>
 </template>
 
 <script>
   import moment from 'moment'
+  import { mapGetters } from 'vuex'
   import ResultsModal from './ResultsModal'
   import NotifyPopover from './NotifyPopover'
 
@@ -50,15 +58,42 @@
     data() {
       return {
         offset: 1,
+        heading: null,
+        yearSelected: null,
+        selectedYear: false,
+        selectedYearData: null,
         currentDate: moment(new Date()).format('dddd MMM DD-YYYY'),
 
       };
+    },
+    created() {
+      this.heading = !this.selectedYear ? 'All classes Results' : `All Results for ${this.yearSelected}`
+    },
+    computed: {
+      ...mapGetters([
+        'teachers',
+        'classes'
+      ])
+    },
+    methods: {
+      navigateTo(year, yearData) {
+        this.selectedYear = true
+        this.yearSelected = year
+        this.selectedYearData = yearData
+      },
+      goBack(year=null, yearData=null) {
+        this.selectedYear = false
+        this.yearSelected = year
+        this.selectedYearData = yearData
+      }
     }
   }
 </script>
 
 <style scoped>
   .my-card {
+    cursor: pointer;
+    min-height: 100px;
     margin-bottom: 4%;
   }
   .time {
