@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use JWTAuth;
 use Illuminate\Http\Request;
 use App\Models\ClassModel;
+use App\Models\Teacher;
 
 use App\Http\Resources\Classes as ClassResource;
 
@@ -22,6 +23,14 @@ class ClassController extends Controller
 
     // get classes of this school
     $classes = ClassModel::where('school', $user_school)->get();
+
+    // get teacher info
+    foreach ($classes as $key => $value) {
+      $teacher = Teacher::where('id', $value->classteacher)->get()->first();
+
+      // set teacher data
+      $value->classteacher = $teacher;
+    }
 
     // return a collection of classes in a json format
     return response()->json([

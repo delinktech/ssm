@@ -19,7 +19,7 @@
       </el-table-column>
       <el-table-column label="Class Teacher" align="center">
         <template slot-scope="scope">
-          {{scope.row.classteacher}}
+          {{scope.row.classteacher.first_name}} {{scope.row.classteacher.teacher_surname}}
         </template>
       </el-table-column>
 
