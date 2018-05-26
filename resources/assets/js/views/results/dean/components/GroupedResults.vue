@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h3>{{heading}}</h3>
+    <h3 v-if="!selectedYear">All School Results</h3> <h3 v-else>All {{yearSelected}} Results</h3>
     <el-col v-if="!selectedYear" :span="7" v-for="(year, indx) in results" :key="indx" :offset="offset" class="my-card">
       <div  v-on:click="navigateTo(indx, year)">
         <el-card class="box-card">
-          <!-- {{year}} -->
           <p style="line-height: 21px; text-align: center; color: #666; font-size: 24px;">{{indx}}</p>
         </el-card>
       </div>
@@ -21,8 +20,8 @@
               <span style="line-height: 21px;">{{cls[0].classInfo.name}}</span>
             </div>
             <div>
-              <!-- <p>{{cls[indx].classInfo.code}}</p> -->
-              Last Edit: <time class="time">{{ currentDate }}</time>
+              <p>{{cls[0].classInfo.code}}</p>
+              Last Edit: <time class="time">{{ cls[0].updated_at | formatDate}}</time>
             </div>
 
             <div class="bottom clearfix">
@@ -61,13 +60,13 @@
         heading: null,
         yearSelected: null,
         selectedYear: false,
-        selectedYearData: null,
-        currentDate: moment(new Date()).format('dddd MMM DD-YYYY'),
-
+        selectedYearData: null
       };
     },
-    created() {
-      this.heading = !this.selectedYear ? 'All classes Results' : `All Results for ${this.yearSelected}`
+    filters: {
+      formatDate(value) {
+        return moment(value).format('dddd MMM DD-YYYY')
+      }
     },
     computed: {
       ...mapGetters([
