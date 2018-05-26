@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column label="Class">
         <template slot-scope="scope">
-          {{scope.row.class_id}}
+          {{scope.row.class_id.code}}
         </template>
       </el-table-column>
       <el-table-column label="First Name">
@@ -35,7 +35,12 @@
       </el-table-column>
       <el-table-column label="Parent" align="center">
         <template slot-scope="scope">
-          {{scope.row.student_parent}}
+          {{scope.row.student_parent.parent_first_name}} {{scope.row.student_parent.parent_second_name}}
+        </template>
+      </el-table-column>
+      <el-table-column label="Phone" align="center">
+        <template slot-scope="scope">
+          {{scope.row.student_parent.parent_Phone_number}}
         </template>
       </el-table-column>
       <el-table-column label="Age" align="center">
