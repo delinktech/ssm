@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\School;
+use App\Models\ParentModel;
+use App\Models\ClassModel;
 use App\FileUpload;
 use File;
 use Storage;
@@ -30,11 +32,27 @@ class StudentController extends Controller
       // get students of this school
       $students = Student::where('student_school', $user_school)->get();
 
+      // append parents and class info
+      $count = 0;
+      foreach ($students as $key => $value) {
+        $count++;
+        $cls = ClassModel::where('id', $value->class_id)->get()->first();
+        $parent = ParentModel::where('id', $value->student_parent)->get()->first();
+
+        // set the parent and class info
+        $value->class_id = $cls;
+        $value->student_parent = $parent;
+      };
+
       // return a collection of students in a json format
-      return response()->json([
-        'success' => true,
-        'students' => $students
-      ], 200);
+      if ($count == count($students)) {
+        return response()->json([
+          'success' => true,
+          'students' => $students
+        ], 200);
+      } else {
+        echo 'not done! ' . $count . '/' . count($students);
+      }
     }
 
     /**
