@@ -1,18 +1,39 @@
 <template>
   <div class="app-container">
-    <h3>All classes Results</h3>
-    <grouped-results></grouped-results>
+    <grouped-results :results="resultsList"></grouped-results>
   </div>
 </template>
 
 <script>
   import GroupedResults from './components/GroupedResults'
+  import { getResults } from '../../../api/results'
 
   export default {
     name: 'AllResutsComponent',
     components: {
       GroupedResults
     },
+    data() {
+      return {
+        resultsList: null
+      }
+    },
+    created() {
+      this.fetchResults()
+    },
+    methods: {
+      fetchResults() {
+        getResults()
+          .then(response => {
+            console.log('results', response)
+            this.resultsList = response.data.results
+          })
+          .catch(err => {
+            // error getting results
+            console.log(err)
+          })
+      }
+    }
   }
 </script>
 
