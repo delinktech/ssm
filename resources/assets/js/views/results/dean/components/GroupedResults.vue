@@ -1,19 +1,34 @@
 <template>
   <div>
     <h3 v-if="!selectedYear">All School Results</h3> <h3 v-else>All {{yearSelected}} Results</h3>
-    <el-col v-if="!selectedYear" :span="7" v-for="(year, indx) in results" :key="indx" :offset="offset" class="my-card">
-      <div  v-on:click="navigateTo(indx, year)">
+    <el-col v-if="!selectedYear && !selectedTerm" :span="7" v-for="(year, indx) in results" :key="indx" :offset="offset" class="my-card">
+      <div  v-on:click="navigateTo('term', indx, year)">
         <el-card class="box-card">
           <p style="line-height: 21px; text-align: center; color: #666; font-size: 24px;">{{indx}}</p>
         </el-card>
       </div>
     </el-col>
 
+    <!-- year selected -->
     <div v-if="selectedYear && selectedYearData" class="clearfix">
       <p>
-        <el-button @click="goBack"><i class="el-icon-arrow-left el-icon-left"></i> Back</el-button>
+        <el-button @click="goBack('year', null, null)"><i class="el-icon-arrow-left el-icon-left"></i> Back</el-button>
       </p>
-      <el-col :span="7" v-for="(cls, indx) in selectedYearData" :key="indx" :offset="offset" class="my-card">
+      <el-col :span="7" v-for="(term, indx) in selectedYearData" :key="indx" :offset="offset" class="my-card">
+        <div v-on:click="navigateTo('cls', indx, term)">
+          <el-card class="box-card">
+            <p style="line-height: 21px; text-align: center; color: #666; font-size: 24px;">Term {{indx}}</p>
+          </el-card>
+        </div>
+      </el-col>
+    </div>
+
+    <!-- class term selected -->
+    <div v-if="selectedTerm && selectedTermData" class="clearfix">
+      <p>
+        <el-button @click="goBack('term', selectedYear, selectedYearData)"><i class="el-icon-arrow-left el-icon-left"></i> Back</el-button>
+      </p>
+      <el-col :span="7" v-for="(cls, indx) in selectedTermData" :key="indx" :offset="offset" class="my-card">
         <div>
           <el-card class="box-card">
             <div slot="header" class="clearfix">
