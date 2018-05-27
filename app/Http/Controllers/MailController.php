@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Result;
-use App\Models\ParentModel;
-use App\Models\Student;
 use Mail;
+use JWTAuth;
+use App\Models\Result;
+use App\Models\School;
+use App\Models\Student;
+use App\Models\ParentModel;
+use Illuminate\Http\Request;
 
 class MailController extends Controller
 {
@@ -32,10 +34,15 @@ class MailController extends Controller
         $value->parentEmail = $email;
         $value->schoolInfo = $school;
       }
+
+      // return response()->json([
+      //   'emails_scheduled' => true,
+      //   'class' => $request->class,
+      //   'term' => $request->term,
+      //   'results' => $results
+      // ]);
+
       // call function to send mail
-      sendMail();
-      foreach ($variable as $key => $value) {
-        # code...
       $this->sendEmail($results);
     }
 
