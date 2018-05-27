@@ -6,12 +6,13 @@
     </el-tooltip>
 
     <!-- display rsults in a table -->
-    <el-dialog :title="cls.name + ' Results'" :visible.sync="dialogTableVisible" width="80%">
+    <el-dialog :title="cls[0].classInfo.name + ' Term ' + cls[0].term + ' Results'" :visible.sync="dialogTableVisible" width="95%">
       <el-table :data="cls">
-        <el-table-column property="student" label="Student" width="150"></el-table-column>
+        <el-table-column property="studentInfo.student_first_name" label="First Name" width="150"></el-table-column>
+        <el-table-column property="studentInfo.student_second_name" label="Sec Name" width="150"></el-table-column>
+        <el-table-column property="student" label="Reg" width="150"></el-table-column>
         <el-table-column property="subject" label="Subject" width="200"></el-table-column>
         <el-table-column property="marks" label="Marks"></el-table-column>
-        <el-table-column property="term" label="Term"></el-table-column>
       </el-table>
     </el-dialog>
   </div>
