@@ -13,16 +13,16 @@ class Teacher extends Model
   protected $primaryKey='id';
 
   protected $casts = [
-    'subjects_id' => 'array'
+    'subjects' => 'array'
   ];
 
-  protected $fillable = ['teacher_username','teacher_surname','teacher_id_number','teacher_email','teacher_email','teacher_dev_reg','teacher_api_session','teacher_password','teacher_status','teacher_school_id','teacher_class_id','subjects_id','teacher_code'
+  protected $fillable = ['tscnumber','first_name','teacher_surname','teacher_id_number','teacher_email','teacher_dev_reg','teacher_api_session','teacher_status','teacher_school_id','subjects','teacher_username','user'
   ];
 
-  // database relationship 
+  // database relationship
   public function studentTeacher(){
     return $this->hasMany(Student::class);
-  } 
+  }
 
   public function schoolTeacher(){
     return $this->belongsTo(School::class);
