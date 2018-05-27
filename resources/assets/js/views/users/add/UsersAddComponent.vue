@@ -245,10 +245,11 @@
                 // success saved the user
                 this.userForm = null
                 this.openSucess()
+                this.resetForm(userForm)
               })
               .catch(err => {
                 // error while saving user
-                this.openError(err.body.message)
+                this.openError('Could not add user, try again!')
               })
           } else {
             // not a valid form
@@ -256,7 +257,10 @@
             return false
           }
         });
-      }
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields()
+      },
     }
   }
 </script>
