@@ -53,6 +53,15 @@ class UserController extends Controller
         'hasTeacherObject' => 'required'
       ]);
 
+    // validate extra fields for techer
+    if ($request->input('hasTeacherObject')) {
+      $this->validate($request, [
+        'tscnumber' => 'required',
+        'idnumber' => 'required',
+        'subjects' => 'required'
+      ]);
+    }
+
     $user = new User([
       'user_firstname' => $request->input('firstname'),
       'user_lastname' => $request->input('lastname'),
@@ -75,14 +84,12 @@ class UserController extends Controller
     ]);
 
     // TODO: check if a user is a teacher | then add to teacher table
-    // if ($request->input('hasTeacherObject')) {
-    //   $teacher = new Teacher([
-    //     // set the fields for teacher
-    //   ]);
-    // }
+    if ($request->input('hasTeacherObject') && $user->save()) {
+      // call functin to save teacher
+      $this->saveTeacher($request, $user);
+    }
 
     if ($user->save()) {
-
       // call event to send activation
       // event(new UserRegistered($user));
 
@@ -90,6 +97,35 @@ class UserController extends Controller
       return response()->json([
         'message' => 'Sussesfuly added User'
       ], 201);
+    }
+  }
+
+  /**
+   * function to save a teacher object
+   */
+  private function saveTeacher($request, $user)
+  {
+    $teacher = new Teacher([
+      // set the fields for teacher
+      'tscnumber' => $request->input('tscnumber'),
+      'first_name' => $request->input('firstname'),
+      'teacher_surname' => $request->input('lastname'),
+      'teacher_id_number' => $request->input('idnumber'),
+
+      'teacher_email' => $request->input('email'),
+      'teacher_username' => $request->input('username'),
+      'teacher_school_id' => $request->input('school'),
+
+      'subjects' => $request->input('subjects'),
+      'user' => $user->id
+    ]);
+
+    // save teacher
+    if ($teacher->save()) {
+    // return a json response
+    return response()->json([
+      'message' => 'Sussesfuly added User'
+    ], 201);
     }
   }
 
