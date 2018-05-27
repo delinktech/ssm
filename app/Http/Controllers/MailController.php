@@ -22,10 +22,21 @@ class MailController extends Controller
       // fetch results
       $results = Result::where('year', $year)->where('class', $cls)->where('term', $term)->get();
 
+      // loop each record and fetch extra info
+      foreach ($results as $key => $value) {
+        // get the student info and parent email
+        $student = Student::where('student_reg', $value->student)->get()->first();
+        $email = ParentModel::select('parent_email')->where('id', $student->student_parent)->get()->first();
+
+        $value->studentIfo = $student;
+        $value->parentEmail = $email;
+        $value->schoolInfo = $school;
+      }
       // call function to send mail
       sendMail();
       foreach ($variable as $key => $value) {
         # code...
+      $this->sendEmail($results);
     }
 
     /**
