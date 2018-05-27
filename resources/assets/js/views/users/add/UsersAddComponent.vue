@@ -61,22 +61,23 @@
       </el-col>
 
       <!-- show this if user is a teacher -->
+      <!-- ====================== TEACHER FORM EXTRA STARTS HERE =========================== -->
       <div v-if="userForm.hasTeacherObject" id="teacher-div">
         <el-col :span="11">
-          <el-form-item label="TSC Number"  prop="tscNum">
-            <el-input size="medium" placeholder="TSC Number"></el-input>
+          <el-form-item label="TSC Number"  prop="tscnumber">
+            <el-input v-model="userForm.tscnumber" size="medium" placeholder="TSC Number"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="2">&nbsp;</el-col>
-        <!-- <el-col :span="11">
-          <el-form-item label="Last Name" prop="lastname">
-            <el-input v-model="userForm.lastname" size="medium" placeholder="Last Name"></el-input>
+        <el-col :span="11">
+          <el-form-item label="ID Number"  prop="idnumber">
+            <el-input v-model="userForm.idnumber" size="medium" placeholder="ID Number"></el-input>
           </el-form-item>
-        </el-col> -->
+        </el-col>
 
         <el-col :span="24">
-          <el-form-item label="Subjects">
-            <el-checkbox-group>
+          <el-form-item label="Subjects" prop="subjects">
+            <el-checkbox-group v-model="userForm.subjects">
               <el-checkbox label="Mathematics" name="type"></el-checkbox>
               <el-checkbox label="English" name="type"></el-checkbox>
               <el-checkbox label="Kishwahili" name="type"></el-checkbox>
@@ -86,15 +87,16 @@
           </el-form-item>
         </el-col>
       </div>
+      <!-- ====================== TEACHER FORM EXTRA ENDS HERE =========================== -->
 
       <el-col :span="24">
-        <el-form-item label="User Role" prop="role">
-          <el-radio-group v-model="userForm.role">
-            <el-radio label="Admin"></el-radio>
-            <el-radio label="Head Master"></el-radio>
-            <el-radio label="Dean"></el-radio>
-            <el-radio label="Teacher"></el-radio>
-            <el-radio label="Secretary"></el-radio>
+        <el-form-item label="User Role" prop="roles">
+          <el-radio-group v-model="userForm.roles">
+            <el-radio label="admin"></el-radio>
+            <el-radio label="headMaster"></el-radio>
+            <el-radio label="dean"></el-radio>
+            <el-radio label="teacher"></el-radio>
+            <el-radio label="secretary"></el-radio>
           </el-radio-group>
         </el-form-item>
       </el-col>
@@ -150,7 +152,10 @@
           password: '',
           avatar: '',
           hasTeacherObject: '',
-          checkPass: ''
+          checkPass: '',
+          tscnumber: '',
+          idnumber: '',
+          subjects: []
         },
         rules: {
           firstname: [
@@ -174,7 +179,7 @@
             { required: true, message: 'Please input the username number', trigger: 'change' },
             { min: 10, message: 'Please input the correct phone format', trigger: ['blur', 'change'] }
           ],
-          role: [
+          roles: [
            { required: true, message: 'Please select at least one role', trigger: 'change' }
           ],
           school: [
@@ -189,6 +194,19 @@
           ],
           checkPass: [
             { validator: validatePass2, trigger: 'blur' }
+          ],
+
+          // validate if is a teacher
+          tscnumber: [
+            { required: true, message: 'Enter the TSC Number', trigger: 'blur' },
+            { min: 3, message: 'Number should be atleast 3 chars', trigger: 'blur' }
+          ],
+          idmnumber: [
+            { required: true, message: 'Enter the National ID Number', trigger: 'blur' },
+            { min: 5, message: 'Number should be atleast 5 chars', trigger: 'blur' }
+          ],
+          subjects: [
+            { required: true, message: 'Pick at least one subject', trigger: 'blur' }
           ]
         }
       };
