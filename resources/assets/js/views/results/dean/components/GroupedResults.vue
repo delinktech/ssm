@@ -60,7 +60,10 @@
         heading: null,
         yearSelected: null,
         selectedYear: false,
-        selectedYearData: null
+        selectedYearData: null,
+        selectedTerm: null,
+        classSelected: null,
+        selectedTermData: null
       };
     },
     filters: {
@@ -75,15 +78,45 @@
       ])
     },
     methods: {
-      navigateTo(year, yearData) {
-        this.selectedYear = true
-        this.yearSelected = year
-        this.selectedYearData = yearData
+      navigateTo(to, indx, data) {
+        switch (to) {
+          case 'term':
+            this.selectedYear = true
+            this.yearSelected = indx
+            this.selectedYearData = data
+            break;
+
+          case 'cls':
+            // hide term
+            this.selectedYear = false
+
+            this.selectedTerm = true
+            this.classSelected = indx
+            this.selectedTermData = data
+            break;
+
+          default:
+            break;
+        }
+
       },
-      goBack(year=null, yearData=null) {
-        this.selectedYear = false
-        this.yearSelected = year
-        this.selectedYearData = yearData
+      goBack(to, indx, data) {
+        switch (to) {
+          case 'term':
+            this.selectedTerm = false
+            this.selectedYear = true
+            this.yearSelected = indx
+            this.selectedYearData = data
+            break;
+
+           case 'year':
+            this.selectedYear = false
+            this.selectedTerm = false
+            break;
+
+          default:
+            break;
+        }
       }
     }
   }
