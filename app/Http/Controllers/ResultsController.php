@@ -24,27 +24,31 @@ class ResultsController extends Controller
     // get logged in user school id
     $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    $results = Result::where('school', $user_school)->get()->groupBy(['year', 'class']);
+    $results = Result::where('school', $user_school)->get()->groupBy(['year', 'term', 'class']);
 
     foreach ($results as $i => $year) {
 
-      foreach ($year as $key => $class) {
+      foreach ($year as $j => $term) {
 
-        foreach ($class as $key => $value) {
+        foreach ($term as $k => $class) {
 
-          $student = Student::where('student_reg', $value->student)->get()->first();
-          $class = ClassModel::where('id', $value->class)->get()->first();
+          foreach ($class as $l => $value) {
+            // fetch
+            $student = Student::where('student_reg', $value->student)->get()->first();
+            $class = ClassModel::where('id', $value->class)->get()->first();
 
-          // set the info
-          $value->studentInfo = $student;
-          $value->classInfo = $class;
+            // set the info
+            $value->studentInfo = $student;
+            $value->classInfo = $class;
+          }
+
         }
 
       }
 
     }
 
-    // return in json format
+    // // return in json format
     return response()->json([
       'results' => $results
     ], 200);
