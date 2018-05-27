@@ -3,20 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Results;
 use App\Models\Parents;
 use App\Models\Students;
+use App\Models\Result;
 use Mail;
 
 class MailController extends Controller
 {
+    public function notifyByEmail(Request $request) {
+      $year = $request->input('year');
+      $term = $request->input('term');
+      $cls = $request->input('class');
 
-    public function html_email() {
+
+      // fetch results
+      $results = Result::where('year', $year)->where('class', $cls)->where('term', $term)->get();
+
       // call function to send mail
       sendMail();
       foreach ($variable as $key => $value) {
         # code...
-      }
     }
 
     /**
