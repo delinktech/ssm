@@ -28,13 +28,15 @@ class MailController extends Controller
     /**
      * function to send email
      */
-    private function sendEmail() {
-      $data = array('name'=>"Virat Gandhi");
-      Mail::send('emails.results-mail', $data, function($message) {
-        $message->to('ngichngimwa@gmail.com', 'Tutorials Point')
-                ->subject('Laravel HTML Testing Mail')
-                ->from('delinkdeveloper@gmail.com','Virat Gandhi');
-      });
+    private function sendEmail($results) {
+      // loop each record and send mail
+      foreach ($results as $key => $result) {
+        Mail::send('emails.results-mail', $result->toArray(), function($message) use($result) {
+          $message->to($result->parentEmail)
+                  ->subject('Term ' . $result->term . ' Results')
+                  ->from($result->schoolInfo->school_email, $result->schoolInfo->school_name);
+        });
+      }
       echo "HTML Email Sent. Check your inbox.";
     }
 
