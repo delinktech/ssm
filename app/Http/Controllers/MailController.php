@@ -15,6 +15,9 @@ class MailController extends Controller
       $term = $request->input('term');
       $cls = $request->input('class');
 
+      // get school info
+      $schId = JWTAuth::parseToken()->toUser()->school;
+      $school = School::select('school_name','school_email')->where('id', $schId)->get()->first();
 
       // fetch results
       $results = Result::where('year', $year)->where('class', $cls)->where('term', $term)->get();
