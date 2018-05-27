@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-popover ref="popover" placement="top" width="260" v-model="visible">
-      <p>Are you sure you want to send emails to parents?</p>
+      <p>Are you sure you want to send emails to parents of class {{cls[0].classInfo.name}}?</p>
       <div style="text-align: right; margin: 0">
-        <el-button size="mini" type="text" @click="visible = false">cancel</el-button>
-        <el-button type="primary" size="mini" @click="sendMails()">confirm</el-button>
+        <el-button size="mini" type="text" @click="visible=false">cancel</el-button>
+        <el-button type="primary" size="mini" @click="sendMails(cls[0])">confirm</el-button>
       </div>
     </el-popover>
 
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+  import { notifyParents } from "../../../../api/results";
   export default {
     name: 'NotifyPopover',
     props: ['cls'],
@@ -25,7 +26,26 @@
       }
     },
     methods: {
-      sendMails() {
+      sendMails(cls) {
+        const sendInfo = {
+          year: cls.year,
+          term: cls.term,
+          class: cls.class
+        }
+        console.log('class selected', cls)
+        console.log('sending this', sendInfo)
+
+        // call api to notify parents
+        notifyParents(sendInfo)
+          .then(res => {
+            // success sending mails
+            console.log('response:',res)
+          })
+          .catch(err => {
+            // error while sending emails
+          })
+
+        // hide the confirmation popover
         this.visible = false
       }
     }
