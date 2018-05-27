@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Parents;
-use App\Models\Students;
 use App\Models\Result;
+use App\Models\ParentModel;
+use App\Models\Student;
 use Mail;
 
 class MailController extends Controller
