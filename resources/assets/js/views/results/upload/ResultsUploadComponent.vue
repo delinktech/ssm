@@ -36,12 +36,13 @@
           </el-select>
         </el-form-item>
       </el-col>
-    </el-form>
 
-    <!-- button to upload results -->
-    <el-button @click="getData(tableData)" type="primary" circle id="fab-upload">
-      <i class="el-icon-upload2"></i>
-    </el-button>
+      <!-- button to upload results -->
+      <el-button @click="getData(tableData, 'resultsForm')" type="primary" circle id="fab-upload">
+        <i class="el-icon-upload2"></i>
+      </el-button>
+
+    </el-form>
 
     <!-- display data on this table -->
     <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
@@ -81,16 +82,16 @@ export default {
       },
       resultsRules: {
           term: [
-            // { required: true, message: 'Please input first name', trigger: 'blur' },
-            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+            { required: true, message: 'Please iselect the term', trigger: 'blur' }
           ],
           cls: [
-            // { required: true, message: 'Please input last name', trigger: 'change' },
-            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+            { required: true, message: 'Please select the class', trigger: 'change' }
           ],
           teacher: [
-            // { required: true, message: 'Please input the username', trigger: 'change' },
-            { min: 3, message: 'Length should be more than 3', trigger: 'blur' }
+            { required: true, message: 'Please select the class teacher', trigger: 'change' }
+          ],
+          year: [
+            { required: true, message: 'Please select the results year', trigger: 'change' }
           ]
       }
     }
@@ -109,9 +110,9 @@ export default {
         type: 'success'
       })
     },
-    openError(object) {
+    openError(msg) {
       this.$message({
-        message: `Oops! Something went wrong while uploading! ${object}`,
+        message: `${msg}`,
         type: 'error'
       })
     },
@@ -119,40 +120,50 @@ export default {
       this.tableData = data.results
       this.tableHeader = data.header
     },
-    getData(dataResults) {
+    getData(dataResults, resultsForm) {
+      console.log(dataResults)
+      console.log(resultsForm)
       // count to track when finished
       let count = 0
 
-      // loop the excel data
-      dataResults.forEach(row => {
-        // set the class | teacher | school
-        row.school = 0
-        row.year = this.resultsForm.year
-        row.term = this.resultsForm.term
-        row.class = this.resultsForm.cls
-        row.teacher = this.resultsForm.teacher
+      this.$refs[resultsForm].validate(valid => {
+        if (valid && dataResults.length !== 0) {
+          // loop the excel data
+          dataResults.forEach(row => {
+            // set the class | teacher | school
+            row.school = 0
+            row.year = this.resultsForm.year
+            row.term = this.resultsForm.term
+            row.class = this.resultsForm.cls
+            row.teacher = this.resultsForm.teacher
 
-        // post results to the api
-        saveUpload(row)
-          .then(res => {
-            count++ // increment by one on every loop
+            // post results to the api
+            saveUpload(row)
+              .then(res => {
+                count++ // increment by one on every loop
 
-            // check if upload is finished
-            if(count === dataResults.length){
-              // uloaded successuly
-              this.openSucess()
+                // check if upload is finished
+                if(count === dataResults.length){
+                  // uloaded successuly
+                  this.openSucess()
 
-              // empty the table
-              this.tableData = []
-              this.tableHeader = []
+                  // empty the table
+                  this.tableData = []
+                  this.tableHeader = []
 
-              // TODO: navigate to list of reults
-            }
+                  // TODO: navigate to list of reults
+                }
+              })
+              .catch(err => {
+                // error while uloading
+                this.openError('Oops! Something went wrong while uploading! results')
+              })
           })
-          .catch(err => {
-            // error while uloading
-            this.openError('results')
-          })
+        } else {
+          // not valid
+          console.log('form not valid!!')
+          this.openError('Oops! fill all the fields and upload some results!')
+        }
       })
     }
   }
