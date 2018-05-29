@@ -217,7 +217,7 @@
             { min: 10, message: 'Length should be more than 10', trigger: 'blur' }
           ],
           email: [
-            // { required: true, message: 'Please input parent email', trigger: 'change' },
+            { required: true, message: 'Please input parent email', trigger: 'change' },
             { type: 'email', message: 'Use the email format', trigger: 'blur' }
           ],
           nationalId: [
@@ -329,5 +329,5 @@
 </script>
 
 <style scoped>
-  
+
 </style>
