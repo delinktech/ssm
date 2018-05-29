@@ -66,11 +66,9 @@ Route::post('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.j
 Route::put('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jwt']);	// update a single school
 Route::delete('class/{id}', ['uses' => 'ClassController@destroy', 'middleware' => 'auth.jwt']);	// delete school
 
-/* Send emails route */
-Route::get('send','MailController@send'); // send mail
-// Route::get('sparkpost','MailController@sendMail'); // send mail
-
-// Email Routes
+/** Send emails routes */
 Route::post('results-notification', ['uses' => 'MailController@notifyByEmail', 'middleware' => 'auth.jwt']);
 Route::get('sendhtmlemail','MailController@html_email');
 Route::get('sendattachmentemail','MailController@attachment_email');
+
+// Route::get('sparkpost','MailController@sendMail'); // send mail
