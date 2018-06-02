@@ -12,6 +12,7 @@
     <el-tooltip content="Notify Parents" placement="bottom">
       <el-button  v-popover:popover type="text" size="small"><md-icon>send</md-icon></el-button>
     </el-tooltip>
+
   </div>
 </template>
 
@@ -27,6 +28,8 @@
     },
     methods: {
       sendMails(cls) {
+        this.$emit('sending', true) // show the loading
+
         const sendInfo = {
           year: cls.year,
           term: cls.term,
@@ -39,11 +42,13 @@
         notifyParents(sendInfo)
           .then(res => {
             // success sending mails
+            this.$emit('sending', false)   // stop the loader
             console.log('response:', res)
             this.openSuccess()
           })
           .catch(err => {
             // error while sending emails
+            this.$emit('sending', false)   // stop the loader
             console.log('error', err)
             this.openError()
           })

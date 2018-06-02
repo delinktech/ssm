@@ -44,8 +44,14 @@
               <results-modal :cls="cls" class="footer-icons"></results-modal>
 
               <!-- call component to show popover -->
-              <notify-popover :cls="cls" class="footer-icons"></notify-popover>
+              <notify-popover :cls="cls" v-on:sending="sending=$event" class="footer-icons"></notify-popover>
 
+              <!-- loader -->
+              <span
+                v-loading="sending"
+                element-loading-text="Sending..."
+                element-loading-spinner="el-icon-loading"
+                style="float: right;position:relative;margin-right: 25%;margin-top: 10%;"></span>
             </div>
 
           </el-card>
@@ -78,7 +84,8 @@
         selectedYearData: null,
         selectedTerm: null,
         classSelected: null,
-        selectedTermData: null
+        selectedTermData: null,
+        sending: false
       };
     },
     filters: {
