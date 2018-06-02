@@ -39,14 +39,31 @@
         notifyParents(sendInfo)
           .then(res => {
             // success sending mails
-            console.log('response:',res)
+            console.log('response:', res)
+            this.openSuccess()
           })
           .catch(err => {
             // error while sending emails
+            console.log('error', err)
+            this.openError()
           })
 
         // hide the confirmation popover
         this.visible = false
+      },
+      openSuccess() {
+        this.$notify.success({
+          title: 'Success',
+          message: 'Emils sent to parents',
+          offset: 100
+        })
+      },
+      openError() {
+        this.$notify.error({
+          title: 'Error',
+          message: 'Emils not sent to parents',
+          offset: 100
+        })
       }
     }
   }
