@@ -31,5 +31,5 @@ export const deleteResult = (_id) => {
 
 /** * notify a parent through the api */
 export const notifyParents = (formData) => {
-  return Vue.http.post('/api/results-notification', formData, { params: {'token': getToken() }} )
+  return Vue.http.post('/api/resultsnotification', formData, { params: {'token': getToken() }} )
 }

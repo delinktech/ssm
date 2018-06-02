@@ -67,7 +67,7 @@ Route::put('class', ['uses' => 'ClassController@store', 'middleware' => 'auth.jw
 Route::delete('class/{id}', ['uses' => 'ClassController@destroy', 'middleware' => 'auth.jwt']);	// delete school
 
 /** Send emails routes */
-Route::post('results-notification', ['uses' => 'MailController@notifyByEmail', 'middleware' => 'auth.jwt']);
+Route::post('resultsnotification', ['uses' => 'NotificationController@notifyByEmail', 'middleware' => 'auth.jwt']);
 Route::get('sendhtmlemail','MailController@html_email');
 Route::get('sendattachmentemail','MailController@attachment_email');
 
