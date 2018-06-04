@@ -22,7 +22,7 @@
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
       <el-col :span="5">
-        <el-form-item label="User Level" prop="cls">
+        <el-form-item label="Class" prop="cls">
           <el-select v-model="resultsForm.cls" placeholder="Select Class" size="medium">
             <el-option v-for="cls in classes" :key="cls.code" :label="cls.name" :value="cls.id"></el-option>
           </el-select>
