@@ -194,7 +194,7 @@ export const constantRouterMap = [
 
 export default new Router({
   scrollBehavior: () => ({ y: 0 }),
-  mode: 'history',
+  // mode: 'history',
   routes: constantRouterMap
 })
 
