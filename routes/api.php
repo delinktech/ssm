@@ -72,3 +72,13 @@ Route::get('sendhtmlemail','MailController@html_email');
 Route::get('sendattachmentemail','MailController@attachment_email');
 
 // Route::get('sparkpost','MailController@sendMail'); // send mail
+//Email Qeue test route
+Route::get('results', function(){
+	$details['email'] = 'kamaunewton78@gmail.com';
+
+
+	dispatch(new App\Jobs\SendResultsEmail($details));
+
+
+	dd('Result');
+});
