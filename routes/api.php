@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,12 +74,12 @@ Route::get('sendattachmentemail','MailController@attachment_email');
 
 // Route::get('sparkpost','MailController@sendMail'); // send mail
 //Email Qeue test route
-Route::get('results', function(){
-	$details['email'] = 'kamaunewton78@gmail.com';
+Route::get('SendResultsEmail', function(){
+	$job = (new SendResultsEmail($message))
+	->delay(Carbon::now()->addSeconds(5));
+	dispatch($job);
+
+	return 'Results sent successfully';
 
 
-	dispatch(new App\Jobs\SendResultsEmail($details));
-
-
-	dd('Result');
 });
