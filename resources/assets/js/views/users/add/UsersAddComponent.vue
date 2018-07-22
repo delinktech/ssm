@@ -36,8 +36,14 @@
 
       <el-col :span="7">
         <el-form-item label="School" prop="school">
-          <el-select v-model="userForm.school" placeholder="Please select school" size="medium">
+          <!-- list user school if logged in user is not an admin -->
+          <el-select v-model="userForm.school" placeholder="Please select school" size="medium"  v-if="roles !== 'Admin'">
             <el-option :label="school.school_name" :value="school.id"></el-option>
+          </el-select>
+
+          <!-- list all schools if logged in user is an admin -->
+          <el-select v-else v-model="userForm.school"  placeholder="Please select school" size="medium">
+            <el-option v-for="school in schoolList" :key="school.id" :label="school.school_name" :value="school.id"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
