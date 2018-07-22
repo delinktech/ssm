@@ -124,6 +124,7 @@
 
 <script>
   import { saveUser } from '../../../api/users'
+  import { getSchools } from '../../../api/schools'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -140,6 +141,7 @@
         }
       };
       return {
+        schoolList: null,
         userForm: {
           firstname: '',
           lastname: '',
@@ -213,13 +215,28 @@
     },
     computed: {
       ...mapGetters([
-        'school'
+        'school',
+        'roles'
       ]),
 
       // TODO: check form validation at this point
       isValid () { return false}
     },
+    created() {
+      this.fetchSchools()
+    },
     methods: {
+      fetchSchools() {
+        getSchools()
+          .then(res => {
+            // success getting list of schools
+            this.schoolList = res.data.data
+          })
+          .catch(err => {
+            // error gettig list of schools
+            this.openError('Error geting list of schools!')
+          })
+      },
       openSucess() {
         this.$message({
           message: 'User Saved Successfuly :)',
