@@ -62,6 +62,12 @@ export default {
     }
   },
   methods: {
+    openError(message) {
+      this.$message({
+        message: `Oops! ${message}`,
+        type: 'error'
+      })
+    },
     showPwd() {
       if (this.pwdType === 'password') {
         this.pwdType = ''
@@ -83,6 +89,7 @@ export default {
             // check for the error
             if (e.status === 401) {
               console.log(e.body.error)
+              this.openError(e.body.error)
             }
           })
         } else {
