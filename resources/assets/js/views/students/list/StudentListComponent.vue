@@ -55,6 +55,11 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <div class="pagination-container">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -67,8 +72,18 @@
     name: 'StudentListComponent',
     data() {
       return {
+        fullList: null,
         list: null,
-        listLoading: true
+        listLoading: true,
+        total: null,
+        listQuery: {
+          page: 1,
+          limit: 20,
+          importance: undefined,
+          title: undefined,
+          type: undefined,
+          sort: '+id'
+        }
       }
     },
     computed: {
@@ -103,7 +118,9 @@
         getStudents()
           .then(response => {
             // console.log('students', response)
-            this.list = response.data.students
+            this.fullList = response.data.students
+            this.list = response.data.students.slice(0, this.listQuery.limit)
+            this.total = response.data.students.length
             this.listLoading = false
           })
           .catch(err => {
@@ -142,7 +159,18 @@
       },
       editStudent(student) {
         console.log('student', student)
-      }
+      },
+      handleSizeChange(val) {
+        this.listQuery.limit = val
+        this.list = this.fullList.slice(0, val)
+        // this.fetchData(val)
+      },
+      handleCurrentChange(val) {
+        this.listQuery.page = val
+        console.log('page:', val)
+        this.list = this.fullList.slice(this.list.length, this.listQuery.limit*2)
+        // this.fetchData()
+      },
     }
   }
 </script>
