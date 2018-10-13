@@ -5,15 +5,23 @@
     <br>
     <!-- display form -->
     <el-form ref="resultsForm" :model="resultsForm" :rules="resultsRules" status-icon>
-      <el-col :span="5">
+      <el-col :span="4">
         <el-form-item label="Term" prop="term">
-          <el-select v-model="resultsForm.term" placeholder="Please results term" size="medium">
+          <el-select v-model="resultsForm.term" placeholder="Select exams term" size="medium">
             <el-option v-for="term in 3" :key="term" :value="term">Term {{term}}</el-option>
           </el-select>
         </el-form-item>
       </el-col>
-       <el-col :span="1">&nbsp;</el-col>
-      <el-col :span="5">
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="4">
+        <el-form-item label="Exam" prop="type">
+          <el-select v-model="resultsForm.type" placeholder="Select exams type" size="medium">
+            <el-option v-for="type in examType" :key="type" :value="type">{{type}}</el-option>
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="1">&nbsp;</el-col>
+      <el-col :span="4">
         <el-form-item label="Year" prop="year">
           <el-select v-model="resultsForm.year" placeholder="Please select year" size="medium">
             <el-option v-for="year in years" :key="year" :value="year">{{year}}</el-option>
@@ -21,7 +29,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
-      <el-col :span="5">
+      <el-col :span="4">
         <el-form-item label="Class" prop="cls">
           <el-select v-model="resultsForm.cls" placeholder="Select Class" size="medium">
             <el-option v-for="cls in classes" :key="cls.code" :label="cls.name" :value="cls.id"></el-option>
@@ -29,7 +37,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="1">&nbsp;</el-col>
-      <el-col :span="6">
+      <el-col :span="4">
         <el-form-item label="Class Teacher" prop="teacher">
           <el-select v-model="resultsForm.teacher" placeholder="Pick class Teacher" size="medium">
             <el-option v-for="teacher in teachers" :key="teacher.id" :label="teacher.first_name + ' ' + teacher.teacher_surname" :value="teacher.id"></el-option>
@@ -74,15 +82,20 @@ export default {
       tableData: [],
       tableHeader: [],
       years: ['2018','2017','2016','2015','2014','2013'],
+      examType: ['Cat-1', 'Mid-Term', 'Cat-2', 'End-Term'],
       resultsForm: {
         term: '',
+        type: '',
         cls: '',
         teacher: '',
         year: currentTime.getFullYear()
       },
       resultsRules: {
           term: [
-            { required: true, message: 'Please iselect the term', trigger: 'blur' }
+            { required: true, message: 'Please select the exam term', trigger: 'blur' }
+          ],
+          type: [
+            { required: true, message: 'Please select the exam type', trigger: 'blur' }
           ],
           cls: [
             { required: true, message: 'Please select the class', trigger: 'change' }
