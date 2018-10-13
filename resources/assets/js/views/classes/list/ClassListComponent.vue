@@ -30,6 +30,7 @@
         </template>
       </el-table-column>
     </el-table>
+      :title="editingRecordTitle"
       :before-close="handleClose">
   </div>
 </template>
@@ -44,6 +45,8 @@
       return {
         list: null,
         listLoading: true
+        editingRecord: null,
+        editingRecordTitle: null
       }
     },
     computed: {
@@ -84,7 +87,10 @@
           })
       },
       editClass(_class) {
-        console.log('class', _class)
+        // console.log('class', _class)
+        this.editingRecordTitle = 'Editing: ' + _class.name
+        this.dialogVisible = true
+        this.editingRecord = _class;
       },
       confirmDeleteClass(_id) {
         this.$confirm('Are you sure you want to delete this Class?')
