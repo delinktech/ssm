@@ -30,8 +30,41 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- edit record -->
+    <el-dialog v-if="dialogVisible"
       :title="editingRecordTitle"
+      :visible.sync="dialogVisible"
+      width="60%"
       :before-close="handleClose">
+
+      <el-form ref="" :model="editingRecord">
+        <el-col :span="11">
+          <el-form-item label="Class Name" prop="name">
+            <el-input v-model="editingRecord.name" size="medium" placeholder="Class Code"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="2">&nbsp;</el-col>
+        <el-col :span="11">
+          <el-form-item label="Class Code" prop="code">
+            <el-input v-model="editingRecord.code" size="medium" placeholder="Class Code"></el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col>
+          <el-form-item label="Class Teacher" prop="classTeacher"><br>
+            <el-select v-model="editingRecord.classteacher.id" placeholder="lease Select Class Teacher">
+              <el-option v-for="teacher in teachers" :key="teacher.first_name" :label="teacher.first_name + ' ' + teacher.teacher_surname" :value="teacher.id"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-form>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -44,14 +77,16 @@
     data() {
       return {
         list: null,
-        listLoading: true
+        listLoading: true,
         editingRecord: null,
+        dialogVisible: false,
         editingRecordTitle: null
       }
     },
     computed: {
       ...mapGetters([
-        'school'
+        'school',
+        'teachers'
       ])
     },
     created() {
