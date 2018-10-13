@@ -24,22 +24,26 @@ class ResultsController extends Controller
     // get logged in user school id
     $user_school = JWTAuth::parseToken()->toUser()->school;
 
-    $results = Result::where('school', $user_school)->get()->groupBy(['year', 'term', 'class']);
+    $results = Result::where('school', $user_school)->get()->groupBy(['year', 'term', 'class', 'type']);
 
-    foreach ($results as $i => $year) {
+    foreach ($results as $y => $year) {
 
-      foreach ($year as $j => $term) {
+      foreach ($year as $t => $term) {
 
-        foreach ($term as $k => $class) {
+        foreach ($term as $c => $class) {
 
-          foreach ($class as $l => $value) {
-            // fetch
-            $student = Student::where('student_reg', $value->student)->get()->first();
-            $class = ClassModel::where('id', $value->class)->get()->first();
+          foreach ($class as $ty => $type) {
 
-            // set the info
-            $value->studentInfo = $student;
-            $value->classInfo = $class;
+            foreach ($type as $t => $value) {
+              // fetch
+              $student = Student::where('student_reg', $value->student)->get()->first();
+              $class = ClassModel::where('id', $value->class)->get()->first();
+
+              // set the info
+              $value->studentInfo = $student;
+              $value->classInfo = $class;
+            }
+
           }
 
         }
@@ -77,6 +81,7 @@ class ResultsController extends Controller
        $result->id = $request->input('result_id');
 
        $result->term = $request->input('term');
+       $result->term = $request->input('type');
        $result->student = $request->input('regnumber');
        $result->class = $request->input('class');
        $result->teacher = $request->input('teacher');
