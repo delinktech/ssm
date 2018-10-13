@@ -20,6 +20,7 @@ class CreateResultsTable extends Migration
             $table->string('subject');
             $table->string('marks');
             $table->string('term');
+            $table->string('type');
             $table->string('school');
             $table->string('teacher');
             $table->string('year');

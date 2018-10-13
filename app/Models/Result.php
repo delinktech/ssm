@@ -12,7 +12,7 @@ class Result extends Model
 
   protected $primaryKey='id';
 
-  protected $fillable=['student', 'class', 'subject', 'marks', 'term', 'school', 'teacher', 'year'];
+  protected $fillable=['student', 'class', 'subject', 'marks', 'term', 'type', 'school', 'teacher', 'year'];
 
   public function studentResults()
   {
