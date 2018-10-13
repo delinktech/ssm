@@ -30,6 +30,7 @@
         </template>
       </el-table-column>
     </el-table>
+      :before-close="handleClose">
   </div>
 </template>
 
@@ -111,6 +112,13 @@
             // catch the error
             this.openError('deleting student')
           })
+      },
+      handleClose(done) {
+        this.$confirm('Are you sure you want to close edit?')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
       }
     }
   }
