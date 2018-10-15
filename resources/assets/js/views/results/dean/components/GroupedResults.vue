@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 v-if="!selectedYear">All School Results</h3> <h3 v-else>All {{yearSelected}} Results</h3>
-    <el-col v-if="!selectedYear && !selectedTerm" :span="7" v-for="(year, indx) in results" :key="indx" :offset="offset" class="my-card">
+    <el-col v-if="!selectedYear && !selectedTerm && !selectedClass" :span="7" v-for="(year, indx) in results" :key="indx" :offset="offset" class="my-card">
       <div  v-on:click="navigateTo('term', indx, year)">
         <el-card class="box-card">
           <p style="line-height: 21px; text-align: center; color: #666; font-size: 24px;">{{indx}}</p>
@@ -29,10 +29,31 @@
         <el-button @click="goBack('term', selectedYear, selectedYearData)"><i class="el-icon-arrow-left el-icon-left"></i> Back</el-button>
       </p>
       <el-col :span="7" v-for="(cls, indx) in selectedTermData" :key="indx" :offset="offset" class="my-card">
+        <div  v-on:click="navigateTo('exam', indx, cls)">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span style="line-height: 21px;">Class name</span>
+            </div>
+            <div>
+              <!-- <p>{{cls[0].classInfo.code}}</p> -->
+              <!-- Last Edit: <time class="time">{{ cls[0].updated_at | formatDate}}</time> -->
+            </div>
+
+          </el-card>
+        </div>
+      </el-col>
+    </div>
+
+    <div v-if="selectedClass && selectedClassData">
+       <p>
+        <el-button @click="goBack('term', selectedTerm, selectedTermData)"><i class="el-icon-arrow-left el-icon-left"></i> Back</el-button>
+      </p>
+
+      <el-col :span="7" v-for="(cls, indx) in selectedClassData" :key="indx" :offset="offset" class="my-card">
         <div>
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span style="line-height: 21px;">{{cls[0].classInfo.name}}</span>
+              <span style="line-height: 21px;">Exam: {{indx}}</span>
             </div>
             <div>
               <p>{{cls[0].classInfo.code}}</p>
@@ -53,8 +74,7 @@
                 element-loading-spinner="el-icon-loading"
                 style="float: right;position:relative;margin-right: 25%;margin-top: 10%;"></span>
             </div>
-
-          </el-card>
+           </el-card>
         </div>
       </el-col>
     </div>
@@ -85,7 +105,9 @@
         selectedTerm: null,
         classSelected: null,
         selectedTermData: null,
-        sending: false
+        sending: false,
+        selectedClass: false,
+        selectedClassData: null
       };
     },
     filters: {
@@ -117,6 +139,15 @@
             this.selectedTermData = data
             break;
 
+          case 'exam':
+            // hide
+            this.selectedTerm = false
+
+            this.selectedClass = true
+            this.selectedClassData = data
+            console.log('EXAM:', indx, ' DATA:', data);
+          break;
+
           default:
             break;
         }
@@ -131,9 +162,14 @@
             this.selectedYearData = data
             break;
 
-           case 'year':
+          case 'year':
             this.selectedYear = false
             this.selectedTerm = false
+            break;
+
+          case 'term':
+            this.selectedClass = false
+            this.selectedTerm = true
             break;
 
           default:
